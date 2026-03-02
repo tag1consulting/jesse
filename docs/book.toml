@@ -1,0 +1,16 @@
+[book]
+title = "Jesse"
+description = "An AI assistant built from folders of text files, an instruction manual, and no vendor lock-in."
+authors = ["Jeremy Andrews"]
+language = "en"
+src = "src"
+
+[build]
+build-dir = "book"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "ayu"
+git-repository-url = "https://github.com/tag1consulting/jesse"
+edit-url-template = "https://github.com/tag1consulting/jesse/edit/main/docs/{path}"
+site-url = "https://jesse.help/"
