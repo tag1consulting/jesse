@@ -1,39 +1,3 @@
-# Research
-
-Structured, source-backed research output saved to `Projects/Research/` as standalone files.
-
-## The Problem
-
-AI research output tends toward walls of unsourced text with inconsistent depth and no clear takeaway. Product comparisons collapse variant lines into single numbers. Conflicting data gets silently resolved. Gaps go unmentioned. The result looks thorough but falls apart when you need to make a decision from it.
-
-## The Solution
-
-A guidelines file in your vault that Jesse reads whenever research is requested. The instruction file points to it with a single line. Every research task produces a scoped, cited report with an actionability section tied to whatever triggered it.
-
-## Vault Structure
-
-```
-Knowledge/
-  Research-Guidelines.md   # Research output standards and citation rules
-Projects/
-  Research/                # Completed research output (standalone files)
-```
-
-## JESSE.md Configuration
-
-Add the following to the **Rules** section of your instruction file:
-
-````markdown
-### Research
-
-Follow [[Knowledge/Research-Guidelines]] for all research tasks.
-````
-
-## The Guidelines File
-
-Create this file at `Knowledge/Research-Guidelines.md` in your vault:
-
-````markdown
 # Research Guidelines
 
 Research output is for human consumption. It must be accurate, but also accessible -- written so the reader can come away understanding the topic, not just holding a pile of citations. Start with a scope statement (what's covered, what's excluded, and why), followed by a 2-3 sentence executive overview that delivers the takeaway up front. The body should explore the topic from multiple angles, choosing angles relevant to the reason the research was requested when known. Structure depth per section based on what the material needs: use accessible overviews where a concept just needs to land, and include technical deep-dives where the subject demands full understanding. Not every section needs both -- match the depth to the content, don't force a uniform structure across the whole piece.
@@ -45,24 +9,3 @@ Find multiple sources and prefer primary over secondary: manufacturer specs, pub
 Distinguish reported fact from analyst speculation from your own synthesis, and make the boundaries obvious. When sources conflict, surface both claims with context on methodology -- don't silently pick a winner or split the difference. When a conflict is noticed mid-analysis, resolve it inline: state both figures, identify which source is more authoritative and why, use the stronger source for any calculations or conclusions, and flag the remaining uncertainty so the reader knows the number isn't settled. Explicitly note gaps: if no source covers an obvious question, or if all available data is outdated or single-sourced, say so. "No independent benchmarks exist yet" is a finding, not an omission. But if a gap could be closed with additional source work -- a GitHub repo, a changelog, a release blog -- close it rather than flagging it as unresolved.
 
 End with a detailed summary that draws all threads together into a coherent picture, followed by an actionability section. If the research was triggered by a decision, state what the findings mean for that decision. If there's nothing actionable yet, say that -- the section is never skipped. Always save research output to `Projects/Research/` as a standalone file.
-````
-
-## How It Works
-
-1. Jesse reads `Knowledge/Research-Guidelines.md` to understand your research standards.
-2. You drop a note in Inbox/ saying "research X" or ask Jesse directly.
-3. Jesse scopes the research, gathers sources, and writes a structured report following the guidelines.
-4. The output lands in `Projects/Research/` as a standalone markdown file.
-5. The summary and actionability section tell you what to do next -- or explicitly say there's nothing to do yet.
-
-## Tips and Gotchas
-
-**Don't collapse variants.** This is the most common failure mode. If something comes in multiple configurations, the research should show all of them, not pick one representative number.
-
-**Non-English sources matter.** Especially for regulatory, technical standards, or international topics. Jesse will actively look for them when relevant.
-
-**Gaps are findings.** "No data exists on this" is valuable information. The guidelines require Jesse to say so explicitly rather than papering over missing information.
-
-**The actionability section is never skipped.** Even when the answer is "nothing to do yet", that's worth stating. It prevents the research from sitting in a folder with no clear next step.
-
-**The guidelines file is yours to edit.** If your research needs differ from the defaults -- different citation style, different depth expectations, domain-specific requirements -- change the file directly. The instruction file just points to it.
