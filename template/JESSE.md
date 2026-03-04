@@ -202,6 +202,10 @@ One-line description.
 
 The project file is the permanent record. `archive/` is a short-term safety net for referencing exact wording.
 
+### Research
+
+Follow [[Knowledge/Research-Guidelines]] for all research tasks.
+
 ### Archive Pattern
 
 The vault uses `archive/` subdirectories wherever items age out. If your agent's VM cannot delete files from mounted folders, always move to archive instead of deleting.
@@ -234,9 +238,11 @@ Today.md                     -- Living daily task list (created during first run
 Inbox/                       -- Quick capture from phone/desktop
 Inbox/archive/               -- Processed inbox notes
 Projects/                    -- Source of truth per topic
+Projects/Research/           -- Completed research output (standalone files)
 Projects/drafts/             -- Active draft communications
 Projects/drafts/archive/     -- Sent drafts (date-prefixed, purge after 90 days)
 Knowledge/                   -- Long-term reference material
+Knowledge/Research-Guidelines.md -- Research output standards and citation rules
 Knowledge/People/            -- Contact directory (subdirectories created during first run)
 Knowledge/Reminders/         -- Date-based reminders
 ```
