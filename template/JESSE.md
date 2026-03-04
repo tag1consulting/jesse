@@ -204,11 +204,11 @@ The project file is the permanent record. `archive/` is a short-term safety net 
 
 ### Research
 
-When research is requested (from Inbox/, conversation, or any other trigger), follow these guidelines for all research output.
+When research is requested (from Inbox/, conversation, or any other trigger), follow these guidelines for all research output. Research output is for human consumption. It must be accurate, but also accessible -- written so the reader can come away understanding the topic, not just holding a pile of citations.
 
 #### Structure
 
-Start with a scope statement: what's covered, what's excluded, and why. Follow with a 2-3 sentence executive overview that delivers the takeaway up front. The body should explore the topic from multiple angles, choosing angles relevant to the reason the research was requested when known. Match depth to content per section -- use accessible overviews where a concept just needs to land, and include technical deep-dives where the subject demands full understanding. Not every section needs both.
+Start with a scope statement (what's covered, what's excluded, and why), followed by a 2-3 sentence executive overview that delivers the takeaway up front. The body should explore the topic from multiple angles, choosing angles relevant to the reason the research was requested when known. Structure depth per section based on what the material needs: use accessible overviews where a concept just needs to land, and include technical deep-dives where the subject demands full understanding. Not every section needs both -- match the depth to the content, don't force a uniform structure across the whole piece.
 
 #### Variants and Comparisons
 
@@ -216,21 +216,15 @@ When a product or system comes in multiple tiers, configurations, or variants, i
 
 #### Sources
 
-Find multiple sources and prefer primary over secondary: manufacturer specs, published papers, official announcements, and direct interviews over blog recaps and aggregator summaries. Non-English sources are valid and sometimes critical -- even when a topic appears US- or English-centric, actively check whether relevant non-English perspectives exist. Don't force irrelevant sources, but don't default to English-only either.
-
-Note each source's publication date and flag when key claims rest on outdated data. Rate source trustworthiness inline and state why: an official spec sheet outranks an anonymous forum post, a peer-reviewed study outranks a vendor whitepaper. Use numbered citations [1] [2] inline throughout the text, with a full source list (URL, title, date, language if non-English) at the end.
+Find multiple sources and prefer primary over secondary: manufacturer specs, published papers, official announcements, and direct interviews over blog recaps and aggregator summaries. Non-English sources are valid and sometimes critical -- even when a topic appears US- or English-centric, actively check whether relevant non-English perspectives exist (a Dutch sysadmin's career, a European standards body, an Italian regulatory filing). Don't force irrelevant sources, but don't default to English-only either. Note each source's publication date and flag when key claims rest on outdated data. Rate source trustworthiness inline and state why: an official spec sheet outranks an anonymous forum post, a peer-reviewed study outranks a vendor whitepaper. Use numbered citations [1] [2] inline throughout the text, with a full source list (URL, title, date, language if non-English) at the end.
 
 #### Accuracy and Honesty
 
-Distinguish reported fact from analyst speculation from your own synthesis, and make the boundaries obvious. When sources conflict, surface both claims with context on methodology -- don't silently pick a winner or split the difference. When a conflict is noticed mid-analysis, resolve it inline: state both figures, identify which source is more authoritative and why, use the stronger source for any calculations or conclusions, and flag the remaining uncertainty so the reader knows the number isn't settled.
-
-Explicitly note gaps: if no source covers an obvious question, or if all available data is outdated or single-sourced, say so. "No independent benchmarks exist yet" is a finding, not an omission. But if a gap could be closed with additional source work -- a GitHub repo, a changelog, a release blog -- close it rather than flagging it as unresolved.
+Distinguish reported fact from analyst speculation from your own synthesis, and make the boundaries obvious. When sources conflict, surface both claims with context on methodology -- don't silently pick a winner or split the difference. When a conflict is noticed mid-analysis, resolve it inline: state both figures, identify which source is more authoritative and why, use the stronger source for any calculations or conclusions, and flag the remaining uncertainty so the reader knows the number isn't settled. Explicitly note gaps: if no source covers an obvious question, or if all available data is outdated or single-sourced, say so. "No independent benchmarks exist yet" is a finding, not an omission. But if a gap could be closed with additional source work -- a GitHub repo, a changelog, a release blog -- close it rather than flagging it as unresolved.
 
 #### Output
 
-End with a detailed summary that draws all threads together into a coherent picture, followed by an actionability section. If the research was triggered by a decision, state what the findings mean for that decision. If there's nothing actionable yet, say that -- the section is never skipped.
-
-Always save research output to `Projects/Research/` as a standalone file.
+End with a detailed summary that draws all threads together into a coherent picture, followed by an actionability section. If the research was triggered by a decision, state what the findings mean for that decision. If there's nothing actionable yet, say that -- the section is never skipped. Always save research output to `Projects/Research/` as a standalone file.
 
 ### Archive Pattern
 
