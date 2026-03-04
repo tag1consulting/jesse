@@ -4,11 +4,11 @@ Structured, source-backed research output saved to `Projects/Research/` as stand
 
 ## The Problem
 
-AI research output tends toward walls of unsourced text with inconsistent depth and no clear takeaway. Product comparisons collapse variant lines into single numbers. Conflicting data gets silently resolved. Gaps go unmentioned. The result looks thorough but falls apart when you need to make a decision from it.
+AI research output tends toward unsourced text with inconsistent depth. Product comparisons collapse variants, conflicts get silently resolved, and gaps go unmentioned.
 
 ## The Solution
 
-A guidelines file in your vault that Jesse reads whenever research is requested. The instruction file points to it with a single line. Every research task produces a scoped, cited report with an actionability section tied to whatever triggered it.
+A guidelines file in your vault that Jesse reads whenever research is requested, producing scoped, cited reports with actionability sections.
 
 ## Vault Structure
 
@@ -49,20 +49,18 @@ End with a detailed summary that draws all threads together into a coherent pict
 
 ## How It Works
 
-1. Jesse reads `Knowledge/Research-Guidelines.md` to understand your research standards.
-2. You drop a note in Inbox/ saying "research X" or ask Jesse directly.
-3. Jesse scopes the research, gathers sources, and writes a structured report following the guidelines.
-4. The output lands in `Projects/Research/` as a standalone markdown file.
-5. The summary and actionability section tell you what to do next -- or explicitly say there's nothing to do yet.
+1. Drop a research request in Inbox/ or ask Jesse directly.
+2. Jesse reads `Knowledge/Research-Guidelines.md`, scopes the research, gathers sources, and writes a structured report.
+3. Output lands in `Projects/Research/` with a summary and actionability section.
 
 ## Tips and Gotchas
 
-**Don't collapse variants.** This is the most common failure mode. If something comes in multiple configurations, the research should show all of them, not pick one representative number.
+**Don't collapse variants.** If something comes in multiple configurations, show all of them.
 
-**Non-English sources matter.** Especially for regulatory, technical standards, or international topics. Jesse will actively look for them when relevant.
+**Non-English sources matter.** Especially for regulatory, standards, or international topics.
 
-**Gaps are findings.** "No data exists on this" is valuable information. The guidelines require Jesse to say so explicitly rather than papering over missing information.
+**Gaps are findings.** "No data exists" is valuable -- say so explicitly.
 
-**The actionability section is never skipped.** Even when the answer is "nothing to do yet", that's worth stating. It prevents the research from sitting in a folder with no clear next step.
+**The actionability section is never skipped.** Even when the answer is "nothing to do yet."
 
-**The guidelines file is yours to edit.** If your research needs differ from the defaults -- different citation style, different depth expectations, domain-specific requirements -- change the file directly. The instruction file just points to it.
+**The guidelines file is yours to edit.** Different citation style, depth, domain needs -- change it directly.
