@@ -18,6 +18,7 @@
 - [People Knowledge Base](./recipes/people-kb.md)
 - [Weekly Vault Maintenance](./recipes/vault-maintenance.md)
 - [Research](./recipes/research.md)
+- [Writing Voice](./recipes/writing-voice.md)
 
 # Reference
 
