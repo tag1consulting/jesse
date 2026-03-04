@@ -12,6 +12,7 @@ Recipes are self-contained guides for setting up specific Jesse capabilities. Ea
 | [Draft Lifecycle](./draft-lifecycle.md) | Managing active drafts, archiving sent communications, and extracting key details |
 | [People Knowledge Base](./people-kb.md) | Automatic contact directory maintenance with categorization and cross-linking |
 | [Weekly Vault Maintenance](./vault-maintenance.md) | Automated hygiene: broken links, naming conventions, archive cleanup |
+| [Research](./research.md) | Structured, source-backed research output with citations, variant tracking, and actionability sections |
 
 ## Contributing a Recipe
 

@@ -17,6 +17,7 @@
 - [Draft Lifecycle](./recipes/draft-lifecycle.md)
 - [People Knowledge Base](./recipes/people-kb.md)
 - [Weekly Vault Maintenance](./recipes/vault-maintenance.md)
+- [Research](./recipes/research.md)
 
 # Reference
 
