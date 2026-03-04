@@ -1,0 +1,13 @@
+# Meeting Agenda Guidelines
+
+During the start-of-day routine, after scanning email, messaging, and calendar, generate an agenda draft for every meeting on today's calendar where you are a participant and the meeting involves discussion. Skip all-hands, company-wide broadcasts, or meetings where you're just an observer. Each agenda goes in `Projects/drafts/` as `YYYY-MM-DD-meeting-name-agenda.md`. If an agenda draft already exists for a meeting -- from a previous session or manual creation -- read it first and update it rather than overwriting.
+
+For each meeting, gather context before writing. Check the People KB for entries on each attendee -- pull up their Current Topics section. Check Dashboard.md and project files for open items relevant to the attendees. Look at past agendas for recurring meetings (search `Projects/drafts/archive/` for similar filenames) to understand the expected structure and cadence. If the meeting has a pattern -- weekly 1:1, ops standup, project review -- follow the established format. If it's a new or ad-hoc meeting, structure it as: context/purpose at top, discussion items, decisions needed, and any FYI items.
+
+Keep agendas short and scannable. Lead with the most important or time-sensitive items. Each item should be one or two lines max -- enough to know what to discuss, not a briefing document. Link to project files or KB entries for background rather than inlining it. If there are items that need a decision, flag them clearly so they don't get lost in discussion. End with a section for items that can be mentioned quickly or deferred if time runs short.
+
+Agendas are living documents until the meeting starts. When new information arrives during the day -- an email reply, a Slack message, a completed task -- update the relevant agenda draft. If a new issue surfaces that's relevant to an upcoming meeting, add it. If something gets resolved before the meeting, note that it's resolved rather than removing it (the attendee may want to know). The goal is that when the meeting starts, the agenda reflects everything known as of that moment.
+
+Once the meeting is over, the agenda draft gets archived like any other draft: extract key decisions and action items into the relevant project files, then move to `Projects/drafts/archive/` with the date prefix. For recurring meetings, the archived agendas become the reference for building next week's agenda.
+
+This file defines how agendas work in your vault. Change the structure, the level of detail, which meetings get agendas, and how context is gathered. Some people want detailed briefing notes with background on every topic. Some want three bullet points. Some want agendas only for 1:1s, not group meetings. Edit this file to match your meeting style.

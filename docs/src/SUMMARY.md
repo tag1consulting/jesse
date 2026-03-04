@@ -15,6 +15,7 @@
 - [Email Integration](./recipes/email.md)
 - [WhatsApp Integration](./recipes/whatsapp.md)
 - [Draft Lifecycle](./recipes/draft-lifecycle.md)
+- [Meeting Agendas](./recipes/meeting-agendas.md)
 - [People Knowledge Base](./recipes/people-kb.md)
 - [Weekly Vault Maintenance](./recipes/vault-maintenance.md)
 - [Research](./recipes/research.md)
