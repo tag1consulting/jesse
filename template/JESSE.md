@@ -204,7 +204,7 @@ The project file is the permanent record. `archive/` is a short-term safety net 
 
 ### Research
 
-Follow [[Knowledge/Research-Guidelines]] for all research tasks.
+Follow [[Knowledge/Research-Guidelines]] for all research tasks. Any inbox item or instruction that asks to research, investigate, explain, or answer a substantive question produces a file in `Projects/Research/`, not a conversational reply. The chat summary is secondary to the written report.
 
 ### Archive Pattern
 

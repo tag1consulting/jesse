@@ -52,6 +52,7 @@ End with a detailed summary that draws all threads together into a coherent pict
 1. Drop a research request in Inbox/ or ask Jesse directly.
 2. Jesse reads `Knowledge/Research-Guidelines.md`, scopes the research, gathers sources, and writes a structured report.
 3. Output lands in `Projects/Research/` with a summary and actionability section.
+4. Any inbox item or instruction that asks to research, investigate, explain, or answer a substantive question produces a file in `Projects/Research/`. The conversational summary is secondary to the written report.
 
 ## Tips and Gotchas
 
