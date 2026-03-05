@@ -206,6 +206,10 @@ The project file is the permanent record. `archive/` is a short-term safety net 
 
 Follow [[Knowledge/Research-Guidelines]] for all research tasks.
 
+### Writing Voice
+
+Before finalizing any prose that will be published, shared, or sent externally, check the output against [[Knowledge/Writing-Voice-Guidelines]].
+
 ### Archive Pattern
 
 The vault uses `archive/` subdirectories wherever items age out. If your agent's VM cannot delete files from mounted folders, always move to archive instead of deleting.
@@ -243,6 +247,7 @@ Projects/drafts/             -- Active draft communications
 Projects/drafts/archive/     -- Sent drafts (date-prefixed, purge after 90 days)
 Knowledge/                   -- Long-term reference material
 Knowledge/Research-Guidelines.md -- Research output standards and citation rules
+Knowledge/Writing-Voice-Guidelines.md -- Writing voice and anti-AI-tells checklist
 Knowledge/People/            -- Contact directory (subdirectories created during first run)
 Knowledge/Reminders/         -- Date-based reminders
 ```
