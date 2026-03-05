@@ -112,9 +112,10 @@ For steps 2-4, use only the tools listed in the **Connected Tools** section belo
 #### Phase 3: Produce
 
 12. **Build Today.md** -- Read it first to capture any manual edits, then overwrite with today's schedule, tasks, and new items. (See Today.md rules below.)
-13. **Update Dashboard.md** -- Sync with everything found above.
-14. **Archive inbox files** -- Move processed files to `Inbox/archive/`. Leave `README.md` in place.
-15. **Deliver morning briefing** -- Surface new items, decisions made during triage, meeting prep notes, reminders, and anything needing input on priority.
+13. **Prepare meeting agendas** -- For each meeting on today's calendar, generate or update an agenda draft in `Projects/drafts/` following [[Knowledge/Meeting-Agenda-Guidelines]]. **Do not proceed to step 14 until all agenda files are written.** This step produces files, not just notes -- if Today.md lists meetings, `Projects/drafts/` must have a corresponding `YYYY-MM-DD-HHMM-*-agenda.md` for each one (or an explicit note why one was skipped).
+14. **Update Dashboard.md** -- Sync with everything found above.
+15. **Archive inbox files** -- Move processed files to `Inbox/archive/`. Leave `README.md` in place.
+16. **Deliver morning briefing** -- Surface new items, decisions made during triage, meeting prep notes, reminders, and anything needing input on priority. **Include links to each agenda file written in step 13.** If no meetings today, state that explicitly.
 
 ### Weekly Vault Maintenance
 
@@ -210,6 +211,10 @@ Follow [[Knowledge/Research-Guidelines]] for all research tasks.
 
 Before finalizing any prose that will be published, shared, or sent externally, check the output against [[Knowledge/Writing-Voice-Guidelines]].
 
+### Meeting Agendas
+
+Follow [[Knowledge/Meeting-Agenda-Guidelines]] when preparing meeting agendas.
+
 ### Archive Pattern
 
 The vault uses `archive/` subdirectories wherever items age out. If your agent's VM cannot delete files from mounted folders, always move to archive instead of deleting.
@@ -248,6 +253,7 @@ Projects/drafts/archive/     -- Sent drafts (date-prefixed, purge after 90 days)
 Knowledge/                   -- Long-term reference material
 Knowledge/Research-Guidelines.md -- Research output standards and citation rules
 Knowledge/Writing-Voice-Guidelines.md -- Writing voice and anti-AI-tells checklist
+Knowledge/Meeting-Agenda-Guidelines.md -- Meeting agenda generation and update rules
 Knowledge/People/            -- Contact directory (subdirectories created during first run)
 Knowledge/Reminders/         -- Date-based reminders
 ```
