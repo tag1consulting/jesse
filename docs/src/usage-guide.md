@@ -58,11 +58,11 @@ Between routines, Jesse is useful for one-off tasks. Some examples:
 
 **Drafting messages.** You can say "draft a reply to that email from Alex about the project timeline" and the agent writes a draft, saves it to Drafts/, and waits for you to review it before anything gets sent. Nothing leaves your outbox without your explicit approval.
 
-**Adding tasks.** "Add a P2 task to follow up with the design team about the mockups" creates the entry in your task list with proper formatting, timestamps, and source tracking.
+**Adding tasks.** "Add a low-priority task to follow up with the design team about the mockups" creates the entry in your task list with proper formatting, timestamps, and source tracking.
 
 **Quick research.** "Summarize the Slack thread in #engineering about the outage" pulls the full conversation and gives you a condensed version.
 
-**Meeting prep.** "What context do I need for my 2pm with Sarah?" pulls up her people file, any open tasks related to her projects, and recent communication history.
+**Meeting prep.** "Help me prepare for my 2pm with Sarah" pulls up her people file, any open tasks related to her projects, and recent communication history.
 
 **Capturing notes.** Drop a note in Inbox/ from your phone (via Obsidian mobile, a quick-capture shortcut, or however you sync files). The next time you run a routine, the agent picks it up and acts on it. If your note says "research options for X," it does the research. If it says "remind me to call Y on Thursday," it creates a reminder.
 
@@ -82,7 +82,7 @@ You can add tasks in several ways:
 - **Drop a note in Inbox/:** The morning routine picks it up.
 - **The agent proposes them:** When scanning email or Slack, the agent flags potential action items and asks if you want to add them to the task list.
 
-That last point matters. The agent doesn't silently add things to your list from email. It surfaces what it found and asks you to confirm. You stay in control of what's on your plate.
+The agent doesn't silently add things to your list from email. It surfaces what it found and asks you to confirm. You stay in control of what's on your plate.
 
 Completed tasks get marked done with a date, and periodically you move them to Archive/ to keep Active.md focused.
 
@@ -138,7 +138,7 @@ After a week or two of daily use, the system matches your judgment more often. T
 A few practical tips:
 
 - **Start simple.** The template instruction file is enough to get going. Add complexity only when you feel the need.
-- **Correct out loud.** When the agent gets something wrong, tell it why. Then update the instruction file so it doesn't happen again.
+- **Correct out loud.** When the agent gets something wrong, tell it why. Then tell it to update the instruction file so it doesn't happen again.
 - **Use Inbox/ liberally.** Any time you think "I need to remember to do X," drop a note. The system handles the rest.
 - **Don't over-organize early.** A slightly messy vault that you actually use beats a pristine structure you avoid touching.
 - **Read the recipes.** They're patterns extracted from real usage, and you can adopt them piecemeal as they become relevant to your workflow.
