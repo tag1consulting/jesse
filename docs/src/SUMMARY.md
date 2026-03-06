@@ -5,6 +5,7 @@
 # Getting Started
 
 - [Quick Start](./getting-started.md)
+- [Using Jesse Day to Day](./usage-guide.md)
 - [The Instruction File](./instruction-file.md)
 - [Vault Structure](./vault-structure.md)
 

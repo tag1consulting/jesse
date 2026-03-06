@@ -4,14 +4,14 @@ You can have Jesse running in about 10 minutes.
 
 ## 1. Create Your Vault
 
-Clone this repo and copy the template directory:
+Go to the [Jesse GitHub page](https://github.com/tag1consulting/jesse), click the green **Code** button, then **Download ZIP**. Extract the zip file and find the `template/` folder inside — copy it somewhere convenient (like your Documents folder) and rename it to something like `jesse-vault`. This is your vault.
+
+If you're comfortable with the command line, you can also clone the repo:
 
 ```bash
 git clone https://github.com/tag1consulting/jesse.git
 cp -r jesse/template/ ~/jesse-vault/
 ```
-
-Or just create the directory structure by hand. It's just folders and markdown files.
 
 ## 2. Choose Your Editor
 

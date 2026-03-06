@@ -4,7 +4,7 @@ Jesse is an AI assistant built from folders of text files, an instruction manual
 
 It pairs a sandboxed desktop AI agent with a structured vault of interconnected markdown files. A single instruction file tells the agent who you are, what your priorities look like, and exactly what to do when you start a session. The vault is your memory. The instruction file is your process. The AI is the engine.
 
-Jesse was created by [Jeremy Andrews](https://www.tag1.com/team/jeremy-andrews/), CEO of [Tag1 Consulting](https://www.tag1.com/), to manage the overhead of running a company with nearly 100 people across 25+ countries while raising a family in Tuscany. The setup has changed how he works enough that people kept asking for the details. This site is those details.
+Jesse was built to solve a specific problem: managing the daily overhead of a demanding workload (triaging email, tracking tasks across projects, preparing for meetings, keeping up with messages) without adding another app to the stack. Instead of a product, it's a method you own and adapt to how you already work.
 
 Read the full story in the [blog post on Tag1's website](https://www.tag1.com/blog/building-my-ai-assistant/).
 
