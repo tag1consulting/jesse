@@ -24,8 +24,16 @@ Jesse runs in a sandboxed environment with explicit permission prompts for sensi
 
 This is a deliberate contrast with "god mode" agents that have full system access. If you're running a business, the difference between "drafts for review" and "sends autonomously" is the difference between a useful tool and a liability.
 
+## Context Efficiency
+
+Every token the agent spends reading instructions is a token not spent on work. JESSE.md is deliberately lean: core principles, rules, preferences, and short summaries that point to `Knowledge/` files. The agent loads the daily routine once per session, weekly maintenance once per week, people guidelines when it encounters a new contact, and first-run setup exactly once. Everything else -- your personal knowledge base, reference material, detailed guidelines -- stays on disk until needed.
+
+When the instruction file contained 500+ lines of routines and guidelines, the agent spent meaningful context budget just reading its own manual. Extracting situational content into separate files freed that budget for actual work -- drafting, research, triage -- without losing any capability.
+
+The same principle applies to tool use during sessions: delegate verbose scans (messaging, large email inboxes) to subagents that return summaries, and read files directly by path instead of scanning directories when you know what you need.
+
 ## Iterate, Don't Architect
 
 The instruction file grows organically. Start with a few rules and add more as you hit situations that need them. You won't know what rules you need until you encounter the situations.
 
-Every time the agent does something you'd do differently, refine a rule. The instruction file is a living document. The setup that works well after a few months looks nothing like what you start with.
+Every time the agent does something you'd do differently, refine a rule. The instruction file and its Knowledge/ files are living documents. The setup that works well after a few months looks nothing like what you start with.

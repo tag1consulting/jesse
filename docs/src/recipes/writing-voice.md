@@ -14,22 +14,23 @@ A checklist file in your vault that Jesse reads before finalizing any prose mean
 
 ```
 Knowledge/
-  Writing-Voice-Guidelines.md    # Writing voice and anti-AI-tells checklist
+  Jesse-Guidelines/
+    Writing-Voice-Guidelines.md    # Writing voice and anti-AI-tells checklist
 ```
 
-## JESSE.md Configuration
+## Configuration
 
-Add the following to the **Rules** section of your instruction file:
+The template already includes writing voice. JESSE.md has a one-line pointer in the Rules section:
 
 ````markdown
 ### Writing Voice
 
-Before finalizing any prose that will be published, shared, or sent externally, check the output against [[Knowledge/Writing-Voice-Guidelines]].
+Before finalizing any prose that will be published, shared, or sent externally, check the output against [[Knowledge/Jesse-Guidelines/Writing-Voice-Guidelines]].
 ````
 
 ## The Guidelines File
 
-Create this file at `Knowledge/Writing-Voice-Guidelines.md` in your vault:
+The template includes this file at `Knowledge/Jesse-Guidelines/Writing-Voice-Guidelines.md`:
 
 ````markdown
 # Writing Voice Guidelines
@@ -50,7 +51,7 @@ This file is yours to edit. Add words your industry overuses, remove items that 
 ## How It Works
 
 1. You ask Jesse to draft, write, or edit prose for external use.
-2. Jesse writes the content, then checks it against `Knowledge/Writing-Voice-Guidelines.md` before delivering.
+2. Jesse writes the content, then checks it against `Knowledge/Jesse-Guidelines/Writing-Voice-Guidelines.md` before delivering.
 3. Flagged patterns get rewritten. The final output reads like a person wrote it.
 
 ## Tips and Gotchas

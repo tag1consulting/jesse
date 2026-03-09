@@ -10,21 +10,20 @@ Draft emails and messages accumulate across multiple accounts and apps. Without 
 
 All drafts live in one place: `Projects/drafts/`. When something gets sent, key details are extracted into the project file and the draft is archived. The project file is the permanent record. The archive is a short-term safety net.
 
-## JESSE.md Configuration
+## Configuration
+
+The template already includes draft lifecycle rules in JESSE.md's Rules section:
 
 ```markdown
 ### Draft Lifecycle
 
-`Projects/drafts/` is for any document that needs review before it goes
-out -- not just emails. This includes checklists, meeting agendas, talking
-points, and anything meant for an audience beyond yourself.
+`Projects/drafts/` is for active drafts only. Once a draft is sent:
 
-Once a draft is sent or delivered:
-1. Extract key details into the relevant project file (e.g., "Sent
-   2026-02-12: proposed X, asked for Y by Z date").
-2. Move to `Projects/drafts/archive/` with date prefix:
-   `YYYY-MM-DD-original-filename.md`.
-3. Purge after 90 days -- move to `Projects/drafts/archive/old/`.
+- **Extract** key details into the relevant project file (e.g., "Sent
+  2026-02-12: proposed X, asked for Y by Z date").
+- **Move** to `Projects/drafts/archive/` with date prefix:
+  `YYYY-MM-DD-original-filename.md`. No copies left in `Projects/drafts/`.
+- **Purge** after 90 days -- move to `Projects/drafts/archive/old/`.
 ```
 
 ## Vault Structure

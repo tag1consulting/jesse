@@ -24,10 +24,15 @@ One paragraph: what this recipe does and why you'd want it.
 
 What you need before starting (tools, accounts, MCP connectors, plugins).
 
-## JESSE.md Configuration
+## Configuration
 
-The instruction file sections to add or modify. Include the actual markdown
-to paste into the instruction file.
+What to add or modify. Most recipes follow this pattern:
+- Create a Knowledge/ file with detailed guidelines (if the recipe needs them).
+- Add a one-line wiki-link pointer in the Rules section of JESSE.md.
+- If the recipe adds steps to the daily routine, modify
+  Knowledge/Jesse-Guidelines/Start-of-Day-Routine.md.
+
+Include the actual markdown to paste into each file.
 
 ## Vault Structure
 

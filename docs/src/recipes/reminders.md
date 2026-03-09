@@ -57,14 +57,16 @@ For less significant dates, two stages might be enough:
 - [ ] Company closed tomorrow (Memorial Day) (@2026-05-24)
 ```
 
-## JESSE.md Configuration
+## Configuration
 
-Add this to your start-of-day routine in the Gather phase:
+The daily routine in `Knowledge/Jesse-Guidelines/Start-of-Day-Routine.md` already includes a reminder scanning step in the Gather phase:
 
 ```markdown
-7. **Read all files in Knowledge/Reminders/** -- Find unchecked reminders
-   (`- [ ]`) with dates matching today or this week. Surface in briefing.
+- **Read all files in Knowledge/Reminders/** -- Find unchecked reminders
+  (`- [ ]`) with dates matching today or this week.
 ```
+
+No additional configuration needed. Just create your reminder files in `Knowledge/Reminders/`.
 
 ## Example: Family Dates File
 

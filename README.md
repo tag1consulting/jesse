@@ -35,15 +35,16 @@ template/
 │   └── drafts/           # Active draft communications
 │       └── archive/      # Sent drafts (date-prefixed)
 └── Knowledge/
-    ├── First-Run-Setup.md            # One-time vault setup procedure
-    ├── Start-of-Day-Routine.md       # Daily routine orchestration
-    ├── Weekly-Vault-Maintenance.md   # Weekly vault cleanup tasks
-    ├── People-KB-Guidelines.md       # People entry format and rules
-    ├── Research-Guidelines.md        # Research output standards
-    ├── Writing-Voice-Guidelines.md   # Writing voice checklist
-    ├── Meeting-Agenda-Guidelines.md  # Meeting agenda rules
+    ├── Jesse-Guidelines/    # Agent behavior rules, routines, and guidelines
+    │   ├── First-Run-Setup.md
+    │   ├── Start-of-Day-Routine.md
+    │   ├── Weekly-Vault-Maintenance.md
+    │   ├── People-KB-Guidelines.md
+    │   ├── Research-Guidelines.md
+    │   ├── Writing-Voice-Guidelines.md
+    │   └── Meeting-Agenda-Guidelines.md
     ├── People/           # Contact directory
-    │   ├── Tag1/         # (your org — rename this)
+    │   ├── YourOrg/      # (rename for your organization)
     │   ├── Client/
     │   ├── Vendor/
     │   ├── Candidate/

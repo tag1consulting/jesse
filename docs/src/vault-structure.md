@@ -7,19 +7,28 @@ The vault is a directory of markdown files. Every file is plain text. You can re
 ```
 Dashboard.md              Priority-sorted TODO index
 Today.md                  Living daily task list (rebuilt each morning)
-JESSE.md                  The instruction file
+JESSE.md                  The instruction file (lean — points to Knowledge/ files)
 
 Inbox/                    Quick capture from phone/desktop
   archive/                Processed inbox notes
 
 Projects/                 Source of truth per topic (one file per project)
+  Research/               Completed research output (standalone files)
   drafts/                 Active draft communications
     archive/              Sent drafts (date-prefixed)
       old/                Sent drafts older than 90 days
 
-Knowledge/                Long-term reference material
+Knowledge/                Personal knowledge base and guidelines (loaded on demand)
+  Jesse-Guidelines/               Agent behavior rules, routines, and guidelines
+    First-Run-Setup.md            One-time vault setup
+    Start-of-Day-Routine.md       Daily routine orchestration
+    Weekly-Vault-Maintenance.md   Weekly vault cleanup
+    People-KB-Guidelines.md       People entry format and rules
+    Research-Guidelines.md        Research output standards
+    Writing-Voice-Guidelines.md   Writing voice checklist
+    Meeting-Agenda-Guidelines.md  Meeting agenda rules
   People/                 Contact directory
-    Tag1/                 Your organization (rename for yours)
+    YourOrg/              Your organization (rename for yours)
     Client/               Client contacts
     Vendor/               External service providers
     Candidate/            Hiring candidates
@@ -46,7 +55,11 @@ A living daily task list. Not a journal, not a log. It gets rebuilt each morning
 
 ### JESSE.md (or CLAUDE.md)
 
-The instruction file. This is where you define who you are, what your daily routine looks like, what tools are connected, and the rules the agent follows. See [The Instruction File](./instruction-file.md) for details.
+The instruction file. Contains your identity, core principles, rules, and preferences -- the things needed every session. Detailed content that's only needed situationally lives in separate `Knowledge/` files and is loaded on demand via `[[wiki-link]]` references. This keeps the instruction file lean so more of the context window goes toward actual work. See [The Instruction File](./instruction-file.md) for details.
+
+### Knowledge/ Files
+
+`Knowledge/` is the vault's personal knowledge base. It holds two kinds of content: reference material you accumulate over time (people entries, reminders) and agent behavior rules in `Jesse-Guidelines/` (routines, setup procedures, and content guidelines like research standards, writing voice, and meeting agendas). Both are loaded on demand -- the agent reads them when the task calls for it, not preemptively.
 
 ## Conventions
 

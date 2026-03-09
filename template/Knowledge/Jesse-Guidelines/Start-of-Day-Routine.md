@@ -24,7 +24,7 @@ For email, calendar, and messaging steps, use only the tools listed in the **Con
 ## Phase 3: Produce
 
 - **Build Today.md** -- Read it first to capture any manual edits, then overwrite with today's schedule, tasks, and new items. (See Today.md Rules in JESSE.md.)
-- **Prepare meeting agendas** -- For each meeting on today's calendar, generate or update an agenda draft in `Projects/drafts/` following [[Knowledge/Meeting-Agenda-Guidelines]]. **Do not proceed to the next step until all agenda files are written.** This step produces files, not just notes -- if Today.md lists meetings, `Projects/drafts/` must have a corresponding `YYYY-MM-DD-HHMM-*-agenda.md` for each one (or an explicit note why one was skipped).
+- **Prepare meeting agendas** -- For each meeting on today's calendar, generate or update an agenda draft in `Projects/drafts/` following [[Knowledge/Jesse-Guidelines/Meeting-Agenda-Guidelines]]. **Do not proceed to the next step until all agenda files are written.** This step produces files, not just notes -- if Today.md lists meetings, `Projects/drafts/` must have a corresponding `YYYY-MM-DD-HHMM-*-agenda.md` for each one (or an explicit note why one was skipped).
 - **Update Dashboard.md** -- Sync with everything found above.
 - **Archive inbox files** -- Move processed files to `Inbox/archive/`. Leave `README.md` in place.
 - **Deliver morning briefing** -- Surface new items, decisions made during triage, meeting prep notes, reminders, and anything needing input on priority. **Include links to each agenda file written above.** If no meetings today, state that explicitly.

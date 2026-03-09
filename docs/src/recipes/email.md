@@ -10,22 +10,17 @@ An MCP connector for your email provider. Current options:
 - **Fastmail / JMAP:** Via [`@jahfer/jmap-mcp-server`](https://github.com/nicholasareed/jmap-mcp-server) (npm package). Read-only.
 - **Other providers:** If your provider supports IMAP, you may find community MCP servers. Check the [MCP server directory](https://github.com/modelcontextprotocol/servers).
 
-## JESSE.md Configuration
+## Configuration
 
-Add email scanning to your start-of-day routine in the Gather phase:
-
-```markdown
-2. **Scan email inbox** -- Check your-email@example.com for action items,
-   replies, and updates. Scan all messages (read and unread) -- if it's
-   still in the inbox, it's not done.
-```
-
-And in the Process phase:
+The daily routine in `Knowledge/Jesse-Guidelines/Start-of-Day-Routine.md` already includes generic email scanning and TODO extraction steps. To customize for your setup, edit that file's Gather phase with your specific email address:
 
 ```markdown
-10. **Extract TODOs from email** -- New action items go into the
-    appropriate project files and Dashboard.md.
+- **Scan email** -- Check your-email@example.com for action items,
+  replies, and updates. Scan all messages (read and unread) -- if it's
+  still in the inbox, it's not done.
 ```
+
+The Process phase already includes a TODO extraction step that covers email.
 
 ## The "Still in Inbox" Rule
 
@@ -33,12 +28,12 @@ The simplest email triage rule: if a message is still in your inbox, it hasn't b
 
 ## Multiple Email Accounts
 
-If you have separate work and personal email, add a step for each:
+If you have separate work and personal email, add a bullet for each in the Gather phase of `Knowledge/Jesse-Guidelines/Start-of-Day-Routine.md`:
 
 ```markdown
-2. **Scan work email** -- Check work@company.com for action items.
-3. **Scan personal email** -- Check personal@example.com for bills,
-   appointments, and anything time-sensitive.
+- **Scan work email** -- Check work@company.com for action items.
+- **Scan personal email** -- Check personal@example.com for bills,
+  appointments, and anything time-sensitive.
 ```
 
 Personal email scanning often surfaces things like: utility bills, medical appointment reminders, subscription renewals, shipping notifications, and school communications.

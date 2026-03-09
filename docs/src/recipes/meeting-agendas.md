@@ -14,33 +14,28 @@ Jesse generates agenda drafts during the morning routine and keeps them updated 
 
 ```
 Knowledge/
-  Meeting-Agenda-Guidelines.md    # Meeting agenda generation and update rules
+  Jesse-Guidelines/
+    Meeting-Agenda-Guidelines.md    # Meeting agenda generation and update rules
 Projects/
   drafts/                         # Active agenda drafts (auto-generated daily)
     archive/                      # Past agendas (reference for recurring meetings)
 ```
 
-## JESSE.md Configuration
+## Configuration
 
-Add the following to the **Rules** section of your instruction file:
+The template already includes meeting agendas. JESSE.md has a one-line pointer in the Rules section:
 
-````markdown
+```markdown
 ### Meeting Agendas
 
-Follow [[Knowledge/Meeting-Agenda-Guidelines]] when preparing meeting agendas.
-````
+Follow [[Knowledge/Jesse-Guidelines/Meeting-Agenda-Guidelines]] when preparing meeting agendas.
+```
 
-Add the following step to your **Start of Day > Phase 3: Produce** section, after building Today.md:
-
-````markdown
-13. **Prepare meeting agendas** -- For each meeting on today's calendar, generate or update an agenda draft in `Projects/drafts/` following the meeting agenda guidelines.
-````
-
-Renumber subsequent steps accordingly.
+The daily routine in `Knowledge/Jesse-Guidelines/Start-of-Day-Routine.md` includes the agenda preparation step in Phase 3: Produce, which generates or updates agenda drafts for each meeting and gates the rest of the routine on their completion.
 
 ## The Guidelines File
 
-Create this file at `Knowledge/Meeting-Agenda-Guidelines.md` in your vault:
+The template includes this file at `Knowledge/Jesse-Guidelines/Meeting-Agenda-Guidelines.md`:
 
 ````markdown
 # Meeting Agenda Guidelines

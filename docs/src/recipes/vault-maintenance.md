@@ -10,29 +10,17 @@ As the vault grows, things drift. Files get renamed without updating links. Nami
 
 A weekly routine (we run ours on Wednesdays) that systematically checks and fixes common issues.
 
-## JESSE.md Configuration
+## Configuration
+
+The template already includes weekly vault maintenance. JESSE.md has a one-line pointer:
 
 ```markdown
-### Wednesday Vault Maintenance
+### Weekly Vault Maintenance
 
-On Wednesdays, run a full vault hygiene pass:
-
-1. **Broken wiki-links** -- Scan all .md files for bare wiki-links
-   (no path prefix), links to moved/renamed/deleted files. Fix all found.
-2. **Naming convention enforcement** -- Find filenames with spaces or
-   inconsistent casing. Rename to Hyphenated-Title-Case.md. Update
-   all referencing wiki-links.
-3. **Archive date prefixes** -- Check archive directories for files
-   missing YYYY-MM-DD- prefixes. Add them.
-4. **90-day archive purge** -- Move anything in Projects/drafts/archive/
-   older than 90 days to Projects/drafts/archive/old/.
-5. **Orphan check** -- Look for Knowledge/ files with zero incoming links
-   from Projects/ or Dashboard.md. Add cross-links where appropriate.
-6. **People KB consistency** -- No duplicate entries. All entries have
-   required fields. New people mentioned in recent updates have entries.
-7. **Dashboard sync** -- No stale items marked urgent that are done,
-   no active items missing from Dashboard.md.
+Run once per week on a consistent day. Read and follow [[Knowledge/Jesse-Guidelines/Weekly-Vault-Maintenance]].
 ```
+
+The detailed checklist lives in `Knowledge/Jesse-Guidelines/Weekly-Vault-Maintenance.md`, which the agent loads when it's time to run maintenance. To customize which checks run or change the cadence, edit that file directly.
 
 ## What Each Check Does
 

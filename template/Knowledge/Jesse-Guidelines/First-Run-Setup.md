@@ -24,7 +24,7 @@ Check which MCP connectors and tools are available in this session. List what yo
 - File storage (Google Drive, Dropbox, etc.)
 - Other (project management tools, home automation, etc.)
 
-For each confirmed tool, add an entry to the **Connected Tools** section of JESSE.md with the tool name, what it's used for, and any quirks discovered during setup. Also update the Phase 1: Gather steps in [[Knowledge/Start-of-Day-Routine]] to reference the specific tools by name so future sessions know exactly what to scan.
+For each confirmed tool, add an entry to the **Connected Tools** section of JESSE.md with the tool name, what it's used for, and any quirks discovered during setup. Also update the Phase 1: Gather steps in [[Knowledge/Jesse-Guidelines/Start-of-Day-Routine]] to reference the specific tools by name so future sessions know exactly what to scan.
 
 ## Step 3: Build the Vault
 
@@ -34,7 +34,7 @@ The directory structure already exists from the template. Create the following f
 
 **Today.md** -- In the vault root. Today's calendar (if a calendar tool is connected) and any immediate tasks from the setup conversation.
 
-**Knowledge/People/ subdirectories** -- Create subdirectories based on the user's situation. For someone running a company: `Team/`, `Client/`, `Vendor/`, `Other/`. For a freelancer: `Client/`, `Vendor/`, `Other/`. For personal-only use: just `Other/`. Ask if unsure. Then create a People entry for each key person mentioned in Step 1 using the format defined in [[Knowledge/People-KB-Guidelines]].
+**Knowledge/People/ subdirectories** -- Create subdirectories based on the user's situation. For someone running a company: `Team/`, `Client/`, `Vendor/`, `Other/`. For a freelancer: `Client/`, `Vendor/`, `Other/`. For personal-only use: just `Other/`. Ask if unsure. Then create a People entry for each key person mentioned in Step 1 using the format defined in [[Knowledge/Jesse-Guidelines/People-KB-Guidelines]].
 
 ## Step 4: Populate Who I Am
 

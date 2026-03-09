@@ -10,7 +10,7 @@ This is a living document. Improve it every time something goes wrong or you lea
 
 ## First Run
 
-If `Dashboard.md` does not exist in the vault root, this is a first-run session. Do NOT attempt the Start of Day routine. Instead, read and follow [[Knowledge/First-Run-Setup]].
+If `Dashboard.md` does not exist in the vault root, this is a first-run session. Do NOT attempt the Start of Day routine. Instead, read and follow [[Knowledge/Jesse-Guidelines/First-Run-Setup]].
 
 ---
 
@@ -33,7 +33,7 @@ These are the rules most likely to be missed. Read them first, every session.
 
 ## Context Management
 
-- **Load on demand.** Knowledge/ files linked from this document contain detailed procedures. Read them when the task calls for it, not preemptively. This keeps each session's context focused on work rather than instructions.
+- **Load on demand.** Knowledge/ files linked from this document contain routines, guidelines, and reference material. Read them when the task calls for it, not preemptively. This keeps each session's context focused on work rather than instructions.
 - **Delegate verbose tools to subagents.** Messaging scans, large email inboxes, and research tasks can return large payloads. Delegate them to subagents that return summaries when the main session doesn't need the raw data.
 - **Direct reads for known paths.** When you know which file you need, read it directly instead of scanning directories. Use directory scans only when discovering new or changed content.
 
@@ -43,7 +43,7 @@ These are the rules most likely to be missed. Read them first, every session.
 
 ### Start of Day
 
-Run this at the start of each working session. Read and follow [[Knowledge/Start-of-Day-Routine]] for detailed orchestration.
+Run this at the start of each working session. Read and follow [[Knowledge/Jesse-Guidelines/Start-of-Day-Routine]] for detailed orchestration.
 
 Three phases: **Gather** (inbox, email, calendar, messaging, dashboard, reminders), **Process** (act on inbox instructions, extract TODOs, flag meeting items, audit links), **Produce** (build Today.md, prepare agendas, update dashboard, archive inbox, deliver briefing).
 
@@ -51,7 +51,7 @@ If `Dashboard.md` does not exist, run First Run instead.
 
 ### Weekly Vault Maintenance
 
-Run once per week on a consistent day. Read and follow [[Knowledge/Weekly-Vault-Maintenance]].
+Run once per week on a consistent day. Read and follow [[Knowledge/Jesse-Guidelines/Weekly-Vault-Maintenance]].
 
 ### Today.md Rules
 
@@ -85,7 +85,7 @@ Every TODO item in Dashboard.md and project files must include:
 
 ### People Knowledge Base
 
-Follow [[Knowledge/People-KB-Guidelines]] when creating or updating people entries in `Knowledge/People/`.
+Follow [[Knowledge/Jesse-Guidelines/People-KB-Guidelines]] when creating or updating people entries in `Knowledge/People/`.
 
 ### Draft Lifecycle
 
@@ -99,15 +99,15 @@ The project file is the permanent record. `archive/` is a short-term safety net 
 
 ### Research
 
-Follow [[Knowledge/Research-Guidelines]] for all research tasks. Any inbox item or instruction that asks to research, investigate, explain, or answer a substantive question produces a file in `Projects/Research/`, not a conversational reply. The chat summary is secondary to the written report.
+Follow [[Knowledge/Jesse-Guidelines/Research-Guidelines]] for all research tasks. Any inbox item or instruction that asks to research, investigate, explain, or answer a substantive question produces a file in `Projects/Research/`, not a conversational reply. The chat summary is secondary to the written report.
 
 ### Writing Voice
 
-Before finalizing any prose that will be published, shared, or sent externally, check the output against [[Knowledge/Writing-Voice-Guidelines]].
+Before finalizing any prose that will be published, shared, or sent externally, check the output against [[Knowledge/Jesse-Guidelines/Writing-Voice-Guidelines]].
 
 ### Meeting Agendas
 
-Follow [[Knowledge/Meeting-Agenda-Guidelines]] when preparing meeting agendas.
+Follow [[Knowledge/Jesse-Guidelines/Meeting-Agenda-Guidelines]] when preparing meeting agendas.
 
 ### Archive Pattern
 
@@ -144,14 +144,15 @@ Projects/                    -- Source of truth per topic
 Projects/Research/           -- Completed research output (standalone files)
 Projects/drafts/             -- Active draft communications
 Projects/drafts/archive/     -- Sent drafts (date-prefixed, purge after 90 days)
-Knowledge/                   -- Long-term reference material
-Knowledge/First-Run-Setup.md            -- One-time vault setup procedure
-Knowledge/Start-of-Day-Routine.md       -- Daily routine orchestration
-Knowledge/Weekly-Vault-Maintenance.md   -- Weekly vault cleanup tasks
-Knowledge/People-KB-Guidelines.md       -- People entry format and rules
-Knowledge/Research-Guidelines.md        -- Research output standards and citation rules
-Knowledge/Writing-Voice-Guidelines.md   -- Writing voice and anti-AI-tells checklist
-Knowledge/Meeting-Agenda-Guidelines.md  -- Meeting agenda generation and update rules
+Knowledge/                   -- Personal knowledge base, guidelines, and routines
+Knowledge/Jesse-Guidelines/              -- Agent behavior rules, routines, and guidelines
+Knowledge/Jesse-Guidelines/First-Run-Setup.md
+Knowledge/Jesse-Guidelines/Start-of-Day-Routine.md
+Knowledge/Jesse-Guidelines/Weekly-Vault-Maintenance.md
+Knowledge/Jesse-Guidelines/People-KB-Guidelines.md
+Knowledge/Jesse-Guidelines/Research-Guidelines.md
+Knowledge/Jesse-Guidelines/Writing-Voice-Guidelines.md
+Knowledge/Jesse-Guidelines/Meeting-Agenda-Guidelines.md
 Knowledge/People/            -- Contact directory (subdirectories created during first run)
 Knowledge/Reminders/         -- Date-based reminders
 ```

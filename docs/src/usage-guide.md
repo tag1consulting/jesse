@@ -10,12 +10,13 @@ This is the core of the system. You open a session, say something like "good mor
 
 What happens behind the scenes:
 
-1. The agent reads your instruction file to load your rules and preferences.
-2. It scans your connected tools (email, calendar, messaging) for anything new.
-3. It checks your Inbox/ folder for notes you dropped in since last session.
-4. It reviews your active tasks and reminders.
-5. It builds (or rebuilds) Today.md and updates Dashboard.md.
-6. It delivers a morning briefing summarizing what needs your attention.
+1. The agent reads your instruction file (JESSE.md) to load your rules and preferences.
+2. It loads the daily routine from `Knowledge/Jesse-Guidelines/Start-of-Day-Routine.md`.
+3. It scans your connected tools (email, calendar, messaging) for anything new.
+4. It checks your Inbox/ folder for notes you dropped in since last session.
+5. It reviews your active tasks and reminders.
+6. It builds (or rebuilds) Today.md, prepares meeting agendas, and updates Dashboard.md.
+7. It delivers a morning briefing summarizing what needs your attention.
 
 The briefing groups things by urgency. A typical output looks something like:
 
@@ -125,7 +126,7 @@ It should take two to five minutes. If you skip it, the morning routine catches 
 
 At the end of the week, ask the agent for a weekly summary. It creates a file in Weekly/ covering what got done, what slipped, what's coming next week, and any patterns worth noting.
 
-This is also a good time to ask the agent to run vault maintenance: checking for broken links between files, flagging tasks that haven't been updated in two weeks, and making sure the dashboard matches reality. You can automate this by adding it to your instruction file as a weekly add-on, similar to how the morning routine works.
+This is also a good time to ask the agent to run vault maintenance (defined in `Knowledge/Jesse-Guidelines/Weekly-Vault-Maintenance.md`): checking for broken links between files, enforcing naming conventions, cleaning up archives, and making sure the dashboard matches reality. The template includes this as a weekly routine -- just tell the agent to run it.
 
 ## The Feedback Loop
 
@@ -133,12 +134,12 @@ The most important thing to understand about Jesse is that it improves through u
 
 When the agent misclassifies an email as low priority, you correct it, and then you add a rule to the instruction file: "Emails from this client are always at least yellow." When a triage decision doesn't match your judgment, you refine the criteria. When you realize you want birthday reminders or a weekly status update draft, you add a recipe.
 
-After a week or two of daily use, the system matches your judgment more often. That's because your instruction file has become more specific about your priorities and preferences.
+After a week or two of daily use, the system matches your judgment more often. That's because your instruction file and Knowledge/ files have become more specific about your priorities and preferences.
 
 A few practical tips:
 
 - **Start simple.** The template instruction file is enough to get going. Add complexity only when you feel the need.
-- **Correct out loud.** When the agent gets something wrong, tell it why. Then tell it to update the instruction file so it doesn't happen again.
+- **Correct out loud.** When the agent gets something wrong, tell it why. Then tell it to update the instruction file or the relevant Knowledge/ file so it doesn't happen again.
 - **Use Inbox/ liberally.** Any time you think "I need to remember to do X," drop a note. The system handles the rest.
 - **Don't over-organize early.** A slightly messy vault that you actually use beats a pristine structure you avoid touching.
 - **Read the recipes.** They're patterns extracted from real usage, and you can adopt them piecemeal as they become relevant to your workflow.
@@ -153,6 +154,6 @@ After daily use, your vault will have:
 - People files that give you instant context before any meeting or message.
 - A Drafts/ folder where you review messages before they go out.
 - A Weekly/ archive showing your work patterns over time.
-- An instruction file that's become genuinely personalized to how you think and work.
+- An instruction file and set of Knowledge/ files that are genuinely personalized to how you think and work.
 
 None of this requires a big upfront investment. It builds up session by session, correction by correction.

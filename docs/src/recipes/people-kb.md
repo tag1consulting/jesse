@@ -23,45 +23,17 @@ Knowledge/People/
 
 Rename `YourOrg/` to match your organization.
 
-## JESSE.md Configuration
+## Configuration
+
+The template already includes the People KB. JESSE.md has a one-line pointer in the Rules section:
 
 ```markdown
 ### People Knowledge Base
 
-When working on a task involving a specific person:
-1. Check if they have an entry in Knowledge/People/ (search all subdirectories).
-2. Create if missing -- at minimum: name, role/title, contact info,
-   relationship, context from current interaction.
-3. Update if exists -- new topics, status changes, contact details.
-4. Categorize correctly: employees in YourOrg/, clients in Client/,
-   service providers in Vendor/, hiring candidates in Candidate/,
-   everyone else in Other/.
-5. Never duplicate. One file per person. If someone changes category,
-   move the file.
-6. Cross-link to relevant project files.
+Follow [[Knowledge/Jesse-Guidelines/People-KB-Guidelines]] when creating or updating people entries in `Knowledge/People/`.
 ```
 
-## Entry Template
-
-```markdown
-# Full Name
-
-One-line description of who they are.
-
-**Contact:** [method and details]
-**Role:** [title]
-
-## Background
-[Professional history, how you know them]
-
-## Current Topics
-[Active items involving this person, with links to project files]
-
-## Related
-[Cross-links to project files and other KB entries]
-```
-
-For your own organization, you might add fields like schedule, timezone, reports-to, and type (full-time vs. contractor).
+The detailed rules and entry template live in `Knowledge/Jesse-Guidelines/People-KB-Guidelines.md`, which the agent loads whenever it needs to create or update a person entry. To customize the entry format (add timezone, pronouns, reports-to, etc.), edit that file directly.
 
 ## How It Works
 
