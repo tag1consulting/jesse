@@ -15,6 +15,7 @@ Recipes are self-contained guides for setting up specific Jesse capabilities. Ea
 | [Meeting Agendas](./meeting-agendas.md) | Auto-generated agenda drafts for every meeting on your calendar |
 | [Research](./research.md) | Structured, source-backed research output with citations, variant tracking, and actionability sections |
 | [Writing Voice](./writing-voice.md) | Catch and fix AI writing tells before publishing or sending |
+| [Semantic Vault Search](./semantic-search.md) | **Optional.** Local semantic search over your vault using [QMD](https://github.com/tobi/qmd) — BM25 keyword, vector similarity, and hybrid re-ranking. Requires ~2 GB for models |
 
 ## Contributing a Recipe
 
