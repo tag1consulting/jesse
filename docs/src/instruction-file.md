@@ -38,15 +38,15 @@ Knowledge/ files referenced by JESSE.md:
 
 | File | When loaded |
 |---|---|
-| `First-Run-Setup.md` | Once, when Dashboard.md doesn't exist |
-| `Start-of-Day-Routine.md` | Once per session, at routine start |
-| `Weekly-Vault-Maintenance.md` | Once per week |
-| `People-KB-Guidelines.md` | When creating or updating a person entry |
-| `Research-Guidelines.md` | When performing research tasks |
-| `Writing-Voice-Guidelines.md` | When finalizing prose for external use |
-| `Meeting-Agenda-Guidelines.md` | When preparing meeting agendas |
+| `Knowledge/Jesse-Guidelines/First-Run-Setup.md` | Once, when Dashboard.md doesn't exist |
+| `Knowledge/Jesse-Guidelines/Start-of-Day-Routine.md` | Once per session, at routine start |
+| `Knowledge/Jesse-Guidelines/Weekly-Vault-Maintenance.md` | Once per week |
+| `Knowledge/Jesse-Guidelines/People-KB-Guidelines.md` | When creating or updating a person entry |
+| `Knowledge/Jesse-Guidelines/Research-Guidelines.md` | When performing research tasks |
+| `Knowledge/Jesse-Guidelines/Writing-Voice-Guidelines.md` | When finalizing prose for external use |
+| `Knowledge/Jesse-Guidelines/Meeting-Agenda-Guidelines.md` | When preparing meeting agendas |
 
-All of these live in `Knowledge/Jesse-Guidelines/`. Recipes add new files following the same pattern.
+Recipes add new files following the same pattern.
 
 ## The Start-of-Day Routine
 
