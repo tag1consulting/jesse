@@ -19,14 +19,14 @@ Projects/                 Source of truth per topic (one file per project)
       old/                Sent drafts older than 90 days
 
 Knowledge/                Personal knowledge base and guidelines (loaded on demand)
-  Jesse-Guidelines/               Agent behavior rules, routines, and guidelines
-    First-Run-Setup.md            One-time vault setup
-    Start-of-Day-Routine.md       Daily routine orchestration
-    Weekly-Vault-Maintenance.md   Weekly vault cleanup
-    People-KB-Guidelines.md       People entry format and rules
-    Research-Guidelines.md        Research output standards
-    Writing-Voice-Guidelines.md   Writing voice checklist
-    Meeting-Agenda-Guidelines.md  Meeting agenda rules
+  Jesse-Guidelines/       Agent behavior rules, routines, and guidelines
+    First-Run-Setup.md
+    Start-of-Day-Routine.md
+    Weekly-Vault-Maintenance.md
+    People-KB-Guidelines.md
+    Research-Guidelines.md
+    Writing-Voice-Guidelines.md
+    Meeting-Agenda-Guidelines.md
   People/                 Contact directory
     YourOrg/              Your organization (rename for yours)
     Client/               Client contacts

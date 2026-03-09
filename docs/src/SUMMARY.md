@@ -24,6 +24,7 @@
 
 # Reference
 
+- [Migrating from Earlier Versions](./migrating.md)
 - [Design Philosophy](./design-philosophy.md)
 - [FAQ](./faq.md)
 - [Contributing](./contributing.md)

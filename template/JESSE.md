@@ -145,7 +145,7 @@ Projects/Research/           -- Completed research output (standalone files)
 Projects/drafts/             -- Active draft communications
 Projects/drafts/archive/     -- Sent drafts (date-prefixed, purge after 90 days)
 Knowledge/                   -- Personal knowledge base, guidelines, and routines
-Knowledge/Jesse-Guidelines/              -- Agent behavior rules, routines, and guidelines
+Knowledge/Jesse-Guidelines/  -- Agent behavior rules, routines, and guidelines
 Knowledge/Jesse-Guidelines/First-Run-Setup.md
 Knowledge/Jesse-Guidelines/Start-of-Day-Routine.md
 Knowledge/Jesse-Guidelines/Weekly-Vault-Maintenance.md

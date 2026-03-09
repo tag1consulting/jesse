@@ -57,7 +57,7 @@ Your instruction file defines what phrases trigger the routine, so you can custo
 
 Between routines, Jesse is useful for one-off tasks. Some examples:
 
-**Drafting messages.** You can say "draft a reply to that email from Alex about the project timeline" and the agent writes a draft, saves it to Drafts/, and waits for you to review it before anything gets sent. Nothing leaves your outbox without your explicit approval.
+**Drafting messages.** You can say "draft a reply to that email from Alex about the project timeline" and the agent writes a draft, saves it to `Projects/drafts/`, and waits for you to review it before anything gets sent. Nothing leaves your outbox without your explicit approval.
 
 **Adding tasks.** "Add a low-priority task to follow up with the design team about the mockups" creates the entry in your task list with proper formatting, timestamps, and source tracking.
 
@@ -69,13 +69,7 @@ Between routines, Jesse is useful for one-off tasks. Some examples:
 
 ## Adding and Managing Tasks
 
-Tasks live in Tasks/Active.md with a simple format:
-
-```
-- [ ] P2 | Work | Follow up with design team on mockups | Due: 2026-03-10 | Source: meeting notes | (Added 2026-03-05)
-```
-
-Each task has a priority (P1 = today, P2 = this week, P3 = when possible), a context (Work or Home), a description, and metadata about where it came from and when it was created.
+Tasks live in Dashboard.md, sorted into four sections: Urgent, This Week, Waiting, and Backlog. Every item has a timestamp so stale items don't hide in plain sight.
 
 You can add tasks in several ways:
 
@@ -85,7 +79,7 @@ You can add tasks in several ways:
 
 The agent doesn't silently add things to your list from email. It surfaces what it found and asks you to confirm. You stay in control of what's on your plate.
 
-Completed tasks get marked done with a date, and periodically you move them to Archive/ to keep Active.md focused.
+Completed tasks get marked done with a date. Today's completions show in the Done section of Today.md.
 
 ## Projects and People
 
@@ -124,7 +118,7 @@ It should take two to five minutes. If you skip it, the morning routine catches 
 
 ## Weekly Review
 
-At the end of the week, ask the agent for a weekly summary. It creates a file in Weekly/ covering what got done, what slipped, what's coming next week, and any patterns worth noting.
+At the end of the week, ask the agent for a weekly summary. It can review Dashboard.md, completed items, and project files to tell you what got done, what slipped, and what's coming next week.
 
 This is also a good time to ask the agent to run vault maintenance (defined in `Knowledge/Jesse-Guidelines/Weekly-Vault-Maintenance.md`): checking for broken links between files, enforcing naming conventions, cleaning up archives, and making sure the dashboard matches reality. The template includes this as a weekly routine -- just tell the agent to run it.
 
@@ -152,8 +146,7 @@ After daily use, your vault will have:
 - A Today.md you can glance at on your phone to know what's next.
 - Project files with running context you didn't have to manually maintain.
 - People files that give you instant context before any meeting or message.
-- A Drafts/ folder where you review messages before they go out.
-- A Weekly/ archive showing your work patterns over time.
+- A `Projects/drafts/` folder where you review messages before they go out.
 - An instruction file and set of Knowledge/ files that are genuinely personalized to how you think and work.
 
 None of this requires a big upfront investment. It builds up session by session, correction by correction.
