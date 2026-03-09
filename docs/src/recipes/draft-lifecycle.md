@@ -60,4 +60,4 @@ Anything that's going to be shared, discussed, or handed to someone:
 
 **The project file is the permanent record.** Don't rely on the archive for long-term reference. The extracted details in the project file should capture what was sent, to whom, and what was proposed or agreed.
 
-**Clean up the archive periodically.** The 90-day move to `old/` keeps the archive manageable. Jeremy purges `old/` manually from Obsidian when inclined.
+**Clean up the archive periodically.** The 90-day move to `old/` keeps the archive manageable. Purge `old/` manually when it gets large.
