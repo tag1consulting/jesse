@@ -28,7 +28,7 @@ The "show your judgment calls" principle also helps. When the agent tells you wh
 
 ## How long before it's useful?
 
-The first session. Even a minimal instruction file produces something useful: a scan of your inbox, a Today.md with your schedule, a morning briefing. It gets significantly better after a few days of iteration as you refine the instruction file for your specific situation.
+The first session. The template includes everything needed to run: on the very first session, Jesse detects that Dashboard.md doesn't exist and walks you through setup (from `Knowledge/Jesse-Guidelines/First-Run-Setup.md`). After that, every session runs the full routine. It gets significantly better after a few days of iteration as you refine the instruction file and Knowledge/ files for your specific situation.
 
 ## Can I use this with a team?
 

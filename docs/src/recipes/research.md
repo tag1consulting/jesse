@@ -14,24 +14,27 @@ A guidelines file in your vault that Jesse reads whenever research is requested,
 
 ```
 Knowledge/
-  Research-Guidelines.md   # Research output standards and citation rules
+  Jesse-Guidelines/
+    Research-Guidelines.md   # Research output standards and citation rules
 Projects/
-  Research/                # Completed research output (standalone files)
+  Research/                  # Completed research output (standalone files)
 ```
 
-## JESSE.md Configuration
+## Configuration
 
-Add the following to the **Rules** section of your instruction file:
+The template already includes research. JESSE.md has a pointer in the Rules section:
 
 ````markdown
 ### Research
 
-Follow [[Knowledge/Research-Guidelines]] for all research tasks.
+Follow [[Knowledge/Jesse-Guidelines/Research-Guidelines]] for all research tasks. Any inbox item or instruction
+that asks to research, investigate, explain, or answer a substantive question produces a file
+in `Projects/Research/`, not a conversational reply.
 ````
 
 ## The Guidelines File
 
-Create this file at `Knowledge/Research-Guidelines.md` in your vault:
+The template includes this file at `Knowledge/Jesse-Guidelines/Research-Guidelines.md`:
 
 ````markdown
 # Research Guidelines
@@ -50,7 +53,7 @@ End with a detailed summary that draws all threads together into a coherent pict
 ## How It Works
 
 1. Drop a research request in Inbox/ or ask Jesse directly.
-2. Jesse reads `Knowledge/Research-Guidelines.md`, scopes the research, gathers sources, and writes a structured report.
+2. Jesse reads `Knowledge/Jesse-Guidelines/Research-Guidelines.md`, scopes the research, gathers sources, and writes a structured report.
 3. Output lands in `Projects/Research/` with a summary and actionability section.
 4. Any inbox item or instruction that asks to research, investigate, explain, or answer a substantive question produces a file in `Projects/Research/`. The conversational summary is secondary to the written report.
 

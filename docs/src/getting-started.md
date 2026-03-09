@@ -24,9 +24,8 @@ If you use Obsidian, open your vault directory as a new vault. Install the [Remi
 Open `JESSE.md` in your vault. This is the file that tells the AI agent what to do. The template has a working starter configuration, but you need to customize it:
 
 - Replace the placeholder name and role with yours.
-- Remove integrations you don't have (WhatsApp, Slack, etc.).
-- Adjust the daily routine to match your workflow.
-- Add your own preferences and rules.
+- Review your preferences and rules.
+- Browse the `Knowledge/` files -- they hold your personal knowledge base (people, reminders, writing preferences) and the routines JESSE.md points to (daily routine, maintenance tasks). Customize these too.
 
 If you're using Claude's Cowork mode, rename `JESSE.md` to `CLAUDE.md`. Cowork picks it up automatically.
 
@@ -40,14 +39,16 @@ Open your AI agent of choice and point it at your vault directory.
 
 **Other agents:** Any agent with file access and tool-calling capabilities can use the instruction file. Point it at the vault and include the contents of `JESSE.md` in your system prompt or project instructions.
 
-## 5. Run the Start-of-Day Routine
+## 5. Run Your First Session
 
-Ask the agent to run the start-of-day routine. On the first run it will:
+Ask the agent to run the start-of-day routine. On the very first run, `Dashboard.md` won't exist yet, so the agent will detect this and run the first-run setup instead (defined in `Knowledge/Jesse-Guidelines/First-Run-Setup.md`). It will:
 
-- Read your (empty) inbox
-- Try to scan email and messaging (skip what's not connected)
-- Build `Today.md` and `Dashboard.md`
-- Deliver a morning briefing (which will be short since everything is new)
+- Ask you a few questions about your name, role, and priorities.
+- Detect which tools are connected (email, calendar, messaging).
+- Build `Dashboard.md` and `Today.md`.
+- Deliver a short briefing with whatever it found.
+
+On all subsequent sessions, the agent skips setup and runs the full start-of-day routine from `Knowledge/Jesse-Guidelines/Start-of-Day-Routine.md`.
 
 ## 6. Iterate
 

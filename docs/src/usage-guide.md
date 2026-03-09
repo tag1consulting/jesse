@@ -10,12 +10,13 @@ This is the core of the system. You open a session, say something like "good mor
 
 What happens behind the scenes:
 
-1. The agent reads your instruction file to load your rules and preferences.
-2. It scans your connected tools (email, calendar, messaging) for anything new.
-3. It checks your Inbox/ folder for notes you dropped in since last session.
-4. It reviews your active tasks and reminders.
-5. It builds (or rebuilds) Today.md and updates Dashboard.md.
-6. It delivers a morning briefing summarizing what needs your attention.
+1. The agent reads your instruction file (JESSE.md) to load your rules and preferences.
+2. It loads the daily routine from `Knowledge/Jesse-Guidelines/Start-of-Day-Routine.md`.
+3. It scans your connected tools (email, calendar, messaging) for anything new.
+4. It checks your Inbox/ folder for notes you dropped in since last session.
+5. It reviews your active tasks and reminders.
+6. It builds (or rebuilds) Today.md, prepares meeting agendas, and updates Dashboard.md.
+7. It delivers a morning briefing summarizing what needs your attention.
 
 The briefing groups things by urgency. A typical output looks something like:
 
@@ -56,7 +57,7 @@ Your instruction file defines what phrases trigger the routine, so you can custo
 
 Between routines, Jesse is useful for one-off tasks. Some examples:
 
-**Drafting messages.** You can say "draft a reply to that email from Alex about the project timeline" and the agent writes a draft, saves it to Drafts/, and waits for you to review it before anything gets sent. Nothing leaves your outbox without your explicit approval.
+**Drafting messages.** You can say "draft a reply to that email from Alex about the project timeline" and the agent writes a draft, saves it to `Projects/drafts/`, and waits for you to review it before anything gets sent. Nothing leaves your outbox without your explicit approval.
 
 **Adding tasks.** "Add a low-priority task to follow up with the design team about the mockups" creates the entry in your task list with proper formatting, timestamps, and source tracking.
 
@@ -68,13 +69,7 @@ Between routines, Jesse is useful for one-off tasks. Some examples:
 
 ## Adding and Managing Tasks
 
-Tasks live in Tasks/Active.md with a simple format:
-
-```
-- [ ] P2 | Work | Follow up with design team on mockups | Due: 2026-03-10 | Source: meeting notes | (Added 2026-03-05)
-```
-
-Each task has a priority (P1 = today, P2 = this week, P3 = when possible), a context (Work or Home), a description, and metadata about where it came from and when it was created.
+Tasks live in Dashboard.md, sorted into four sections: Urgent, This Week, Waiting, and Backlog. Every item has a timestamp so stale items don't hide in plain sight.
 
 You can add tasks in several ways:
 
@@ -84,7 +79,7 @@ You can add tasks in several ways:
 
 The agent doesn't silently add things to your list from email. It surfaces what it found and asks you to confirm. You stay in control of what's on your plate.
 
-Completed tasks get marked done with a date, and periodically you move them to Archive/ to keep Active.md focused.
+Completed tasks get marked done with a date. Today's completions show in the Done section of Today.md.
 
 ## Projects and People
 
@@ -123,9 +118,9 @@ It should take two to five minutes. If you skip it, the morning routine catches 
 
 ## Weekly Review
 
-At the end of the week, ask the agent for a weekly summary. It creates a file in Weekly/ covering what got done, what slipped, what's coming next week, and any patterns worth noting.
+At the end of the week, ask the agent for a weekly summary. It can review Dashboard.md, completed items, and project files to tell you what got done, what slipped, and what's coming next week.
 
-This is also a good time to ask the agent to run vault maintenance: checking for broken links between files, flagging tasks that haven't been updated in two weeks, and making sure the dashboard matches reality. You can automate this by adding it to your instruction file as a weekly add-on, similar to how the morning routine works.
+This is also a good time to ask the agent to run vault maintenance (defined in `Knowledge/Jesse-Guidelines/Weekly-Vault-Maintenance.md`): checking for broken links between files, enforcing naming conventions, cleaning up archives, and making sure the dashboard matches reality. The template includes this as a weekly routine -- just tell the agent to run it.
 
 ## The Feedback Loop
 
@@ -133,12 +128,12 @@ The most important thing to understand about Jesse is that it improves through u
 
 When the agent misclassifies an email as low priority, you correct it, and then you add a rule to the instruction file: "Emails from this client are always at least yellow." When a triage decision doesn't match your judgment, you refine the criteria. When you realize you want birthday reminders or a weekly status update draft, you add a recipe.
 
-After a week or two of daily use, the system matches your judgment more often. That's because your instruction file has become more specific about your priorities and preferences.
+After a week or two of daily use, the system matches your judgment more often. That's because your instruction file and Knowledge/ files have become more specific about your priorities and preferences.
 
 A few practical tips:
 
 - **Start simple.** The template instruction file is enough to get going. Add complexity only when you feel the need.
-- **Correct out loud.** When the agent gets something wrong, tell it why. Then tell it to update the instruction file so it doesn't happen again.
+- **Correct out loud.** When the agent gets something wrong, tell it why. Then tell it to update the instruction file or the relevant Knowledge/ file so it doesn't happen again.
 - **Use Inbox/ liberally.** Any time you think "I need to remember to do X," drop a note. The system handles the rest.
 - **Don't over-organize early.** A slightly messy vault that you actually use beats a pristine structure you avoid touching.
 - **Read the recipes.** They're patterns extracted from real usage, and you can adopt them piecemeal as they become relevant to your workflow.
@@ -151,8 +146,7 @@ After daily use, your vault will have:
 - A Today.md you can glance at on your phone to know what's next.
 - Project files with running context you didn't have to manually maintain.
 - People files that give you instant context before any meeting or message.
-- A Drafts/ folder where you review messages before they go out.
-- A Weekly/ archive showing your work patterns over time.
-- An instruction file that's become genuinely personalized to how you think and work.
+- A `Projects/drafts/` folder where you review messages before they go out.
+- An instruction file and set of Knowledge/ files that are genuinely personalized to how you think and work.
 
 None of this requires a big upfront investment. It builds up session by session, correction by correction.
