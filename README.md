@@ -31,9 +31,17 @@ template/
 ├── Today.md              # Living daily task list
 ├── Inbox/                # Quick capture from phone/desktop
 ├── Projects/
+│   ├── Research/          # Completed research output
 │   └── drafts/           # Active draft communications
 │       └── archive/      # Sent drafts (date-prefixed)
 └── Knowledge/
+    ├── First-Run-Setup.md            # One-time vault setup procedure
+    ├── Start-of-Day-Routine.md       # Daily routine orchestration
+    ├── Weekly-Vault-Maintenance.md   # Weekly vault cleanup tasks
+    ├── People-KB-Guidelines.md       # People entry format and rules
+    ├── Research-Guidelines.md        # Research output standards
+    ├── Writing-Voice-Guidelines.md   # Writing voice checklist
+    ├── Meeting-Agenda-Guidelines.md  # Meeting agenda rules
     ├── People/           # Contact directory
     │   ├── Tag1/         # (your org — rename this)
     │   ├── Client/
