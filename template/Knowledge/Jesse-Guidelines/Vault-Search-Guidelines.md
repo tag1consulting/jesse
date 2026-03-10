@@ -30,6 +30,9 @@ read entire directories or guess at file paths.
 
 - QMD returns snippets, not full files. Always retrieve the full document
   with `get` after finding it.
-- The index is not live. Run `qmd update` after significant vault changes.
+- The index is refreshed by an external scheduled job, not by the agent.
+  Check `qmd status` at start of session and warn if the index is
+  more than 24 hours stale. Files created or edited during a session
+  won't appear in search results until the next index run.
 - First sub-query in a search gets 2× weight — put your strongest
   signal first.

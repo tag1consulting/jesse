@@ -132,7 +132,10 @@ read entire directories or guess at file paths.
 
 - QMD returns snippets, not full files. Always retrieve the full document
   with `get` after finding it.
-- The index is not live. Run `qmd update` after significant vault changes.
+- The index is refreshed by an external scheduled job, not by the agent.
+  Check `qmd status` at start of session and warn if the index is
+  more than 24 hours stale. Files created or edited during a session
+  won't appear in search results until the next index run.
 - First sub-query in a search gets 2× weight — put your strongest
   signal first.
 ```
@@ -183,7 +186,59 @@ Additional tools:
 
 ### Keeping the index fresh
 
-QMD doesn't watch for file changes. After your assistant writes to the vault (or you edit files manually), update the index:
+QMD's MCP server is **read-only** — it exposes `query`, `get`, `multi_get`, and `status`, but no reindex tool. The `qmd update` and `qmd embed` commands are CLI-only and must run on the host machine, not through the agent. Your agent cannot refresh the index during a session.
+
+Set up automated indexing outside the agent. Files created or edited during a session won't be searchable until the next index run.
+
+**macOS (launchd)** — runs 4× daily during work hours, catches up on wake if the Mac was asleep:
+
+Save as `~/Library/LaunchAgents/com.qmd.update.plist` (replace `REPLACE_WITH_YOUR_HOME` with your home directory path), then load with `launchctl load ~/Library/LaunchAgents/com.qmd.update.plist`:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.qmd.update</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-c</string>
+        <string>/opt/homebrew/bin/qmd update &amp;&amp; /opt/homebrew/bin/qmd embed</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Hour</key><integer>7</integer><key>Minute</key><integer>0</integer></dict>
+        <dict><key>Hour</key><integer>11</integer><key>Minute</key><integer>0</integer></dict>
+        <dict><key>Hour</key><integer>15</integer><key>Minute</key><integer>0</integer></dict>
+        <dict><key>Hour</key><integer>19</integer><key>Minute</key><integer>0</integer></dict>
+    </array>
+    <key>StandardOutPath</key>
+    <string>REPLACE_WITH_YOUR_HOME/Library/Logs/qmd-update.log</string>
+    <key>StandardErrorPath</key>
+    <string>REPLACE_WITH_YOUR_HOME/Library/Logs/qmd-update.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <key>HOME</key>
+        <string>REPLACE_WITH_YOUR_HOME</string>
+    </dict>
+</dict>
+</plist>
+```
+
+**Linux (cron):**
+
+```cron
+# QMD vault reindex — every 4 hours during work hours
+0 7,11,15,19 * * * /usr/local/bin/qmd update && /usr/local/bin/qmd embed >> ~/logs/qmd-update.log 2>&1
+```
+
+> **Note:** Find your QMD binary path with `which qmd`. Homebrew installs to `/opt/homebrew/bin/qmd`; npm global installs may differ.
+
+**Manual runs** — you can always reindex on demand from the terminal:
 
 ```bash
 qmd update    # Re-scan for new/changed files
