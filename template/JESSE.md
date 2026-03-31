@@ -97,6 +97,8 @@ Follow [[Knowledge/Jesse-Guidelines/People-KB-Guidelines]] when creating or upda
 
 The project file is the permanent record. `archive/` is a short-term safety net for referencing exact wording.
 
+**HARD RULE: Every file in `drafts/` and `Research/` gets an archive footer.** No exceptions -- emails, agendas, recipes, checklists, research reports, anything. If it lives in `Projects/drafts/` or `Projects/Research/` (not `archive/` subdirectories), it ends with the three archive checkboxes. This applies regardless of how the file was created (routine, inbox processing, manual request, ad-hoc). See [[Knowledge/Jesse-Guidelines/Archive-Footer-Guidelines]] for the exact format.
+
 ### Research
 
 Follow [[Knowledge/Jesse-Guidelines/Research-Guidelines]] for all research tasks. Any inbox item or instruction that asks to research, investigate, explain, or answer a substantive question produces a file in `Projects/Research/`, not a conversational reply. The chat summary is secondary to the written report.
@@ -120,6 +122,16 @@ The vault uses `archive/` subdirectories wherever items age out. If your agent's
 | `Projects/drafts/archive/old/` | Sent drafts older than 90 days (created on first purge) |
 
 Purge archive folders manually from Obsidian or Finder when desired.
+
+### Archive Checkbox Processing
+
+Every research file and draft includes an archive footer with three checkboxes (Archive, Deep extract, Archive only). The user checks one to signal what should happen. Processing these checked files is a background maintenance task that should happen efficiently throughout the day.
+
+**How to check:** Use grep, not QMD -- QMD's tokenizer strips brackets so `[x]` never matches in lex queries. The command: `grep -rl '^\- \[x\] \(Archive\|Deep extract\|Archive only\)' Projects/drafts/ Projects/Research/` finds all checked files in one pass. Run this check periodically (at start of day, after processing inbox, and when context allows during the session). Suggest that the user set up a scheduled task two run maybe four times a day.
+
+**How to process:** Delegate to a subagent. The subagent must have either: (a) the file content passed in its prompt, or (b) instructions to read the file and search the vault (via QMD or another search tool if installed) for relevant knowledge collections and project files. The subagent handles extraction and archiving, keeping the raw content out of the main context window. For "Deep extract," the subagent lowers the bar for what qualifies -- background context, supporting details, and minor observations all get captured (but still skip noise and redundancy). For standard "Archive," extract only what clearly matters -- decisions, findings, action items. For "Archive only," just move to archive.
+
+**Efficiency rule:** This must not waste main context. One grep to find checked files. One subagent per file to process. No reading file contents in the main session unless there's a specific reason to.
 
 ---
 
@@ -153,6 +165,7 @@ Knowledge/Jesse-Guidelines/People-KB-Guidelines.md
 Knowledge/Jesse-Guidelines/Research-Guidelines.md
 Knowledge/Jesse-Guidelines/Writing-Voice-Guidelines.md
 Knowledge/Jesse-Guidelines/Meeting-Agenda-Guidelines.md
+Knowledge/Jesse-Guidelines/Archive-Footer-Guidelines.md
 Knowledge/People/            -- Contact directory (subdirectories created during first run)
 Knowledge/Reminders/         -- Date-based reminders
 ```
