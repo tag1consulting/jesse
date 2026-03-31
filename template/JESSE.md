@@ -45,7 +45,10 @@ These are the rules most likely to be missed. Read them first, every session.
 
 Run this at the start of each working session. Read and follow [[Knowledge/Jesse-Guidelines/Start-of-Day-Routine]] for detailed orchestration.
 
-Three phases: **Gather** (inbox, email, calendar, messaging, dashboard, reminders), **Process** (act on inbox instructions, extract TODOs, flag meeting items, audit links), **Produce** (build Today.md, prepare agendas, update dashboard, archive inbox, deliver briefing).
+- **Pre-flight:** Read Dashboard.md, confirm tools, **reconcile Today.md** (propagate user edits before overwriting)
+- **Gather:** Inbox, email, calendar, messaging, reminders
+- **Process:** Act on inbox instructions, extract TODOs, filter already-surfaced items, detect state changes, flag meeting items, audit links
+- **Produce:** Build Today.md, prepare agendas, update dashboard, archive inbox, deliver briefing
 
 If `Dashboard.md` does not exist, run First Run instead.
 
