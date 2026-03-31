@@ -20,7 +20,7 @@ These steps run in the main context, not subagents. Complete them before startin
 
 **Universal retry rule (applies to ALL scanner agents):** If any MCP connector call fails, wait a moment and retry once. MCP connectors can have transient auth/connection errors. Only report failure if it fails TWICE. When reporting failure, include the exact error text so we can debug. This rule applies to every scanner -- Gmail, Fastmail, WhatsApp, Slack, Calendar, Vault, and Environment. Do not surface "connector unavailable" to the user on a single failure.
 
-**Universal dedup rule (applies to ALL scanner agents):** When returning items, include the date/timestamp of the underlying message or event. Phase 2 uses these dates to filter out items that were already surfaced in a previous session. If an item is more than 3 days old, it should still be returned (Phase 2 handles filtering), but the date must be present so Phase 2 can make the call.
+**Universal dedup rule (applies to ALL scanner agents):** When returning items, include the date/timestamp of the underlying message or event. Phase 2 uses these dates to filter out items that were already surfaced in a previous session. Always return all items regardless of age -- Phase 2 handles the filtering decision. The date must be present so Phase 2 can make the call.
 
 - **Read Inbox/** -- Capture all notes, TODOs, and instructions left from phone/desktop. Ignore `README.md` and `.gitkeep` files.
 - **Scan email** -- Check connected email accounts for action items, replies, and updates. Scan all messages still in the inbox (read and unread) -- if it's still in the inbox, it's not done.
