@@ -186,7 +186,7 @@ Each day's journal follows this structure:
 
 ## How It Works
 
-1. The user says "log breakfast: two eggs, toast with butter, coffee with milk" or similar.
+1. The user says "log breakfast: two eggs, toast with butter, coffee with whole milk" or similar.
 2. Jesse estimates macros from general knowledge (no external API), updates the daily journal table, appends rows to `food-log.xlsx`, and shows the dashboard in chat.
 3. For exercise: "logged a 7km run, 38 minutes, avg HR 155" updates the journal's Activity section, appends to `exercise-log.xlsx`, and the dashboard switches to two-line calorie display.
 4. The user can correct any estimate ("that was 300 cal not 250") and all three views update.
@@ -202,5 +202,7 @@ Each day's journal follows this structure:
 **Don't eat back exercise calories.** The dashboard shows net calories for information but the "Remaining" line always uses baseline (intake only). Burn estimates are averages and eating them back can stall weight loss. This is a deliberate design choice baked into the guidelines.
 
 **Spreadsheets are the long-term record.** The daily journals are good for day-of review. The spreadsheets are what you analyze when looking at weekly/monthly trends.
+
+**Works with the [Cookbook](./cookbook.md).** When both are active, logging a meal from a tracked recipe auto-populates nutrition data, and meal suggestions consider remaining macro budget. Either works standalone.
 
 **Removing this recipe** is clean: delete `Projects/Diet/`, the two spreadsheets, `Diet-Dashboard-Guidelines.md`, and the instruction file hook. Nothing else references it.

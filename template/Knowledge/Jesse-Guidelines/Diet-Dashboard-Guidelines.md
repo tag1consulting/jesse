@@ -50,3 +50,4 @@ All three must update on every log. If one is skipped, the data drifts.
 - **Don't recalculate targets.** The user's targets are defined in `Projects/Diet/Overview.md`. Use them as-is. If they seem wrong, mention it once and move on -- don't adjust without being asked.
 - **Calorie/macro estimates come from general knowledge**, not an API. The user corrects values if they know better. Keep it simple and dependency-free.
 - **Day types are user-defined** in Overview.md. Don't assume a specific sport or training plan.
+- **Cookbook integration:** When both the Cookbook and Diet Tracker are active, logging a meal from a tracked recipe in `Knowledge/Cookbook/` auto-populates the food journal with the recipe's nutrition data (adjusted for portion size). When the Cookbook is not active, ignore this rule.
