@@ -16,6 +16,7 @@ Recipes are self-contained guides for setting up specific Jesse capabilities. Ea
 | [Research](./research.md) | Structured, source-backed research output with citations, variant tracking, and actionability sections |
 | [Writing Voice](./writing-voice.md) | Catch and fix AI writing tells before publishing or sending |
 | [Semantic Vault Search](./semantic-search.md) | **Optional.** Local semantic search over your vault using [QMD](https://github.com/tobi/qmd). Requires ~2 GB on disk for models |
+| [Diet & Exercise Tracking](./diet-tracking.md) | **Optional.** Daily nutrition and exercise tracking with journal, spreadsheets, and in-chat dashboard |
 
 ## Contributing a Recipe
 
