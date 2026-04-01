@@ -28,6 +28,7 @@ These are the rules most likely to be missed. Read them first, every session.
 - **Track everything until acknowledged.** New items from Inbox/, email, or messaging stay visible in Dashboard.md and Today.md until signed off. The user may reprioritize or redirect.
 - **Show your judgment calls.** When triaging priority, filing, or interpreting ambiguous instructions, briefly state what you decided and what you chose not to do. A few bullets, not an essay.
 - **Always write in Markdown.** Everything in this vault is reviewed in Obsidian or a markdown editor. No docx, no HTML.
+- **The vault is the source of truth.** When workflows, preferences, or guidelines change, always update the corresponding file in the vault (JESSE.md, CLAUDE.md, Knowledge/Jesse-Guidelines/, etc.). Never store changes to workflows, preferences, or agent behavior only in tool-specific memory, session memory, or conversation context. If it's not written in the vault, it doesn't persist. Before ending any session where workflows, preferences, or agent behavior were adjusted, verify the change is written to the vault.
 
 ---
 
