@@ -8,6 +8,7 @@ Recipes are self-contained guides for setting up specific Jesse capabilities. Ea
 |---|---|
 | [Birthday and Date Reminders](./reminders.md) | Multi-stage reminders for birthdays, holidays, document expirations, and recurring dates using Obsidian Reminders |
 | [Email Integration](./email.md) | Scanning Gmail, Fastmail, or other email for action items during the morning routine |
+| [Slack Integration](./slack.md) | Scanning Slack channels and DMs with timestamp-gated reads to avoid stale data and missed messages |
 | [WhatsApp Integration](./whatsapp.md) | Scanning WhatsApp chats for action items via a local bridge |
 | [Draft Lifecycle](./draft-lifecycle.md) | Managing active drafts, archiving sent communications, and extracting key details |
 | [People Knowledge Base](./people-kb.md) | Automatic contact directory maintenance with categorization and cross-linking |
