@@ -88,6 +88,8 @@ Slack MCP connectors have two reliability issues that cause bad morning briefing
 
 2. **Missed DMs.** The `to:me` search modifier is unreliable -- it can miss DMs entirely, especially from less frequent contacts. If DMs are your only scan method, you'll silently drop action items.
 
+3. **Invisible thread replies.** `slack_read_channel` with an `oldest` timestamp only returns top-level messages posted after that timestamp. Thread replies on older parent messages -- even brand-new ones with @mentions -- are completely invisible to channel reads. If someone replies to a week-old thread with "@you please review this," the channel scan won't see it.
+
 ### The Solution
 
 The vault file below implements two techniques to solve these problems:
@@ -95,6 +97,8 @@ The vault file below implements two techniques to solve these problems:
 **Timestamp-gated channel reads.** Instead of broad search queries, use `slack_read_channel` with an `oldest` timestamp derived from your Dashboard's last-updated date. This returns exactly the messages posted since your last session -- no stale data. The scan window adapts automatically: a normal weekday gets ~28 hours of lookback, a long weekend gets ~96 hours, because it's anchored to when you last ran the routine rather than a fixed window.
 
 **Two-pronged DM scanning.** A `to:me` search catches DMs from anyone, but misses some messages. Direct reads of known DM channels never miss messages, but only cover contacts you've listed. Using both together eliminates the gap.
+
+**Mention search for thread replies.** The `to:me` search that's already part of DM scanning (Prong 1) does double duty: it also catches @mentions in thread replies on older parent messages. The key is to check those search results for thread replies in channels (where `thread_ts` differs from `message_ts`), not just DMs. For any thread reply found, `slack_read_thread` pulls the full context. This closes the gap that channel reads alone can't cover.
 
 The vault file also covers dedup against Dashboard.md (so tracked items don't resurface), thread context handling, and subagent delegation patterns. See the [Vault File](#vault-file) section for the complete implementation.
 
@@ -168,11 +172,47 @@ timestamp.
 
 Direct reads catch messages that `to:me` search misses.
 
-## Thread Context
+## Thread Replies and @Mentions
 
-When a message has replies or someone tags you with a vague message
-("^", "+1", etc.), use `slack_read_thread` with the `message_ts`
-to get full context before summarizing.
+### The gap: thread replies on older messages
+
+`slack_read_channel` with `oldest` only returns **top-level channel
+messages** posted after the timestamp. It does **not** return thread
+replies on older parent messages, even if the reply itself is new.
+This means @mentions in threads on older posts will be missed by
+channel reads alone.
+
+**Example:** You post a message on Monday. Someone replies in that
+thread on Thursday with "@you can you review this?" The Thursday
+channel scan (with `oldest` set to Wednesday) will NOT see this
+reply because the parent message is from Monday.
+
+### Fix: Add a mention search pass
+
+After all channel reads and DM scans, run an additional search for
+@mentions:
+
+```
+slack_search_public_and_private(
+  query="to:me after:YYYY-MM-DD",
+  sort="timestamp",
+  sort_dir="desc",
+  limit=20,
+  include_context=true
+)
+```
+
+This overlaps with the DM search (Prong 1) and can be combined into
+a single search. The key point is that results must be checked for
+**thread replies in channels**, not just DMs. For any result that is
+a thread reply (`thread_ts` differs from `message_ts`), use
+`slack_read_thread` to get full context before summarizing.
+
+### Enriching channel read results
+
+When a channel message has replies or someone tags you with a vague
+message ("^", "+1", etc.), use `slack_read_thread` with the
+`message_ts` to get full context before summarizing.
 
 ## Dedup
 
@@ -193,6 +233,11 @@ Before surfacing any item:
   a `slack_read_channel` call on a known-active channel.
 - Formatted dates in search results can appear shifted. Prefer the
   Unix `message_ts` for determining when a message was posted.
+- Thread replies on old messages are invisible to channel reads.
+  `slack_read_channel` with `oldest` only returns top-level messages.
+  New thread replies (even with @mentions) on parent messages older
+  than the scan window won't appear. The `to:me` mention search pass
+  catches these.
 
 ## Maintaining the Contact List
 
@@ -212,5 +257,7 @@ channel ID, use `slack_read_channel` with the person's user ID.
 **Subagents need context to avoid the stale-data problem.** If you delegate Slack scanning to a subagent and don't pass the timestamp and Dashboard context, the subagent will use broad searches and present old messages as new. This is the failure mode that motivated this recipe.
 
 **Keep your channel list and DM contacts list updated.** When you start monitoring a new channel or notice DMs from a new frequent contact, add them to the instruction file. The scanning routine only checks what's listed.
+
+**Thread replies on old messages are invisible to channel reads.** This is the subtlest gap. Someone can @mention you in a thread on a week-old message and `slack_read_channel` won't return it, no matter what `oldest` is set to. The `to:me` mention search catches these -- make sure you're checking search results for thread replies (where `thread_ts` differs from `message_ts`) and pulling full thread context with `slack_read_thread`.
 
 **Slack's "Save for Later" list has no API.** Slack retired the stars/reminders endpoints in 2023 when they launched "Save for Later." There is no way to read this list programmatically. Workaround: manually review your Later list and drop anything actionable into `Inbox/` or `Knowledge/Reminders/`.
