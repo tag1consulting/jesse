@@ -22,6 +22,8 @@
 - [Research](./recipes/research.md)
 - [Writing Voice](./recipes/writing-voice.md)
 - [Semantic Vault Search](./recipes/semantic-search.md)
+- [Diet & Exercise Tracking](./recipes/diet-tracking.md)
+- [Cookbook](./recipes/cookbook.md)
 
 # Reference
 
