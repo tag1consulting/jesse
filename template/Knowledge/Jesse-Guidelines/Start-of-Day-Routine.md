@@ -45,7 +45,7 @@ For email, calendar, and messaging steps, use only the tools listed in the **Con
 - **Build Today.md** -- Reconciliation was already done in "Before Launching Agents" step 3. Now overwrite with today's schedule, tasks from Dashboard.md, and new items from the scanners. (See Today.md Rules in JESSE.md.)
 - **Prepare meeting agendas** -- For each meeting on today's calendar, generate or update an agenda draft in `Projects/drafts/` following [[Knowledge/Jesse-Guidelines/Meeting-Agenda-Guidelines]]. **Do not proceed to the next step until all agenda files are written.** This step produces files, not just notes -- if Today.md lists meetings, `Projects/drafts/` must have a corresponding `YYYY-MM-DD-HHMM-*-agenda.md` for each one (or an explicit note why one was skipped).
 - **Update Dashboard.md** -- Sync with everything found above.
-- **Archive inbox files** -- Move processed files to `Inbox/archive/`. Leave `README.md` in place.
+- **Archive inbox files** -- Move processed files to `Inbox/archive/` with a `YYYY-MM-DD-` date prefix. **Idempotency rule:** if the inbox filename already starts with a `YYYY-MM-DD-` prefix (regex `^\d{4}-\d{2}-\d{2}-`), do NOT add another date — keep the existing one. Phone-captured quick-note files often include their own timestamp; double-prefixing them produces names like `2026-04-29-2026-04-29-0706-Quick-Note.md`. Leave `README.md` in place.
 - **Deliver morning briefing** -- Surface new items, decisions made during triage, meeting prep notes, reminders, and anything needing input on priority. **Include links to each agenda file written above.** If no meetings today, state that explicitly.
 
 ## Customization Notes
