@@ -30,7 +30,16 @@ Weight data lives in `food-log.xlsx` on the **Weight** sheet.
 
 ### Window Definitions
 - **Trailing window:** Most recent 14 consecutive days of logged weight data (not calendar days).
-- **Composition window:** Most recent 28 consecutive days (used only if BF% and MM are logged).
+- **Composition window:** Most recent 28 consecutive days, after hydration artifact exclusion (see below).
+
+### Hydration Artifact Exclusion
+
+Bioelectrical impedance measurements are unreliable near intense exercise and during high hydration variance. Apply these exclusion rules before computing composition trends:
+
+- Any entry whose `Notes` field contains `⚠️ hydration artifact` is excluded from the composition window.
+- BIA readings within 4 hours of heavy exercise (>800 cal burn) should be flagged with `⚠️ hydration artifact` at log time and excluded.
+- The composition window requires **≥10 clean entries** after exclusion. If fewer than 10 remain, suppress composition bars and display: "Log Body Fat % and Muscle Mass for composition tracking."
+- Weight-only entries (no BF%/MM) are never excluded from the pace trailing window — exclusion applies to composition only.
 
 ---
 
@@ -123,7 +132,7 @@ Both are computed from the 14-day trailing window.
 
 ## Progress Bars
 
-Progress bars show movement toward **user-defined goal weights**. Define these in your tracking overview (e.g., "Goal 1: 180 lbs", "Goal 2: 165 lbs").
+Progress bars show movement toward **user-defined goal weights**. Define these in your tracking overview (e.g., "Goal 1: 180 lbs", "Goal 2: 165 lbs"). If you have two goals, render **two progress bars** — one per goal. Never collapse them into a single bar.
 
 ### Design
 
@@ -208,42 +217,24 @@ Shows the change in lean (non-fat) mass in lbs/week.
 
 ## Fancy Dashboard (HTML File)
 
-A self-contained HTML dashboard provides a richer view than Markdown blocks. Place it in your tracking directory as `dashboard.html`.
-
-### Contents
+Full build rules live in [[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]. That file is the single source of truth for generating `Dashboard-Fancy.html`. Summary of contents:
 
 1. **Line chart (Chart.js):**
    - Daily weight (scatter).
    - 7-day moving average (line).
    - Goal weight lines (dashed).
+   - **Trajectory line:** A dotted reference line through four reference weights: start weight, first goal weight, second goal weight (if defined), and the projected weight at the current pace on the goal-target date (if set). Distinguishes intent from actual data.
    - Y-axis labeled in lbs; legend shows all series.
 
 2. **Metric cards:**
-   - Current weight, weight lost from start, days to goal.
-   - Current body fat %, lean mass (if available).
-   - Phase, trough pace, raw pace.
+   - Current weight, weight lost from start, phase, pace range.
 
 3. **Bar visualizations:**
-   - Pace bar, progress bars, composition bars — all rendered as 12×16px colored blocks for crisp presentation.
-   - Hover tooltip showing block value range.
+   - Pace bar (range-as-subset), progress bars (fill-to-position), composition bars (single-block highlight) — all rendered as 12×16 px colored blocks.
 
-4. **Light/dark mode:**
-   - Reads system preference; user can toggle.
-   - Colors adjusted for contrast in both modes.
+4. **Light/dark mode** — reads system preference; user can toggle.
 
-5. **Coach's notes section:**
-   - Pattern-based observations extracted from the last 7 days:
-     - "Weight stable, pace slow."
-     - "Fat dropping, lean stable—good deficit."
-     - "High variance; ignore day-to-day noise."
-   - Generated from the pace range and composition trends; not manually edited.
-
-### How to Use
-
-1. Export your Weight sheet from `food-log.xlsx` as CSV (or keep it as XLSX and load via JavaScript library).
-2. Update the `data` array in the HTML with your weight entries.
-3. Update phase config, goal weights, and scale caps.
-4. Open in a browser. Dashboard auto-detects light/dark mode.
+5. **Coach's notes section** — pattern-based observations, regenerated on each HTML rebuild. See Fancy-Dashboard-Build.md for continuity rules and Coach-Notes-Log.md format.
 
 ---
 
