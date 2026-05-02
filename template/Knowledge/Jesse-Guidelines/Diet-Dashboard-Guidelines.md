@@ -222,41 +222,9 @@ Pace (7d): −0.8 lbs/wk → ETA goal in 44 weeks
 
 ---
 
-## Fancy Dashboard (Optional)
+## Fancy Dashboard
 
-For visual learners, create a standalone HTML file with interactive charts.
-
-**When to use:**
-- On weigh-in days, offer both text dashboard (quick) and HTML dashboard (visual)
-- User can open the HTML file alongside their vault for at-a-glance trends
-
-**Contents:**
-- Chart.js line chart: weight trend (7-day rolling average + raw points)
-- Metric cards: current macros, calorie deficit, weekly pace
-- Emoji bars: day's macros (same format as text dashboard)
-- Progress bar: toward weight goal
-
-**Implementation:**
-- Self-contained HTML (no external dependencies except Chart.js from CDN)
-- Inline CSS and JavaScript
-- Save to `todo-list/Projects/Diet/dashboard.html` (user can refresh it manually)
-- Example header:
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Diet Dashboard</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>/* inline CSS */</style>
-</head>
-<body>
-  <!-- weight trend chart, macro bars, progress cards -->
-</body>
-</html>
-```
-
-Keep it simple — the point is visual feedback, not feature bloat.
+Fancy dashboard build rules live in [[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]. That file is the single source of truth for generating and updating `Dashboard-Fancy.html`.
 
 ---
 
