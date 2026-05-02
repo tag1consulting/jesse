@@ -175,6 +175,8 @@ Equipment-specific guides live in `Knowledge/Cookbook/Tools/`. These are compreh
 
 Tool files are optional. Users without specialized equipment get full functionality -- tool links just won't appear.
 
+**Lookup before advising on specialized equipment.** When a recipe uses equipment that has a tool reference file (e.g., a kamado grill), read the relevant `Tools/` file before giving instructions. Temperatures, vent positions, and fuel setup vary by equipment model; general knowledge will be wrong for users whose tool file specifies different settings. If no tool file exists for that equipment, note the gap and suggest the user create one after their first cook.
+
 ## Integration with Diet Tracker
 
 When both the Cookbook and Diet Tracker are enabled:
