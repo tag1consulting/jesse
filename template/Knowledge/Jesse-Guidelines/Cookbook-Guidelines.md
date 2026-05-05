@@ -75,6 +75,8 @@ Projects/
     [Recipe-Name].md              # First cook, untested, or in-progress
 Knowledge/
   Cookbook/
+    Pantry/                       # What's on hand
+      Garden.md                   # Seasonal garden/orchard inventory with harvest logs
     [Recipe-Name].md              # Keepers and worth-repeating
     did-not-like/                 # Recipes that didn't work
       [Recipe-Name].md            # Preserved with verdict explaining why
@@ -98,7 +100,7 @@ Knowledge/
 
 When the user describes what they have available and asks what to make:
 
-1. **Inventory what's available.** Fridge, pantry, garden, freezer -- whatever the user mentions.
+1. **Inventory what's available.** Check `Pantry/Garden.md` for what's currently producing in the garden/orchard (items with no "Last harvest" date this year). Then check fridge, pantry, freezer -- whatever the user mentions.
 2. **Check the cookbook.** Search existing recipes that use those ingredients. Prioritize recipes tagged as hits.
 3. **Check cooking tools.** What equipment is available? A kamado opens different options than a stovetop-only kitchen.
 4. **Check constraints.** Time available, number of people, skill level, dietary restrictions.

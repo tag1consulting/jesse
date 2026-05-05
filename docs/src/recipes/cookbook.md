@@ -19,6 +19,8 @@ Projects/
   drafts/                           # New recipes start here as drafts
 Knowledge/
   Cookbook/
+    Pantry/                         # What's on hand
+      Garden.md                     # Seasonal garden/orchard inventory with harvest logs
     [Recipe-Name].md                # Keepers and worth-repeating
     did-not-like/                   # Recipes that didn't work (preserved with notes)
     Ideas/                          # Untested concepts and meal ideas
@@ -32,7 +34,7 @@ Knowledge/
 ### 1. Create the Cookbook directories
 
 ```bash
-mkdir -p Knowledge/Cookbook/did-not-like Knowledge/Cookbook/Ideas Knowledge/Cookbook/Tools
+mkdir -p Knowledge/Cookbook/Pantry Knowledge/Cookbook/did-not-like Knowledge/Cookbook/Ideas Knowledge/Cookbook/Tools
 ```
 
 ### 2. Add the guidelines file
@@ -46,7 +48,7 @@ Add to your instruction file's `## Rules` section:
 ```markdown
 ### Cookbook
 
-Personal cookbook in [[Knowledge/Cookbook/]] managed per [[Knowledge/Jesse-Guidelines/Cookbook-Guidelines]]. Recipes track family reviews, cooking tool references, and iteration notes. New recipes start in `Projects/drafts/` and file to `Knowledge/Cookbook/` after cooking and review. When the user describes available ingredients, design meals from what's on hand. If the Diet Tracker recipe is also active, bridge nutrition tracking with meal design.
+Personal cookbook in [[Knowledge/Cookbook/]] managed per [[Knowledge/Jesse-Guidelines/Cookbook-Guidelines]]. Recipes track family reviews, cooking tool references, and iteration notes. New recipes start in `Projects/drafts/` and file to `Knowledge/Cookbook/` after cooking and review. When the user describes available ingredients, check `Pantry/Garden.md` for what's currently in season, then design meals from what's on hand. If the Diet Tracker recipe is also active, bridge nutrition tracking with meal design.
 ```
 
 And add to the Vault Structure section:
@@ -160,10 +162,11 @@ The most powerful feature. Describe what you have and Jesse designs a meal:
 **You:** "I've got chicken thighs, arborio rice, parmesan, and chard from the garden. What should I make?"
 
 **Jesse checks:**
-1. Existing recipes using those ingredients (prioritizes hits)
-2. Available cooking tools
-3. Time constraints (weeknight default ~40 min unless stated)
-4. Remaining macro budget (if diet tracker is active)
+1. `Pantry/Garden.md` for what's currently in season (items with no "Last harvest" this year)
+2. Existing recipes using those ingredients (prioritizes hits)
+3. Available cooking tools
+4. Time constraints (weeknight default ~40 min unless stated)
+5. Remaining macro budget (if diet tracker is active)
 
 **Jesse responds** with a full recipe -- ingredients, steps, estimated nutrition -- saved to `Projects/drafts/`. After cooking, you report back, and Jesse updates cooking notes and family reviews, then files to `Knowledge/Cookbook/`.
 
@@ -176,6 +179,41 @@ Equipment-specific guides live in `Knowledge/Cookbook/Tools/`. These are compreh
 Tool files are optional. Users without specialized equipment get full functionality -- tool links just won't appear.
 
 **Lookup before advising on specialized equipment.** When a recipe uses equipment that has a tool reference file (e.g., a kamado grill), read the relevant `Tools/` file before giving instructions. Temperatures, vent positions, and fuel setup vary by equipment model; general knowledge will be wrong for users whose tool file specifies different settings. If no tool file exists for that equipment, note the gap and suggest the user create one after their first cook.
+
+## Garden & Orchard Inventory
+
+`Knowledge/Cookbook/Pantry/Garden.md` is a living seasonal inventory of what grows on your property. Each item -- fruit tree, vegetable, herb -- has its own section with a harvest log table tracking first harvest, last harvest, peak months, and notes, year over year.
+
+**How it works:**
+- Items with no "Last harvest" for the current year are in season and available
+- At end of season, fill in the last harvest date -- the item stays as a permanent record
+- Next year, add a new row; the old rows remain, building the multi-year pattern
+- Over time the log answers: "Tomatoes usually start mid-June, peak July--August, done by October"
+
+**Why it's useful:**
+
+Ingredient-driven meal design starts with what's actually available. The garden inventory makes that concrete -- Jesse checks it before suggesting meals, combining what's in season with what's in the fridge and the recipe collection. When the diet tracker is also active, Jesse can identify which in-season produce helps fill a macro gap (e.g., "you have chard from the garden and are low on micronutrient-dense carbs today").
+
+**Example harvest log entry:**
+
+```markdown
+### Tomato (Sungold Cherry)
+
+**Harvest log:**
+
+| Year | First harvest | Last harvest | Peak months | Notes |
+|------|--------------|--------------|-------------|-------|
+| 2025 | Jun 22 | Oct 8 | Jul–Sep | Strong yield, 2026-03-20 transplant |
+| 2026 | Jun 15 |  | Jul–Sep | |
+```
+
+The 2026 row has no "Last harvest" -- Sungold tomatoes are currently available.
+
+**Cross-references:** Each item links to recipes that use it. When designing a meal, Jesse prioritizes ingredient+recipe combinations that have review history.
+
+The template file at `Knowledge/Cookbook/Pantry/Garden.md` includes sections for Fruit Trees, Vegetables, and Herbs with placeholder entries showing the format and the "How This File Works" workflow guide.
+
+---
 
 ## Integration with Diet Tracker
 
