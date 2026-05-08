@@ -1,0 +1,61 @@
+// Example diet-today.js — copy to your vault root as diet-today.js
+// This file is rewritten automatically on every food or exercise log.
+// The HTML dashboard loads it via <script src="diet-today.js"></script>.
+//
+// Field names are a strict contract — do not rename properties.
+// See Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build.md for the full spec.
+
+window.DIET_TODAY = {
+  // Date context
+  date: "2026-05-08",
+  dayLabel: "Thu May 8",
+  dayType: "Training day — 7.2km run",
+  mode: null,                   // null, or e.g. "CARB-LOAD DAY 1/2"
+
+  // Targets (from Overview.md, adjusted for exercise)
+  targets: {
+    calories: 1942,             // adaptive: 1900 base + 7% of 600 cal run
+    protein: 150,
+    fat: 70,
+    carbs: 180
+  },
+
+  // Weight (if logged today; omit or null if no weigh-in)
+  weight: null,
+
+  // Meals logged today
+  meals: [
+    {
+      name: "Breakfast",
+      time: "07:30",
+      items: [
+        { item: "Scrambled eggs (2)", amount: "2 large", cal: 180, p: 12, f: 14, c: 1 },
+        { item: "Whole wheat toast", amount: "1 slice", cal: 80, p: 4, f: 1, c: 14 },
+        { item: "Coffee with whole milk", amount: "1 cup", cal: 30, p: 2, f: 1.5, c: 2 }
+      ]
+    },
+    {
+      name: "Lunch",
+      time: "12:30",
+      items: [
+        { item: "Grilled chicken salad", amount: "1 bowl", cal: 420, p: 38, f: 18, c: 22 },
+        { item: "Olive oil dressing", amount: "1 tbsp", cal: 120, p: 0, f: 14, c: 0 }
+      ]
+    }
+  ],
+
+  // Exercises logged today
+  exercise: [
+    {
+      type: "Run",
+      time: "06:15",
+      desc: "Easy 7.2km",
+      distance: "7.2",
+      unit: " km",
+      duration: "38:00",
+      pace: "5:16/km",
+      avgHR: "148",
+      calories: 600
+    }
+  ]
+};

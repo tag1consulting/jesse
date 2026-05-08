@@ -344,6 +344,47 @@ If the user corrects a value ("that was 350 not 300"):
 
 ---
 
+
+## Meal Planning (`proposed-diet-today.js`)
+
+The system supports optional meal planning. When you discuss meal ideas with the assistant ("what should I make for dinner?"), it can write a `proposed-diet-today.js` file at the vault root. The HTML dashboard picks this up and shows a "Meal Ideas" section with estimated macros and a gap analysis ("after these meals, you'll be at X cal, Y protein").
+
+**Lifecycle:**
+1. Assistant creates `proposed-diet-today.js` with planned meals and their estimated nutrition
+2. Dashboard shows the plan in a "Meal Ideas" panel
+3. As you log actual meals, the corresponding ideas are removed from the proposed file
+4. When all planned meals are logged (or the day ends), the file is deleted
+
+This is entirely optional. If the file doesn't exist, the dashboard simply hides the Meal Ideas panel.
+
+## Viewing in a Browser
+
+The HTML dashboard loads its data files via relative `<script src="...">` paths. Browsers block local file loading (`file://` protocol) for security, so you need a lightweight HTTP server.
+
+Any static file server works. One easy option is [miniserve](https://github.com/svenstaro/miniserve) (Rust, single binary, zero config):
+
+```bash
+# Install (macOS)
+brew install miniserve
+
+# Serve only the dashboard files via a symlink directory
+mkdir -p ~/dashboard
+ln -s /path/to/vault/Dashboard-Fancy.html ~/dashboard/index.html
+ln -s /path/to/vault/diet-today.js ~/dashboard/
+ln -s /path/to/vault/diet-weight-history.js ~/dashboard/
+ln -s /path/to/vault/diet-progress.js ~/dashboard/
+ln -s /path/to/vault/diet-coach-notes.js ~/dashboard/
+ln -s /path/to/vault/proposed-diet-today.js ~/dashboard/
+
+# Serve it
+miniserve ~/dashboard --port 8080
+# Open http://localhost:8080
+```
+
+The symlink directory means you serve only the dashboard and its data files — not your entire vault. To auto-start the server on login, add it to your OS's startup mechanism (launchd on macOS, systemd on Linux). The server is stateless; restarting it loses nothing.
+
+After logging food or exercise, just reload the browser tab — the assistant rewrites the JS data files, and the HTML picks up the new values on reload.
+
 ## Debugging
 
 **Macro bars show wrong values after a log.** The fancy dashboard reads from `diet-today.js`. If the bars are stale, check that the log event rewrote `diet-today.js` and that the browser reloaded it (hard-reload with Ctrl/Cmd+Shift+R to bypass cache).
