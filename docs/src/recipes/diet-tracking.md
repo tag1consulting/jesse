@@ -1,0 +1,396 @@
+# Diet & Exercise Tracking
+
+Daily nutrition and exercise tracking with a Markdown journal, Excel spreadsheets, a chat dashboard, and a live HTML dashboard. Includes weight tracking with progress visualization, body composition metrics, tiered adaptive calorie targets, carb-load day protocol, alcohol enforcement, and weekly accountability reports.
+
+> **This recipe is optional.** When disabled, the assistant never mentions food, calories, exercise, or weight tracking. It does not include meal planning, recipe suggestions, diet advice, or nutrition coaching. The system records and displays -- it doesn't lecture.
+
+## What You Get
+
+- **Daily journal** -- `Projects/Diet/YYYY-MM-DD.md` with structured meal tables, activity logs, and running totals
+- **Spreadsheets** -- `food-log.xlsx` (meals + weight tracking), `exercise-log.xlsx` (activities) at workspace root
+- **Chat dashboard** -- Colored emoji bars with macro flags and adaptive calorie display after every food or exercise log
+- **Live HTML dashboard** -- `Dashboard-Fancy.html` at vault root; static weight chart and pace bars rebuilt on weigh-in, dynamic macro bars updated on every log via `diet-today.js`
+- **Weight tracking** -- Two progress bars toward user goals, trend analysis, body composition metrics (optional), phases for different training cycles
+- **Coach's Notes Log** -- `Knowledge/Health/Coach-Notes-Log.md` tracks dashboard notes across days for consistency; prevents advice from contradicting itself or chasing noise
+- **Weekly accountability** -- Sunday routine with automated analysis report (four sections: Great, Good, Bad, Ugly) saved to Knowledge/Health/Weekly-Diet-Analysis/
+- **Adaptive calorie target** -- Tiered exercise adjustment (7% for normal sessions, 10% for high-volume days) prevents under-fueling without eating back the full burn
+- **Carb-load day protocol** -- Two-day window target with calorie range, carb floor, fat ceiling, three-point cross-check, and dashboard mode banner
+- **Alcohol enforcement** -- Alcohol always logged as a separate entry; next-day journal note required with calorie count and percentage of daily target
+
+## Vault Structure
+
+```
+Dashboard-Fancy.html         # Live HTML dashboard (vault root)
+diet-today.js                # Today's food/macro data for the HTML dashboard (vault root)
+food-log.xlsx                # Food log (Date, Meal, Item...) + Weight sheet (Date, Weight, Phase...)
+exercise-log.xlsx            # One row per activity (workspace root)
+Projects/
+  Diet/
+    Overview.md              # Targets, goals, phases, body composition goals
+    YYYY-MM-DD.md            # Daily journals (one per day)
+Knowledge/
+  Jesse-Guidelines/
+    Diet-Logging-Flow.md           # Per-log-event flow, diet-today.js spec, alcohol/carb-load rules
+    Diet-Dashboard-Guidelines.md   # ASCII dashboard format, colored bars, flags, sync rules
+    Weight-Tracker-Guidelines.md   # Weight tracking, progress bars, trends, phases
+    Fancy-Dashboard-Build.md       # HTML dashboard architecture — single source of truth
+    Sunday-Weekly-Diet-Analysis.md # Weekly accountability report format
+  Health/
+    Coach-Notes-Log.md             # Rolling log of dashboard coach's notes (30-day retention)
+    Weekly-Diet-Analysis/          # Archive of weekly reports (date-prefixed)
+```
+
+## Configuration
+
+### 1. Create the Diet directory
+
+```bash
+mkdir -p Projects/Diet Knowledge/Health/Weekly-Diet-Analysis
+```
+
+### 2. Create your Overview file
+
+Create `Projects/Diet/Overview.md` with your targets and goals. Use this template:
+
+````markdown
+# Diet Journal -- Overview
+
+Daily food tracking. Individual daily logs in this directory, named `YYYY-MM-DD.md`.
+
+---
+
+## Goals
+
+Your personal goals drive progress bars and phases. Examples:
+- Lose weight for an event (wedding, reunion, vacation, photo shoot)
+- Hit a target weight or body composition
+- Train for a race or athletic event
+- Build muscle / body recomposition
+- Improve energy levels or manage a health condition
+- General longevity and health
+
+**My goal(s):**
+- [your goal here]
+
+---
+
+## Current Metrics
+
+- **Current weight:** [weight] lbs / [kg]
+- **Current body fat %:** [if you have it; optional]
+- **Current muscle mass:** [if you have it; optional]
+- **Age/sex:** [for TDEE context]
+
+## Target Metrics
+
+- **Target weight:** [weight] lbs / [kg]
+- **Target body fat %:** [optional]
+- **Target muscle mass:** [optional]
+
+## Calorie Targets
+
+| Metric | Rest Day | Training Day | Long Event Day |
+|--------|----------|--------------|----------------|
+| Base calories | [e.g., 1,900] | [e.g., 2,200] | [e.g., 2,500] |
+| Protein | [e.g., 130g] | [e.g., 150g] | [e.g., 160g] |
+| Carbs | [calculated] | [calculated] | [calculated] |
+| Fat | [calculated] | [calculated] | [calculated] |
+
+**How adaptive targets work:**
+- **Base calories:** Your maintenance or deficit/surplus baseline (e.g. TDEE - 300 for a cut)
+- **Exercise multiplier:** 7% by default (suggested for most people). Multiply exercise calories burned × 0.07 and add to base target.
+  - Example: 800 kcal run × 0.07 = +56 cal → target becomes 1,900 + 56 = 1,956 cal
+  - This prevents bonking without eating back the full burn
+  - Edit the multiplier in Diet-Dashboard-Display.md to adjust
+
+**Macros:**
+- Protein: set first, then carbs and fat split the remaining calories
+- Fat: ~30% of base calorie target / 9 cal per gram
+- Carbs: remainder after protein and fat
+
+## Day Types
+
+Define what qualifies as each type for your schedule:
+- **Rest day:** No structured training (walking, light activity is fine)
+- **Training day:** Structured run, bike, swim, gym session, or sports
+- **Long event day:** Runs/rides over [X] km, races, multi-hour activities
+
+## Weight Phases
+
+Define phases for different training cycles. The Weight sheet in food-log.xlsx includes a Phase column.
+
+Example phases:
+- **Phase 1: Aggressive cut** (target -1.5 lbs/week)
+- **Phase 2: Moderate cut** (target -0.75 lbs/week)
+- **Phase 3: Maintenance** (stable)
+- **Phase 4: Build** (slight surplus)
+
+*Format: Name | Start Date | Target Weight | Target Rate | Notes*
+
+| Phase | Start | Target Weight | Target Rate | Notes |
+|-------|-------|---------------|-------------|-------|
+| [phase 1] | [date] | [weight] | [rate] | |
+| [phase 2] | [date] | [weight] | [rate] | |
+
+## Snack Library
+
+*Add foods you eat regularly; sort by macro benefit or category.*
+
+### High Protein (quick snacks)
+- [your items]
+
+### Quick Carbs (training fuel)
+- [your items]
+
+### Balanced Options
+- [your items]
+
+## Event Prep Modes
+
+Optional: If you're training for an event, define special target overrides. These override normal targets temporarily (e.g., carb loading, diet break, refeed days).
+
+| Mode | Trigger | Calorie Mod | Carb Mod | Duration | Notes |
+|------|---------|------------|----------|----------|-------|
+| [e.g., Carb Load] | 2 days before race | +300 | +50g | 2 days | race prep |
+
+## Running Averages
+
+*Updated as journals accumulate.*
+
+| Period | Avg Calories | Avg Protein | Days Tracked | Notes |
+|--------|-------------|-------------|--------------|-------|
+| Last week | -- | -- | 0 | |
+| Last 2 weeks | -- | -- | 0 | |
+````
+
+### 3. Copy the guidelines files from the template
+
+The template ships these files in `Knowledge/Jesse-Guidelines/`. Copy them to your vault:
+
+| File | Purpose |
+|------|---------|
+| `Diet-Logging-Flow.md` | Per-log-event flow, `diet-today.js` spec, alcohol rules, carb-load protocol, tiered exercise adjustment |
+| `Diet-Dashboard-Guidelines.md` | ASCII dashboard format, colored emoji bars, flags, adaptive targets, sync rules |
+| `Weight-Tracker-Guidelines.md` | Weight tracking, 14-day dual regression, progress bars, phases, body composition |
+| `Fancy-Dashboard-Build.md` | HTML dashboard architecture — single source of truth for `Dashboard-Fancy.html` |
+| `Sunday-Weekly-Diet-Analysis.md` | Weekly accountability report format (Great / Good / Bad / Ugly) |
+
+Also copy `Knowledge/Health/Coach-Notes-Log.md` from the template.
+
+### 4. Add to your instruction file
+
+Add to your instruction file's `## Rules` section:
+
+```markdown
+### Diet Tracking
+
+Daily food journal at `[[Projects/Diet/Overview]]` (targets and goals defined there). Daily logs are `Projects/Diet/YYYY-MM-DD.md`. Excel trackers at workspace root: `food-log.xlsx` (meals + weight) and `exercise-log.xlsx` (activities). When the user logs a meal or exercise, follow `[[Knowledge/Jesse-Guidelines/Diet-Logging-Flow]]`. When the user asks about their state without new data, show the ASCII dashboard per `[[Knowledge/Jesse-Guidelines/Diet-Dashboard-Guidelines]]`. Weight tracking uses the Weight sheet in food-log.xlsx per `[[Knowledge/Jesse-Guidelines/Weight-Tracker-Guidelines]]`. HTML dashboard lives at `Dashboard-Fancy.html` (vault root) — see `[[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]` for build rules. Every Sunday, produce a weekly accountability report per `[[Knowledge/Jesse-Guidelines/Sunday-Weekly-Diet-Analysis]]` and save to `Knowledge/Health/Weekly-Diet-Analysis/`.
+```
+
+### 5. Create spreadsheet templates
+
+On first use, create both spreadsheets with these columns:
+
+**food-log.xlsx:**
+- Sheet 1 (Food Log): Date, Meal, Item, Amount, Unit, Grams, Calories, Protein, Fat, Carbs, Notes
+- Sheet 2 (Weight): Date, Weight, Weight (kg), Phase, Body Fat %, Muscle Mass, Notes
+
+**exercise-log.xlsx:** Date, Type, Description, Distance (km), Duration, Pace (min/km), Elevation (m), Avg HR, Cadence, Calories, Plan Source, Notes
+
+Or create them manually with those headers if you prefer to have them ready.
+
+## Daily Journal Format
+
+Each day's journal follows this structure:
+
+````markdown
+# Food Journal -- [Day], [Date]
+
+**Day type:** [Rest / Training / Long Event] ([activity context])
+**Weight:** [if weighed in]
+**Phase:** [current phase, if tracking]
+
+## Breakfast
+
+| Item | Amount | Grams | Calories | Protein | Fat | Carbs | Notes |
+|------|--------|-------|----------|---------|-----|-------|-------|
+| | | | | | | | |
+| **BREAKFAST TOTAL** | | **g** | **cal** | **g** | **g** | **g** | |
+
+## Lunch
+
+[same table format]
+
+## Dinner
+
+[same table format]
+
+## Snack
+
+[same table format -- added when snacks are logged]
+
+## Activity
+
+**Activity 1:** [type]
+**Workout stats:** [duration] | avg HR [bpm] | [distance if applicable] | [calories burned]
+**Notes:**
+
+## Running Totals
+
+| Meal | Calories | Protein | Fat | Carbs |
+|------|----------|---------|-----|-------|
+| Breakfast | | | | |
+| Lunch | | | | |
+| Dinner | | | | |
+| Snack | | | | |
+| **Day Total** | | | | |
+
+**Target ([day type]):** [adaptive cal] cal / [protein]g protein
+**Remaining:** [cal] cal, [protein]g protein
+**Exercise burn:** [total] kcal
+
+**Progress to goals:**
+- Weight: [current] → [target] ([days to goal at current pace])
+- [Other goals as applicable]
+````
+
+## How It Works
+
+### Two-Layer Dashboard Architecture
+
+The system maintains two live views of today's data:
+
+**Layer 1 — `Dashboard-Fancy.html`** (vault root): The persistent HTML dashboard. Rebuilt on morning weigh-in or on request. Contains the weight trend chart (Chart.js), metric cards, 14-day pace bars, progress bars toward goal weights, body composition bars (when available), and coach's notes. Opening the file in a browser gives a visual overview without interacting with the assistant.
+
+**Layer 2 — `diet-today.js`** (vault root): A small JavaScript file that holds today's food and exercise data as `window.DIET_TODAY`. Rewritten on every food or exercise log. The static HTML loads this file, so the macro bars and food log sections in the dashboard update on the next browser reload -- no HTML rebuild needed.
+
+### Logging Meals
+
+1. User says: "log breakfast: two eggs, toast with butter, coffee with whole milk"
+2. Assistant estimates macros from knowledge base; checks food-log.xlsx for recent entries of the same items to reuse values (prevents drift)
+3. Updates the daily journal table, appends to food-log.xlsx, recalculates running totals
+4. Rewrites `diet-today.js` with updated macro totals, meal items, and flags
+5. Shows the ASCII dashboard in chat with colored emoji bars
+6. Fancy dashboard auto-updates on next browser reload via `diet-today.js`
+
+### Logging Exercise
+
+1. User says: "logged a 7km run, 38 minutes, avg HR 155"
+2. Assistant estimates calories burned, updates the daily journal Activity section, appends to exercise-log.xlsx
+3. Rewrites `diet-today.js`; ASCII dashboard shows two-line calorie display:
+   - Line 1: baseline intake vs. adaptive target
+   - Line 2: net (intake − burn), gray bars, informational only
+4. Adaptive target uses tiered exercise adjustment: ≤1,500 cal burned → 7%; >1,500 cal → 10%
+
+### Logging Weight (Weigh-In)
+
+1. User says: "weighed in: 175.5 lbs"
+2. Assistant adds row to Weight sheet in food-log.xlsx
+3. Rebuilds `Dashboard-Fancy.html`: weight chart updates, pace bars recalculate from the 14-day trailing window (trough + raw regression shown as a range), progress bars refresh, coach's notes regenerate
+4. New notes appended to `Knowledge/Health/Coach-Notes-Log.md`
+
+### Logging Alcohol
+
+Alcohol is always logged as a separate **Alcohol** meal entry:
+1. Calories logged under meal name "Alcohol"
+2. The next day's journal includes a note: total alcohol calories and percentage of daily target
+
+### Carb-Load Days
+
+Two days before a long run (threshold configurable in `Overview.md`):
+- Targets shift: calories 2,400–2,600 (window metric), carbs 400–500g, fat ≤ 50g ceiling
+- Dashboard header shows `CARB-LOAD DAY 1/2` or `CARB-LOAD DAY 2/2`
+- Calorie bar switches to window metric (green only in-range, not ceiling-only)
+- Three-point cross-check at day-end: calories in range, carbs ≥ 400g, fat ≤ 50g
+
+### Weekly Accountability (Sunday)
+
+1. Every Sunday at start of day, assistant generates a report with four sections: Great, Good, Bad, Ugly
+2. Ranked improvement suggestions based on actual data
+3. Week-over-week trend table
+4. Saved to Knowledge/Health/Weekly-Diet-Analysis/ with date prefix
+5. Brief summary shown in morning briefing
+
+### Correcting Entries
+
+If the user corrects a value ("that was 350 not 300"):
+- Update the daily journal table
+- Update the corresponding row in food-log.xlsx
+- Recalculate running totals
+- Rewrite `diet-today.js` with corrected values
+- Refresh ASCII dashboard in chat
+
+## Tips and Gotchas
+
+**Estimates are estimates.** Calorie and macro values come from the assistant's knowledge, not a food database API. They're close enough for tracking trends but not lab-precise. Correct values when you know better, and the system reuses those values for future entries of the same food.
+
+**The ASCII dashboard is configurable.** The 20-character bar width, colored emojis, flag thresholds, and adaptive calorie formula are all defined in `Diet-Dashboard-Guidelines.md`. Edit that file to change them.
+
+**Day types are yours to define.** The template suggests Rest/Training/Long Event but you can define whatever categories fit your schedule. The targets table in Overview.md adapts.
+
+**Tiered adaptive targets prevent under-fueling high-volume training.** Normal sessions use 7% of exercise calories; sessions burning >1,500 cal use 10%. Both rates are conservative -- the system does not add back the full burn. Adjust the thresholds and rates in `Diet-Logging-Flow.md`.
+
+**Weight tracking is optional.** If you don't have a scale, skip the Weight sheet and the HTML dashboard. The system works fine with just food and exercise data.
+
+**Spreadsheets are the long-term record.** Daily journals are good for day-of review. Spreadsheets are what feeds weekly/monthly trend analysis and the Sunday accountability reports.
+
+**Food identification prevents drift.** The system reuses nutritional values from your recent `food-log.xlsx` entries for the same item, preventing the slow creep of inconsistent estimates over time.
+
+**Event-prep modes override targets temporarily.** Define a mode in Overview.md; the dashboard header reflects it and targets shift. Regular targets return when the mode period expires.
+
+**Works with the [Cookbook](./cookbook.md).** When both are active, logging a meal from a tracked recipe auto-populates nutrition data, and meal suggestions consider remaining macro budget. Either works standalone.
+
+**Removing this recipe** is clean: delete `Projects/Diet/`, `Dashboard-Fancy.html`, `diet-today.js`, the two spreadsheets, the guidelines files, the coach's notes log, the weekly analysis archive, and the instruction file hooks. Nothing else references it.
+
+---
+
+
+## Meal Planning (`proposed-diet-today.js`)
+
+The system supports optional meal planning. When you discuss meal ideas with the assistant ("what should I make for dinner?"), it can write a `proposed-diet-today.js` file at the vault root. The HTML dashboard picks this up and shows a "Meal Ideas" section with estimated macros and a gap analysis ("after these meals, you'll be at X cal, Y protein").
+
+**Lifecycle:**
+1. Assistant creates `proposed-diet-today.js` with planned meals and their estimated nutrition
+2. Dashboard shows the plan in a "Meal Ideas" panel
+3. As you log actual meals, the corresponding ideas are removed from the proposed file
+4. When all planned meals are logged (or the day ends), the file is deleted
+
+This is entirely optional. If the file doesn't exist, the dashboard simply hides the Meal Ideas panel.
+
+## Viewing in a Browser
+
+The HTML dashboard loads its data files via relative `<script src="...">` paths. Browsers block local file loading (`file://` protocol) for security, so you need a lightweight HTTP server.
+
+Any static file server works. One easy option is [miniserve](https://github.com/svenstaro/miniserve) (Rust, single binary, zero config):
+
+```bash
+# Install (macOS)
+brew install miniserve
+
+# Serve only the dashboard files via a symlink directory
+mkdir -p ~/dashboard
+ln -s /path/to/vault/Dashboard-Fancy.html ~/dashboard/index.html
+ln -s /path/to/vault/diet-today.js ~/dashboard/
+ln -s /path/to/vault/diet-weight-history.js ~/dashboard/
+ln -s /path/to/vault/diet-progress.js ~/dashboard/
+ln -s /path/to/vault/diet-coach-notes.js ~/dashboard/
+ln -s /path/to/vault/proposed-diet-today.js ~/dashboard/
+
+# Serve it
+miniserve ~/dashboard --port 8080
+# Open http://localhost:8080
+```
+
+The symlink directory means you serve only the dashboard and its data files — not your entire vault. To auto-start the server on login, add it to your OS's startup mechanism (launchd on macOS, systemd on Linux). The server is stateless; restarting it loses nothing.
+
+After logging food or exercise, just reload the browser tab — the assistant rewrites the JS data files, and the HTML picks up the new values on reload.
+
+## Debugging
+
+**Macro bars show wrong values after a log.** The fancy dashboard reads from `diet-today.js`. If the bars are stale, check that the log event rewrote `diet-today.js` and that the browser reloaded it (hard-reload with Ctrl/Cmd+Shift+R to bypass cache).
+
+**Field name mismatch: bars blank or undefined.** If a macro bar in the HTML shows nothing or `NaN`, the JavaScript is reading a field name that doesn't exist in `window.DIET_TODAY`. Compare the field names in `diet-today.js` against the contract table in `Fancy-Dashboard-Build.md`. The contract is exact -- casing and spelling must match.
+
+**Chart missing or broken.** The weight chart and the food log renderer run in separate error isolation blocks. A Chart.js failure will not break the food log, and vice versa. Open the browser console to see which block failed. Common cause: `weightChart` canvas element not found because the HTML was rebuilt incompletely.
+
+**`textContent` destroying child elements.** If a metric card goes blank after an update, the renderer likely called `element.textContent = value` on a container that has child nodes -- this wipes all children. The fix is to target the specific leaf node (e.g., `card-weight-value` not `card-weight`). See the error isolation section of `Fancy-Dashboard-Build.md`.
