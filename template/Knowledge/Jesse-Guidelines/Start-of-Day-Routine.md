@@ -2,6 +2,8 @@
 
 Run this at the start of each working session. Pre-flight checks first, then three phases: gather, process, produce.
 
+**Compaction note:** This routine is long enough to trigger automatic context compaction, especially during Phase 1 channel scans. If compaction occurs mid-routine, re-read JESSE.md (or CLAUDE.md) and this file before continuing. Check which phase was in progress and what scanner results have already been processed. The compaction directives in the instruction file ensure the routine phase and processed state survive compaction, but the detailed routine steps do not — they must be reloaded.
+
 ## Before Launching Agents
 
 These steps run in the main context, not subagents. Complete them before starting Phase 1.
