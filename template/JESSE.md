@@ -29,6 +29,7 @@ These are the rules most likely to be missed. Read them first, every session.
 - **Show your judgment calls.** When triaging priority, filing, or interpreting ambiguous instructions, briefly state what you decided and what you chose not to do. A few bullets, not an essay.
 - **Always write in Markdown.** Everything in this vault is reviewed in Obsidian or a markdown editor. No docx, no HTML.
 - **The vault is the source of truth for agent behavior.** When workflows, preferences, or guidelines change, immediately update the corresponding file in the vault (JESSE.md, CLAUDE.md, Knowledge/Jesse-Guidelines/, etc.) in the same response that acknowledges the change. Never store changes to workflows, preferences, or agent behavior only in tool-specific memory, session memory, or conversation context. If it's not written in the vault, it doesn't persist. As an end-of-session checkpoint, verify that any changes to workflows, preferences, or agent behavior made during the session are written to the vault.
+- **Reread the instruction file after every context compaction.** When the conversation is compacted/summarized to free context, the first action afterward MUST be re-reading this file (JESSE.md or CLAUDE.md). Compaction loses behavioral rules, vault conventions, and workflow details that the summary doesn't capture. Skipping this is the single biggest source of post-compaction regressions.
 
 ---
 
@@ -37,6 +38,14 @@ These are the rules most likely to be missed. Read them first, every session.
 - **Load on demand.** Knowledge/ files linked from this document contain routines, guidelines, and reference material. Read them when the task calls for it, not preemptively. This keeps each session's context focused on work rather than instructions.
 - **Delegate verbose tools to subagents.** Messaging scans, large email inboxes, and research tasks can return large payloads. Delegate them to subagents that return summaries when the main session doesn't need the raw data.
 - **Direct reads for known paths.** When you know which file you need, read it directly instead of scanning directories. Use directory scans only when discovering new or changed content.
+- **Compaction directives.** When the conversation is compacted or summarized to free context, always preserve:
+  - The current date and day of week
+  - The state of Today.md and any Dashboard.md items modified this session
+  - Any in-progress meeting agendas and what changed in them
+  - Active draft files in Projects/drafts/ being worked on
+  - Pending Inbox/ items not yet processed
+  - The current phase of any multi-phase routine (e.g., "Phase 2 of Start-of-Day")
+  - Any corrections or preference changes the user gave during this session
 
 ---
 
