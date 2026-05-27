@@ -28,7 +28,7 @@ These are the rules most likely to be missed. Read them first, every session.
 - **Track everything until acknowledged.** New items from Inbox/, email, or messaging stay visible in Dashboard.md and Today.md until signed off. The user may reprioritize or redirect.
 - **Show your judgment calls.** When triaging priority, filing, or interpreting ambiguous instructions, briefly state what you decided and what you chose not to do. A few bullets, not an essay.
 - **Think critically, always.** Every analysis, research report, fact-check, and recommendation must model critical thinking. Question assumptions (the authors and your own). Identify what's missing from an argument. Name the logical fallacies. When presenting information, show *how* to evaluate it — what makes one source more credible than another, what questions a reader should ask, what the strongest counterargument is. Help the reader sharpen their own critical thinking, not just deliver conclusions.
-- **Check the vault before going external.** This vault can be large and contain extensive knowledge — people, projects, research, history, and context accumulated over years. When mentioning a person, project, or topic, search QMD *first* (or another search tool if installed and configured: do not use globs as they waste context and fail too often) before querying external tools (such as Slack, WhatsApp, Gmail, web, etc). This applies to research projects too — before launching web searches on any topic, efficiently check whether the vault already has relevant context (prior research, knowledge collection entries, project files, people files, local knowledge). The vault likely already has relevant context that will inform how to interpret external results. Never assume the vault is empty on a topic — verify with QMD (or another search tool if available: do not use globs as they are too inneficient).
+- **Check the vault before going external.** This vault can be large and contain extensive knowledge — people, projects, research, history, and context accumulated over years. When mentioning a person, project, or topic, search QMD *first* (or another search tool if installed and configured: do not use globs as they waste context and fail too often) before querying external tools (such as Slack, WhatsApp, Gmail, web, etc). This applies to research projects too — before launching web searches on any topic, efficiently check whether the vault already has relevant context (prior research, knowledge collection entries, project files, people files, local knowledge). The vault likely already has relevant context that will inform how to interpret external results. Never assume the vault is empty on a topic — verify with QMD (or another search tool if available: do not use globs as they are too inefficient).
 - **Always write in Markdown.** Everything in this vault is reviewed in Obsidian or a markdown editor. No docx, no HTML.
 - **The vault is the source of truth for agent behavior.** When workflows, preferences, or guidelines change, immediately update the corresponding file in the vault (JESSE.md, CLAUDE.md, Knowledge/Jesse-Guidelines/, etc.) in the same response that acknowledges the change. Never store changes to workflows, preferences, or agent behavior only in tool-specific memory, session memory, or conversation context. If it's not written in the vault, it doesn't persist. As an end-of-session checkpoint, verify that any changes to workflows, preferences, or agent behavior made during the session are written to the vault.
 
@@ -103,6 +103,8 @@ Follow [[Knowledge/Jesse-Guidelines/People-KB-Guidelines]] when creating or upda
 
 The project file is the permanent record. `archive/` is a short-term safety net for referencing exact wording.
 
+Every file in `Projects/drafts/` and `Projects/Research/` (not `archive/` subdirectories) must end with an archive footer -- checkboxes the user marks to signal processing intent. No exceptions: emails, agendas, research reports, anything. This applies regardless of how the file was created. See [[Knowledge/Jesse-Guidelines/Archive-Footer-Guidelines]] for the exact format. Note: these paths may need adjusting per deployment if the vault layout differs.
+
 ### Research
 
 Follow [[Knowledge/Jesse-Guidelines/Research-Guidelines]] for all research tasks. Any inbox item or instruction that asks to research, investigate, explain, or answer a substantive question produces a file in `Projects/Research/`, not a conversational reply. The chat summary is secondary to the written report.
@@ -128,6 +130,16 @@ The vault uses `archive/` subdirectories wherever items age out. If your agent's
 | `Projects/drafts/archive/old/` | Sent drafts older than 90 days (created on first purge) |
 
 Purge archive folders manually from Obsidian or Finder when desired.
+
+### Archive Checkbox Processing
+
+Every research file and draft includes an archive footer with three checkboxes (Archive, Deep extract, Archive only). The user checks one to signal what should happen. Processing these checked files is a background maintenance task.
+
+**How to check:** Use grep, not QMD -- QMD's tokenizer strips brackets so `[x]` never matches in lex queries. The command: `grep -rEl '^- \[x\] (Archive|Deep extract|Archive only)' Projects/drafts/ Projects/Research/` finds all checked files in one pass. The footer standardizes on hyphen-style list markers (`-`), not asterisks. Run this check at the frequency that fits the deployment -- at minimum start-of-day and end-of-day, more often if the user writes many drafts. Note: paths in the grep command may need adjusting per vault layout.
+
+**How to process:** Delegate to a subagent. The subagent must have either: (a) the file content passed in its prompt, or (b) instructions to read the file and search the vault (via QMD or another search tool if installed) for relevant knowledge collections and project files. The subagent handles extraction and archiving, keeping the raw content out of the main context window. For "Deep extract," the subagent lowers the bar for what qualifies -- background context, supporting details, and minor observations all get captured (but still skip noise and redundancy). For standard "Archive," extract only what clearly matters -- decisions, findings, action items. For "Archive only," just move to archive.
+
+**Efficiency rule:** This must not waste main context. One grep to find checked files. One subagent per file to process. No reading file contents in the main session unless there's a specific reason to.
 
 ---
 
@@ -161,6 +173,7 @@ Knowledge/Jesse-Guidelines/People-KB-Guidelines.md
 Knowledge/Jesse-Guidelines/Research-Guidelines.md
 Knowledge/Jesse-Guidelines/Writing-Voice-Guidelines.md
 Knowledge/Jesse-Guidelines/Meeting-Agenda-Guidelines.md
+Knowledge/Jesse-Guidelines/Archive-Footer-Guidelines.md
 Knowledge/People/            -- Contact directory (subdirectories created during first run)
 Knowledge/Reminders/         -- Date-based reminders
 ```

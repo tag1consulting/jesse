@@ -110,11 +110,4 @@ Always save research output to `Projects/Research/` as a standalone file.
 
 ## Archive Footer
 
-Every research file ends with an archive footer for the user to signal processing intent when done reviewing:
-
-```markdown
----
-- [ ] Reviewed -- ready to archive
-- [ ] Knowledge extracted to `Knowledge/`
-- [ ] Archived to `Projects/Research/archive/`
-```
+Every research file ends with an archive footer. See [[Knowledge/Jesse-Guidelines/Archive-Footer-Guidelines]] for the exact format and processing rules. The footer lets the user signal from Obsidian whether to extract knowledge before archiving, deep-extract with a lower bar, or archive without extraction.
