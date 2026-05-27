@@ -30,6 +30,7 @@ These are the rules most likely to be missed. Read them first, every session.
 - **Think critically, always.** Every analysis, research report, fact-check, and recommendation must model critical thinking. Question assumptions (the authors and your own). Identify what's missing from an argument. Name the logical fallacies. When presenting information, show *how* to evaluate it — what makes one source more credible than another, what questions a reader should ask, what the strongest counterargument is. Help the reader sharpen their own critical thinking, not just deliver conclusions.
 - **Check the vault before going external.** This vault can be large and contain extensive knowledge — people, projects, research, history, and context accumulated over years. When mentioning a person, project, or topic, search QMD *first* (or another search tool if installed and configured: do not use globs as they waste context and fail too often) before querying external tools (such as Slack, WhatsApp, Gmail, web, etc). This applies to research projects too — before launching web searches on any topic, efficiently check whether the vault already has relevant context (prior research, knowledge collection entries, project files, people files, local knowledge). The vault likely already has relevant context that will inform how to interpret external results. Never assume the vault is empty on a topic — verify with QMD (or another search tool if available: do not use globs as they are too inneficient).
 - **Always write in Markdown.** Everything in this vault is reviewed in Obsidian or a markdown editor. No docx, no HTML.
+- **The vault is the source of truth for agent behavior.** When workflows, preferences, or guidelines change, immediately update the corresponding file in the vault (JESSE.md, CLAUDE.md, Knowledge/Jesse-Guidelines/, etc.) in the same response that acknowledges the change. Never store changes to workflows, preferences, or agent behavior only in tool-specific memory, session memory, or conversation context. If it's not written in the vault, it doesn't persist. As an end-of-session checkpoint, verify that any changes to workflows, preferences, or agent behavior made during the session are written to the vault.
 
 ---
 
@@ -47,7 +48,10 @@ These are the rules most likely to be missed. Read them first, every session.
 
 Run this at the start of each working session. Read and follow [[Knowledge/Jesse-Guidelines/Start-of-Day-Routine]] for detailed orchestration.
 
-Three phases: **Gather** (inbox, email, calendar, messaging, dashboard, reminders), **Process** (act on inbox instructions, extract TODOs, flag meeting items, audit links), **Produce** (build Today.md, prepare agendas, update dashboard, archive inbox, deliver briefing).
+- **Pre-flight:** Read Dashboard.md, confirm tools, **reconcile Today.md** (propagate user edits before overwriting)
+- **Gather:** Inbox, email, calendar, messaging, reminders
+- **Process:** Act on inbox instructions, extract TODOs, filter already-surfaced items, detect state changes, flag meeting items, audit links
+- **Produce:** Build Today.md, prepare agendas, update dashboard, archive inbox, deliver briefing
 
 If `Dashboard.md` does not exist, run First Run instead.
 
