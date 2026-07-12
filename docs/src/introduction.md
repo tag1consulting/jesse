@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="images/jesse-logo.svg" alt="Jesse logo" width="140">
+</p>
+
 # Jesse
 
 Jesse is an AI assistant built from folders of text files, an instruction manual, and no vendor lock-in.

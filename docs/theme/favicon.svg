@@ -1,0 +1,16 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Jesse app icon: lowercase j and command-prompt caret">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6366F1"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <g transform="translate(256 256) scale(1.7067) translate(-256 -243)">
+    <g fill="none" stroke="#ffffff" stroke-width="42" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 189 205 L 189 290 Q 189 328 151 328"/>
+      <path d="M 281 195 L 361 256 L 281 317"/>
+    </g>
+    <circle cx="189" cy="158" r="21" fill="#ffffff"/>
+  </g>
+</svg>
