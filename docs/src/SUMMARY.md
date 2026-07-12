@@ -16,6 +16,7 @@
 - [Email Integration](./recipes/email.md)
 - [Slack Integration](./recipes/slack.md)
 - [WhatsApp Integration](./recipes/whatsapp.md)
+- [iOS Obsidian Quick-Note Shortcut](./recipes/ios-obsidian-quick-note-shortcut.md)
 - [Draft Lifecycle](./recipes/draft-lifecycle.md)
 - [Meeting Agendas](./recipes/meeting-agendas.md)
 - [People Knowledge Base](./recipes/people-kb.md)
