@@ -67,6 +67,19 @@ Every recipe follows this structure:
 
 ---
 
+## Measurement Format
+
+Pick a **primary unit system** for the whole cookbook and note the other in parentheses where it helps. Consistency matters more than the choice -- mixed units inside one recipe are how a cook goes wrong mid-step.
+
+- **One primary system.** Metric primary (`500g (~1.1 lbs)`, `240ml (~1 cup)`) or US primary (`1 cup (240ml)`, `4 oz (115g)`) -- whichever matches where the user cooks and shops. Record the choice here once and apply it everywhere.
+- **Temperatures always in both C and F:** `180°C (350°F)`. Recipes travel, equipment manuals differ, and the conversion is cheap insurance against a ruined cook.
+- **Weights in grams where nutrition accuracy matters** (the diet tracker computes macros from grams), even if volume is given alongside for convenience.
+- **Time needs no conversion** -- minutes and hours are universal.
+
+Apply the format to ingredient lists, cooking temperatures, equipment settings, and any food-preparation guides.
+
+---
+
 ## Directory Structure
 
 ```
@@ -140,6 +153,8 @@ Tool files live in `Knowledge/Cookbook/Tools/` and follow this format:
 
 Tool files are comprehensive -- they should be the "I forgot how to set up the grill for ribs" reference. They grow as the user tries new things on the equipment.
 
+**Read the `Tools/` reference before advising on specialized equipment.** When a recipe or a cooking question involves equipment that has a tool reference file (a kamado, a pizza oven, a sous-vide setup), read the relevant `Tools/` file first. Temperatures, vent positions, and fuel setups vary by model; general knowledge will be wrong for a user whose tool file specifies different settings. If no tool file exists for the equipment, note the gap and suggest creating one after the first cook.
+
 ---
 
 ## Updating Recipes
@@ -165,4 +180,4 @@ When both the Diet Tracker and Cookbook are enabled:
 - **Ingredient + macro intersection:** The most useful mode. "I have chicken and some vegetables, what fits my macros?" combines ingredient availability with nutritional targeting.
 - **Recipe nutrition stays in the recipe.** The diet tracker references the recipe's nutrition section. If the recipe is updated (different portion, added ingredient), the nutrition updates in one place.
 
-When only the Cookbook is active (no diet tracker), nutrition sections in recipes are informational only -- no dashboards, no macro tracking, no spreadsheet updates. The recipes still work perfectly; they just don't feed into a tracking system.
+When only the Cookbook is active (no diet tracker), nutrition sections in recipes are informational only -- no dashboards, no macro tracking, no log updates. The recipes still work perfectly; they just don't feed into a tracking system.

@@ -26,7 +26,7 @@ Rules that keep the store trustworthy:
 - **`diet-today.js` is a DERIVED cache**, regenerated from the CSVs. Never hand-edit its meal, exercise, or weight item data; the only hand-edited fields are the scalars (`dayType`, `dayStyle`, `targets`). If the cache and the CSVs ever disagree, **the CSVs win** -- and if the cache leads (an entry with no CSV row), back-fill the CSV first, then regenerate.
 - **Morning reconcile.** Before rolling `diet-today.js` to a new day, confirm every entry in yesterday's cache has a matching CSV row and that the previous day's journal is complete (see the journal-before-roll rule in [[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]).
 
-Why the store is CSV rather than a spreadsheet, and an optional DuckDB pattern for ad-hoc queries over these files, are covered in the diet-tracking recipe documentation (sections "Why CSV Files" and "Optional: DuckDB for Dynamic Queries").
+The full rationale for the plain-CSV store, and an optional DuckDB pattern for ad-hoc queries over these files, are covered in the diet-tracking recipe documentation (sections "Why CSV Files" and "Optional: DuckDB for Dynamic Queries").
 
 ---
 
@@ -36,7 +36,7 @@ Why the store is CSV rather than a spreadsheet, and an optional DuckDB pattern f
 
 1. **Parse input** — extract food items, quantities, or exercise type/duration/calories
 2. **Estimate nutrition** — use knowledge base; check `food-log.csv` for recent entries of that food (last 30 days, real CSV parser) and reuse those values to prevent drift
-3. **Append CSV first** — add the complete row(s) to `diet-logs/food-log.csv` (meals) or `diet-logs/exercise-log.csv` (exercise), RFC-4180 quoted
+3. **Append CSV first** -- add the complete row(s) to `diet-logs/food-log.csv` (meals) or `diet-logs/exercise-log.csv` (exercise), RFC-4180 quoted
 4. **Update daily journal** — add row(s) to the meal or activity table in `Projects/Diet/YYYY-MM-DD.md`; recalculate the Running Totals table
 5. **Rewrite `diet-today.js`** — write the complete updated `window.DIET_TODAY` object (see spec below); item data must match the CSV rows exactly
 6. **Show ASCII dashboard in chat** — per [[Knowledge/Jesse-Guidelines/Diet-Dashboard-Guidelines]] format
@@ -46,7 +46,7 @@ Why the store is CSV rather than a spreadsheet, and an optional DuckDB pattern f
 
 Same steps 1–6 (step 3 appends to `diet-logs/weight-log.csv`), plus:
 
-8. **Regenerate the dashboard data files** — `diet-weight-history.js`, `diet-progress.js`, and `diet-coach-notes.js`, per [[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]. This refreshes the weight chart, pace bars, progress bars, and coach's notes on the next browser reload. Do **not** rebuild `Dashboard-Fancy.html` -- the HTML is a static shell; only data files change.
+8. **Regenerate the dashboard data files** -- `diet-weight-history.js`, `diet-progress.js`, and `diet-coach-notes.js`, per [[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]. This refreshes the weight chart, pace bars, progress bars, and coach's notes on the next browser reload. Do **not** rebuild `Dashboard-Fancy.html` -- the HTML is a static shell; only data files change.
 
 **Weigh-in judgment:**
 

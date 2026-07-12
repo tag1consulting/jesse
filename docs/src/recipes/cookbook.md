@@ -223,7 +223,7 @@ When both the Cookbook and Diet Tracker are enabled:
 - **Macro-aware meal suggestions** -- "What should I make for dinner?" considers remaining calorie and macro budget
 - **Ingredient + macro intersection** -- "I have chicken and vegetables, what fits my macros?" combines what's available with nutritional targeting
 
-When only the Cookbook is active, nutrition sections are informational only -- no dashboards, no tracking, no spreadsheet updates. Everything still works; it just doesn't feed into a tracking system.
+When only the Cookbook is active, nutrition sections are informational only -- no dashboards, no tracking, no log updates. Everything still works; it just doesn't feed into a tracking system.
 
 ## Tips and Gotchas
 

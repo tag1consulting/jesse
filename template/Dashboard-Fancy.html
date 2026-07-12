@@ -650,8 +650,17 @@ try {
         });
 
         content.appendChild(tbl);
+        if (P.source) {
+            var src = document.createElement('div');
+            src.style.fontSize = '11px';
+            src.style.color = 'var(--text2)';
+            src.style.marginTop = '8px';
+            src.textContent = 'Source: ' + P.source;
+            content.appendChild(src);
+        }
         if (P.gapNote) {
-            document.getElementById('mealIdeasGap').textContent = P.gapNote;
+            var gapEl = document.getElementById('mealIdeasGap');
+            if (gapEl) gapEl.textContent = P.gapNote;
         }
     })();
 } catch(e) { console.error('Meal ideas render error:', e); }
@@ -782,7 +791,7 @@ try {
 }
 </script>
 
-<!-- Progress & Pace bars (from diet-progress.js — optional).
+<!-- Progress & Pace bars (from diet-progress.js -- optional).
      Algorithms are baked in here (HARD RULE, see Fancy-Dashboard-Build.md):
      goals = fill-to-position; Pace = range-as-subset with converged-range
      collapse and off-scale guard; FatLb/LeanD = single-block highlight.
@@ -924,7 +933,7 @@ try {
 } catch(e) { console.error('Progress bars error:', e); }
 </script>
 
-<!-- Body Composition (from DIET_TODAY.weight — self-hides when BF% absent;
+<!-- Body Composition (from DIET_TODAY.weight -- self-hides when BF% absent;
      never carried forward from a previous weigh-in) -->
 <script>
 try {

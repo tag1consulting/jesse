@@ -236,7 +236,7 @@ Shows the change in lean (non-fat) mass in lbs/week.
 
 **Zone coloring (BIA-noise-aware):**
 - **GOOD (green):** <0.5 lbs/week loss -- within BIA test-retest noise plus plausible glycogen shifts during a sustained deficit.
-- **WATCH (yellow):** 0.5–1.0 lbs/week loss -- above noise; approaching real muscle-loss territory.
+- **WATCH (yellow):** 0.5-1.0 lbs/week loss -- above noise; approaching real muscle-loss territory.
 - **CONCERN (red):** >1.0 lbs/week loss -- clear catabolism signal; the deficit should be eased.
 - **GAINING (blue):** negative -- lean mass increasing; rare on a deficit, usually water retention or measurement drift. Note it in the label.
 
@@ -257,11 +257,11 @@ Full build rules live in [[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]. T
    - Current weight, weight lost from start, phase, pace range. On no-weigh-in days the weight card falls back to the last recorded weigh-in; BF%/lean stay blank.
 
 3. **Bar visualizations:**
-   - Pace bar (range-as-subset), progress bars (fill-to-position), composition bars (single-block highlight) — all rendered as 14×16 px colored blocks. Algorithms live in the HTML; numbers come from `diet-progress.js`.
+   - Pace bar (range-as-subset), progress bars (fill-to-position), composition bars (single-block highlight) -- all rendered as 14x16 px colored blocks. Algorithms live in the HTML; numbers come from `diet-progress.js`.
 
 4. **Light/dark mode** — reads system preference; user can toggle.
 
-5. **Coach's notes section** — pattern-based observations, regenerated with the data files on morning roll and weigh-in. See Fancy-Dashboard-Build.md for continuity rules and Coach-Notes-Log.md format.
+5. **Coach's notes section** -- pattern-based observations, regenerated with the data files on morning roll and weigh-in. See Fancy-Dashboard-Build.md for continuity rules and Coach-Notes-Log.md format.
 
 ---
 

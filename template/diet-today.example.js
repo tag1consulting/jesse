@@ -39,7 +39,7 @@ window.DIET_TODAY = {
   // Weight (if logged today; omit or null if no weigh-in)
   weight: null,
 
-  // Meals logged today. item.fiber is grams of dietary fiber — always present
+  // Meals logged today. item.fiber is grams of dietary fiber -- always present
   // (write 0 for items without a fiber value so the Fiber bar's sum is defined).
   meals: [
     {

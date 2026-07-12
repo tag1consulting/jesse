@@ -63,8 +63,12 @@ Most days are `normal`. For special days, set a **day style** and the dashboard 
 ## Vault Structure
 
 ```
-Dashboard-Fancy.html         # Live HTML dashboard (vault root)
-diet-today.js                # Today's food/macro data for the HTML dashboard (vault root)
+Dashboard-Fancy.html         # Live HTML dashboard -- static shell (vault root)
+diet-today.js                # Today's food/macro data (rewritten on every log; see diet-today.example.js in the template)
+diet-weight-history.js       # Weight trend data for the chart (regenerated on morning roll / weigh-in)
+diet-progress.js             # Progress, pace, and zone values for the bars (regenerated on morning roll / weigh-in)
+diet-coach-notes.js          # Coach's notes, what's-ahead, quote (regenerated on morning roll / weigh-in)
+proposed-diet-today.js       # Optional meal plan; absent when no plan exists
 diet-logs/                   # Append-only CSV logs (workspace root) -- the permanent record
   food-log.csv               # One row per food item (Date, Meal, Item, ..., Fiber_g)
   exercise-log.csv           # One row per activity
@@ -72,13 +76,16 @@ diet-logs/                   # Append-only CSV logs (workspace root) -- the perm
 Projects/
   Diet/
     Overview.md              # Targets, goals, phases, body composition goals
+    Journal.md               # Entity journal -- dated notes on the diet project itself
+    Timeline.md              # Milestones (start, phase changes, goals reached)
     YYYY-MM-DD.md            # Daily journals (one per day)
 Knowledge/
   Jesse-Guidelines/
     Diet-Setup-Wizard.md           # First-run target derivation (BMR/TDEE, macros, calibration)
     Diet-Logging-Flow.md           # Per-log-event flow, diet-today.js spec, macro model, day-style registry
     Diet-Dashboard-Guidelines.md   # ASCII dashboard format, goal chips, floor/ceiling/window colors, gated flags
-    Weight-Tracker-Spec.md   # Weight tracking, progress bars, trends, phases
+    Diet-Dashboard-Display.md      # Read-only status display (state queries without new data)
+    Weight-Tracker-Spec.md         # Weight tracking, progress bars, trends, phases
     Fancy-Dashboard-Build.md       # HTML dashboard architecture — single source of truth
     Sunday-Weekly-Diet-Analysis.md # Weekly accountability report format
   Health/
@@ -137,7 +144,7 @@ Your personal goals drive progress bars and phases. Examples:
 
 | Metric | Rest Day | Training Day | Long Event Day |
 |--------|----------|--------------|----------------|
-| Base calories | [e.g., 1,900] | [e.g., 2,200] | [e.g., 2,500] |
+| Base calories | [e.g., 2,000] | [e.g., 2,300] | [e.g., 2,600] |
 | Protein | [e.g., 130g] | [e.g., 150g] | [e.g., 160g] |
 | Carbs | [calculated] | [calculated] | [calculated] |
 | Fat | [calculated] | [calculated] | [calculated] |
@@ -145,7 +152,7 @@ Your personal goals drive progress bars and phases. Examples:
 **How adaptive targets work:**
 - **Base calories:** Your maintenance or deficit/surplus baseline (e.g. TDEE − 300 for a cut). The setup wizard derives this; see `Diet-Setup-Wizard.md`.
 - **Exercise add-back with haircut:** discount the logged burn by `[TRACKER_HAIRCUT]` (default 25%), then add back `[ADD_BACK_RATE]` (default 50%): `base + 0.50 × (burn × 0.75)`.
-  - Example: 800 kcal run → 800 × 0.75 = 600, × 0.50 = +300 → target becomes 1,900 + 300 = 2,200 cal
+  - Example: 800 kcal run → 800 × 0.75 = 600, × 0.50 = +300 → target becomes 2,000 + 300 = 2,300 cal
   - Discounting first guards against noisy tracker estimates; eating back only half keeps the deficit meaningful
   - Edit `[TRACKER_HAIRCUT]` and `[ADD_BACK_RATE]` here to adjust
 
@@ -222,6 +229,7 @@ The template ships these files in `Knowledge/Jesse-Guidelines/`. Copy them to yo
 | `Diet-Setup-Wizard.md` | First-run target derivation — BMR/TDEE math, sex/non-binary handling, macros, calibration loop |
 | `Diet-Logging-Flow.md` | Per-log-event flow, `diet-today.js` spec, macro model, calorie haircut formula, Day-Style Registry, floor-miss monitoring |
 | `Diet-Dashboard-Guidelines.md` | ASCII dashboard format, goal chips, floor/ceiling/window colors, time-gated flags, sync rules |
+| `Diet-Dashboard-Display.md` | Read-only status display -- how to answer state queries ("where am I today?") without logging new data |
 | `Weight-Tracker-Spec.md` | Weight tracking, 14-day dual regression, progress bars, phases, body composition |
 | `Fancy-Dashboard-Build.md` | HTML dashboard architecture — single source of truth for `Dashboard-Fancy.html` |
 | `Sunday-Weekly-Diet-Analysis.md` | Weekly accountability report format (Great / Good / Bad / Ugly) + floor-miss pattern |
@@ -235,7 +243,7 @@ Add to your instruction file's `## Rules` section:
 ```markdown
 ### Diet Tracking
 
-Daily food journal at `[[Projects/Diet/Overview]]` (targets and goals defined there). Daily logs are `Projects/Diet/YYYY-MM-DD.md`. CSV logs in `diet-logs/` at workspace root: `food-log.csv`, `exercise-log.csv`, `weight-log.csv` -- the single source of truth; append the CSV row first on any log event. When the user logs a meal or exercise, follow `[[Knowledge/Jesse-Guidelines/Diet-Logging-Flow]]`. When the user asks about their state without new data, show the ASCII dashboard per `[[Knowledge/Jesse-Guidelines/Diet-Dashboard-Guidelines]]`. Weight tracking uses `diet-logs/weight-log.csv` per `[[Knowledge/Jesse-Guidelines/Weight-Tracker-Spec]]`. HTML dashboard lives at `Dashboard-Fancy.html` (vault root) — see `[[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]` for build rules. Every Sunday, produce a weekly accountability report per `[[Knowledge/Jesse-Guidelines/Sunday-Weekly-Diet-Analysis]]` and save to `Knowledge/Health/Weekly-Diet-Analysis/`.
+Daily food journal at `[[Projects/Diet/Overview]]` (targets and goals defined there). Daily logs are `Projects/Diet/YYYY-MM-DD.md`. CSV logs in `diet-logs/` at workspace root: `food-log.csv`, `exercise-log.csv`, `weight-log.csv` -- the single source of truth; append the CSV row first on any log event. When the user logs a meal or exercise, follow `[[Knowledge/Jesse-Guidelines/Diet-Logging-Flow]]`. When the user asks about their state without new data, follow `[[Knowledge/Jesse-Guidelines/Diet-Dashboard-Display]]` (read-only; ASCII format per `[[Knowledge/Jesse-Guidelines/Diet-Dashboard-Guidelines]]`). Weight tracking uses `diet-logs/weight-log.csv` per `[[Knowledge/Jesse-Guidelines/Weight-Tracker-Spec]]`. HTML dashboard lives at `Dashboard-Fancy.html` (vault root) -- see `[[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]` for build rules. Every Sunday, produce a weekly accountability report per `[[Knowledge/Jesse-Guidelines/Sunday-Weekly-Diet-Analysis]]` and save to `Knowledge/Health/Weekly-Diet-Analysis/`.
 ```
 
 ### 5. Create the CSV logs
@@ -466,7 +474,7 @@ read-only lens over them. If you never install it, everything in this recipe sti
 
 **Works with the [Cookbook](./cookbook.md).** When both are active, logging a meal from a tracked recipe auto-populates nutrition data, and meal suggestions consider remaining macro budget. Either works standalone.
 
-**Removing this recipe** is clean: delete `Projects/Diet/`, `Dashboard-Fancy.html`, `diet-today.js`, the `diet-logs/` directory, the guidelines files, the coach's notes log, the weekly analysis archive, and the instruction file hooks. Nothing else references it.
+**Removing this recipe** is clean: delete `Projects/Diet/` (including `Journal.md` and `Timeline.md`), `Dashboard-Fancy.html`, the five data files (`diet-today.js`, `diet-weight-history.js`, `diet-progress.js`, `diet-coach-notes.js`, `proposed-diet-today.js`), the `diet-logs/` directory, the guidelines files, the coach's notes log, the weekly analysis archive, and the instruction file hooks. Nothing else references it.
 
 ---
 

@@ -81,7 +81,7 @@ Write to `Knowledge/Health/Weekly-Diet-Analysis/YYYY-MM-DD.md`:
 
 - Never fabricate data. Use actual numbers from journals and the CSV logs.
 - Compare against the user's own targets (from Overview.md), not generic recommendations.
-- Track alcohol separately if the user logs it — total calories, number of drinking days, and the counterfactual: what the week would have looked like without alcohol (average calories, compliance days).
+- Track alcohol separately if the user logs it -- total calories, number of drinking days, and the counterfactual: what the week would have looked like without alcohol (average calories, compliance days).
 - Don't double-count exercise. The adaptive calorie target already includes the exercise add-back (see the formula in [[Knowledge/Jesse-Guidelines/Diet-Logging-Flow]]); judge compliance against that adaptive target, never layer additional "earned" food on top of it.
 - Be honest about what's working and what isn't.
 - **Week numbering is sequential.** Week 1 is the user's first tracked week; increment every Sunday regardless of tracking gaps, and put the number in the report header.
