@@ -2,6 +2,8 @@
 
 The Quick Start guide gets you set up. This page shows you what actually using Jesse looks like once it's running: the daily rhythm, common interactions, and how the system grows with you over time.
 
+If you haven't read [How Jesse Works](./how-jesse-works.md) yet, start there for the mental model; this page is about the daily rhythm.
+
 The examples here come from real usage. Your version will look different depending on your tools, your job, and what you care about tracking. That's the point. Jesse is a framework you shape to fit how you already work.
 
 ## The Morning Routine

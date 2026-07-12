@@ -1,0 +1,177 @@
+/* Jesse landing page and site styles. Loaded via book.toml additional-css.
+   Uses mdBook theme variables so light and dark themes both work. */
+
+:root {
+  --jesse-grad-a: #6366F1;
+  --jesse-grad-b: #7C3AED;
+}
+
+/* ---------- Hero ---------- */
+
+.jesse-hero {
+  text-align: center;
+  padding: 1.5rem 0 0.5rem;
+}
+
+.jesse-hero img {
+  width: 112px;
+  height: 112px;
+}
+
+.jesse-hero h1 {
+  margin: 0.75rem 0 0.25rem;
+  font-size: 2.6rem;
+  border: none;
+}
+
+.jesse-tagline {
+  font-size: 1.25rem;
+  margin: 0.25rem auto 0.5rem;
+  max-width: 34em;
+}
+
+.jesse-subline {
+  font-size: 1rem;
+  opacity: 0.75;
+  margin: 0 auto 1rem;
+  max-width: 38em;
+}
+
+/* ---------- CTA buttons ---------- */
+
+.jesse-cta {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.jesse-cta a {
+  display: inline-block;
+  padding: 0.6rem 1.3rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+
+.jesse-cta a.primary {
+  background: linear-gradient(135deg, var(--jesse-grad-a), var(--jesse-grad-b));
+  color: #fff !important;
+}
+
+.jesse-cta a.primary:hover {
+  filter: brightness(1.1);
+}
+
+.jesse-cta a.secondary {
+  border: 1.5px solid var(--theme-popup-border, currentColor);
+  color: var(--fg) !important;
+}
+
+.jesse-cta a.secondary:hover {
+  border-color: var(--jesse-grad-a);
+  color: var(--jesse-grad-a) !important;
+}
+
+/* ---------- Briefing card ---------- */
+
+.jesse-briefing {
+  max-width: 40em;
+  margin: 1rem auto;
+  border: 1px solid var(--table-border-color, rgba(128,128,128,0.35));
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+}
+
+.jesse-briefing .titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+  opacity: 0.85;
+  background: var(--quote-bg, rgba(128,128,128,0.12));
+  border-bottom: 1px solid var(--table-border-color, rgba(128,128,128,0.35));
+}
+
+.jesse-briefing .titlebar .dots span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 4px;
+  opacity: 0.55;
+  background: currentColor;
+}
+
+.jesse-briefing pre {
+  margin: 0;
+  padding: 1rem 1.2rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  background: transparent;
+}
+
+/* ---------- Three-part grid ---------- */
+
+.jesse-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.9rem;
+  margin: 1.25rem 0;
+}
+
+.jesse-grid .card {
+  border: 1px solid var(--table-border-color, rgba(128,128,128,0.35));
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+}
+
+.jesse-grid .card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.02rem;
+}
+
+.jesse-grid .card p {
+  margin: 0;
+  font-size: 0.92rem;
+  opacity: 0.9;
+}
+
+.jesse-grid .card .kicker {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--jesse-grad-a);
+  margin-bottom: 0.35rem;
+}
+
+/* ---------- Diagram ---------- */
+
+.jesse-diagram {
+  text-align: center;
+  margin: 1.25rem 0;
+}
+
+.jesse-diagram svg {
+  max-width: 620px;
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- Section spacing on the landing page ---------- */
+
+.jesse-section-label {
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--jesse-grad-a);
+  margin: 2rem 0 0.25rem;
+}

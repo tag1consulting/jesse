@@ -28,6 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-bfe3b20f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -35,10 +36,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-1f6cf78a.js";
+            window.path_to_searchindex_js = "../searchindex-8e01a1e0.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-244e3899.js"></script>
+        <script src="../toc-7aa894ee.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -181,8 +182,24 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="recipes"><a class="header" href="#recipes">Recipes</a></h1>
-<p>Recipes are self-contained guides for setting up specific Jesse capabilities. Each one covers what it does, what you need, what to add to your instruction file, and what to watch out for.</p>
-<h2 id="available-recipes"><a class="header" href="#available-recipes">Available Recipes</a></h2>
+<p>Recipes are self-contained guides for setting up specific Jesse capabilities. Each one covers what it does, what you need, what to add to your instruction file, and what to watch out for. Adopt them piecemeal – each recipe stands alone, and none are required.</p>
+<h2 id="connect-your-tools"><a class="header" href="#connect-your-tools">Connect Your Tools</a></h2>
+<p>Wire your communication tools into the morning routine.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Recipe</th><th>What it does</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="./email.html">Email Integration</a></td><td>Scanning Gmail, Fastmail, or other email for action items during the morning routine</td></tr>
+<tr><td><a href="./slack.html">Slack Integration</a></td><td>Scanning Slack channels and DMs with timestamp-gated reads to avoid stale data and missed messages</td></tr>
+<tr><td><a href="./whatsapp.html">WhatsApp Integration</a></td><td>Scanning WhatsApp chats for action items via a local bridge</td></tr>
+<tr><td><a href="./ios-obsidian-quick-note-shortcut.html">iOS Obsidian Quick-Note Shortcut</a></td><td>Two-tap iOS Shortcut that drops timestamped quick-capture notes into the vault’s Inbox/ folder</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="daily-workflow"><a class="header" href="#daily-workflow">Daily Workflow</a></h2>
+<p>Patterns that structure the day-to-day rhythm.</p>
 <div class="table-wrapper">
 <table>
 <thead>
@@ -190,15 +207,37 @@
 </thead>
 <tbody>
 <tr><td><a href="./reminders.html">Birthday and Date Reminders</a></td><td>Multi-stage reminders for birthdays, holidays, document expirations, and recurring dates using Obsidian Reminders</td></tr>
-<tr><td><a href="./email.html">Email Integration</a></td><td>Scanning Gmail, Fastmail, or other email for action items during the morning routine</td></tr>
-<tr><td><a href="./whatsapp.html">WhatsApp Integration</a></td><td>Scanning WhatsApp chats for action items via a local bridge</td></tr>
+<tr><td><a href="./meeting-agendas.html">Meeting Agendas</a></td><td>Auto-generated agenda drafts for every meeting on your calendar</td></tr>
 <tr><td><a href="./draft-lifecycle.html">Draft Lifecycle</a></td><td>Managing active drafts, archiving sent communications, and extracting key details</td></tr>
 <tr><td><a href="./people-kb.html">People Knowledge Base</a></td><td>Automatic contact directory maintenance with categorization and cross-linking</td></tr>
 <tr><td><a href="./vault-maintenance.html">Weekly Vault Maintenance</a></td><td>Automated hygiene: broken links, naming conventions, archive cleanup</td></tr>
-<tr><td><a href="./meeting-agendas.html">Meeting Agendas</a></td><td>Auto-generated agenda drafts for every meeting on your calendar</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="writing-and-research"><a class="header" href="#writing-and-research">Writing and Research</a></h2>
+<p>Standards for what the agent produces.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Recipe</th><th>What it does</th></tr>
+</thead>
+<tbody>
 <tr><td><a href="./research.html">Research</a></td><td>Structured, source-backed research output with citations, variant tracking, and actionability sections</td></tr>
 <tr><td><a href="./writing-voice.html">Writing Voice</a></td><td>Catch and fix AI writing tells before publishing or sending</td></tr>
 <tr><td><a href="./semantic-search.html">Semantic Vault Search</a></td><td><strong>Optional.</strong> Local semantic search over your vault using <a href="https://github.com/tobi/qmd">QMD</a>. Requires ~2 GB on disk for models</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="health-and-home"><a class="header" href="#health-and-home">Health and Home</a></h2>
+<p>Optional life-tracking capabilities that show how far the pattern stretches.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Recipe</th><th>What it does</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="./diet-tracking.html">Diet &amp; Exercise Tracking</a></td><td><strong>Optional.</strong> Daily nutrition and exercise tracking over append-only CSV activity logs, with a first-run setup wizard, a floors/ceilings/windows macro model, an extensible day-style registry, adaptive calorie targets with a tracker-overestimation haircut, weight tracking with trend analysis and progress visualization, body composition metrics, weekly accountability reports, and a persistent HTML dashboard</td></tr>
+<tr><td><a href="./cookbook.html">Cookbook</a></td><td><strong>Optional.</strong> Personal cookbook with family reviews, cooking tool references, ingredient-driven meal design, and diet tracker integration</td></tr>
 </tbody>
 </table>
 </div>
@@ -209,11 +248,11 @@
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../vault-structure.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../usage-guide.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="../recipes/reminders.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../recipes/email.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -223,11 +262,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../vault-structure.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../usage-guide.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="../recipes/reminders.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../recipes/email.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

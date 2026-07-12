@@ -28,6 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-bfe3b20f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -35,10 +36,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "ayu";
-            window.path_to_searchindex_js = "../searchindex-1f6cf78a.js";
+            window.path_to_searchindex_js = "../searchindex-8e01a1e0.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-244e3899.js"></script>
+        <script src="../toc-7aa894ee.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -202,19 +203,22 @@ that asks to research, investigate, explain, or answer a substantive question pr
 in `Projects/Research/`, not a conversational reply.
 </code></pre>
 <h2 id="the-guidelines-file"><a class="header" href="#the-guidelines-file">The Guidelines File</a></h2>
-<p>The template includes this file at <code>Knowledge/Jesse-Guidelines/Research-Guidelines.md</code>:</p>
-<pre><code class="language-markdown"># Research Guidelines
-
-Research output is for human consumption. It must be accurate, but also accessible -- written so the reader can come away understanding the topic, not just holding a pile of citations. Start with a scope statement (what's covered, what's excluded, and why), followed by a 2-3 sentence executive overview that delivers the takeaway up front. The body should explore the topic from multiple angles, choosing angles relevant to the reason the research was requested when known. Structure depth per section based on what the material needs: use accessible overviews where a concept just needs to land, and include technical deep-dives where the subject demands full understanding. Not every section needs both -- match the depth to the content, don't force a uniform structure across the whole piece.
-
-When a product or system comes in multiple tiers, configurations, or variants, identify all of them early. Don't collapse a product line into a single spec number -- a "Max" chip with 32-core and 40-core GPU options has two different bandwidth figures, and using just one misrepresents the picture. Build comparison structures (tables, side-by-side breakdowns) that show the full variant landscape so the reader can locate themselves in it.
-
-Find multiple sources and prefer primary over secondary: manufacturer specs, published papers, official announcements, and direct interviews over blog recaps and aggregator summaries. Non-English sources are valid and sometimes critical -- even when a topic appears US- or English-centric, actively check whether relevant non-English perspectives exist (a Dutch sysadmin's career, a European standards body, an Italian regulatory filing). Don't force irrelevant sources, but don't default to English-only either. Note each source's publication date and flag when key claims rest on outdated data. Rate source trustworthiness inline and state why: an official spec sheet outranks an anonymous forum post, a peer-reviewed study outranks a vendor whitepaper. Use numbered citations [1] [2] inline throughout the text, with a full source list (URL, title, date, language if non-English) at the end.
-
-Distinguish reported fact from analyst speculation from your own synthesis, and make the boundaries obvious. When sources conflict, surface both claims with context on methodology -- don't silently pick a winner or split the difference. When a conflict is noticed mid-analysis, resolve it inline: state both figures, identify which source is more authoritative and why, use the stronger source for any calculations or conclusions, and flag the remaining uncertainty so the reader knows the number isn't settled. Explicitly note gaps: if no source covers an obvious question, or if all available data is outdated or single-sourced, say so. "No independent benchmarks exist yet" is a finding, not an omission. But if a gap could be closed with additional source work -- a GitHub repo, a changelog, a release blog -- close it rather than flagging it as unresolved.
-
-End with a detailed summary that draws all threads together into a coherent picture, followed by an actionability section. If the research was triggered by a decision, state what the findings mean for that decision. If there's nothing actionable yet, say that -- the section is never skipped. Always save research output to `Projects/Research/` as a standalone file.
-</code></pre>
+<p>The template ships a full research methodology at <a href="https://github.com/tag1consulting/jesse/blob/main/template/Knowledge/Jesse-Guidelines/Research-Guidelines.md"><code>template/Knowledge/Jesse-Guidelines/Research-Guidelines.md</code></a> – too long to embed here, and canonical in the template rather than in this page. What it covers:</p>
+<ul>
+<li><strong>Vault first</strong> – search the vault (QMD or grep) before any web search; previously extracted knowledge with citations counts as a source, with a freshness heuristic for when to re-search.</li>
+<li><strong>Scope confirmation</strong> – confirm scope on ambiguous requests; in unattended runs (scheduled tasks, inbox processing), make the most reasonable interpretation, record it in the scope statement, and never stall.</li>
+<li><strong>Writing quality</strong> – narrative flow, no filler, specific over general: numbers, dates, names.</li>
+<li><strong>Critical thinking</strong> – question the premise, show reasoning, identify gaps, name fallacies.</li>
+<li><strong>Source hierarchy</strong> – four tiers (primary &gt; institutional &gt; quality journalism &gt; everything else with caveats), inline trustworthiness ratings, numbered citations.</li>
+<li><strong>Web search mandate</strong> – training knowledge is never a citable source; every non-trivial fact traces to a retrieved, dated, linkable source (or a cited vault extraction).</li>
+<li><strong>Multilingual sourcing</strong> – mandatory for non-English contexts; “sparse in English” means the search stopped too early.</li>
+<li><strong>Structural hints by research type</strong> – technical, market/competitive, and domain research patterns.</li>
+<li><strong>Devil’s advocate, three layers</strong> – steelman, best counterargument, nuanced resolution.</li>
+<li><strong>Pre-delivery quality check</strong> – a self-review checklist (source monoculture, blurred epistemic lines, stale sources, missing “so what”, orphaned tangents).</li>
+<li><strong>Report skeleton</strong> – scope statement, executive overview (scaled to length), body, devil’s advocate, summary, actionability (never skipped), one or more appendices for tangents, source list.</li>
+<li><strong>Archive footer</strong> – every research file ends with the checkbox footer from [[Knowledge/Jesse-Guidelines/Archive-Footer-Guidelines]] so it can be processed from Obsidian.</li>
+</ul>
+<p>Copy the file from the template and edit it for your needs; the version in your vault is the one Jesse follows.</p>
 <h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
 <ol>
 <li>Drop a research request in Inbox/ or ask Jesse directly.</li>

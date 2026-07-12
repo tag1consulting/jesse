@@ -1,0 +1,431 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Cookbook - Jesse</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="An AI assistant built from folders of text files, an instruction manual, and no vendor lock-in.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-4af526f9.svg">
+        <link rel="shortcut icon" href="../favicon-e05eaf80.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-bfe3b20f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../searchindex-8e01a1e0.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-7aa894ee.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Jesse</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/tag1consulting/jesse" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/tag1consulting/jesse/edit/main/docs/src/recipes/cookbook.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="cookbook"><a class="header" href="#cookbook">Cookbook</a></h1>
+<p>A living personal cookbook that tracks family reviews, cooking tool references, iteration notes, and ingredient-driven meal design.</p>
+<blockquote>
+<p><strong>This recipe is optional.</strong> When disabled, Jesse doesn’t manage cooking recipes or suggest meals. It works standalone or alongside the <a href="./diet-tracking.html">Diet &amp; Exercise Tracking</a> recipe – when both are active, meal logging from tracked recipes auto-populates nutrition data, and meal suggestions consider remaining macro budget.</p>
+</blockquote>
+<h2 id="what-you-get"><a class="header" href="#what-you-get">What You Get</a></h2>
+<ul>
+<li><strong>Structured recipes</strong> – Living Markdown files with ingredients, steps, cooking notes, per-person reviews, and nutrition estimates</li>
+<li><strong>Verdict system</strong> – Keepers in <code>Knowledge/Cookbook/</code>, duds in <code>did-not-like/</code> (preserved so they’re not re-attempted blindly), untested ideas in <code>Ideas/</code></li>
+<li><strong>Cooking tool references</strong> – Equipment-specific guides in <code>Tools/</code> (grill temps, setups, techniques) linked from recipes that use them</li>
+<li><strong>Ingredient-driven meal design</strong> – Describe what you have on hand; Jesse designs a meal from your ingredients, existing recipes, available tools, and (if diet tracker is active) remaining macro budget</li>
+<li><strong>Iteration tracking</strong> – Recipes evolve with each cook. Cooking notes accumulate, reviews update, ingredients and steps improve over time</li>
+</ul>
+<h2 id="vault-structure"><a class="header" href="#vault-structure">Vault Structure</a></h2>
+<pre><code>Projects/
+  drafts/                           # New recipes start here as drafts
+Knowledge/
+  Cookbook/
+    Pantry/                         # What's on hand
+      Garden.md                     # Seasonal garden/orchard inventory with harvest logs
+    [Recipe-Name].md                # Keepers and worth-repeating
+    did-not-like/                   # Recipes that didn't work (preserved with notes)
+    Ideas/                          # Untested concepts and meal ideas
+    Tools/                          # Equipment reference guides
+  Jesse-Guidelines/
+    Cookbook-Guidelines.md           # Format, filing rules, meal design behavior
+</code></pre>
+<h2 id="configuration"><a class="header" href="#configuration">Configuration</a></h2>
+<h3 id="1-create-the-cookbook-directories"><a class="header" href="#1-create-the-cookbook-directories">1. Create the Cookbook directories</a></h3>
+<pre><code class="language-bash">mkdir -p Knowledge/Cookbook/Pantry Knowledge/Cookbook/did-not-like Knowledge/Cookbook/Ideas Knowledge/Cookbook/Tools
+</code></pre>
+<h3 id="2-add-the-guidelines-file"><a class="header" href="#2-add-the-guidelines-file">2. Add the guidelines file</a></h3>
+<p>The template includes <code>Knowledge/Jesse-Guidelines/Cookbook-Guidelines.md</code>. This controls recipe format, the verdict/filing system, ingredient-driven meal design behavior, tool reference format, and diet tracker integration rules.</p>
+<h3 id="3-add-to-your-instruction-file"><a class="header" href="#3-add-to-your-instruction-file">3. Add to your instruction file</a></h3>
+<p>Add to your instruction file’s <code>## Rules</code> section:</p>
+<pre><code class="language-markdown">### Cookbook
+
+Personal cookbook in [[Knowledge/Cookbook/]] managed per [[Knowledge/Jesse-Guidelines/Cookbook-Guidelines]]. Recipes track family reviews, cooking tool references, and iteration notes. New recipes start in `Projects/drafts/` and file to `Knowledge/Cookbook/` after cooking and review. When the user describes available ingredients, check `Pantry/Garden.md` for what's currently in season, then design meals from what's on hand. If the Diet Tracker recipe is also active, bridge nutrition tracking with meal design.
+</code></pre>
+<p>And add to the Vault Structure section:</p>
+<pre><code class="language-markdown">Knowledge/Cookbook/               -- Personal cookbook (recipes, tools, ideas)
+Knowledge/Jesse-Guidelines/Cookbook-Guidelines.md
+</code></pre>
+<h2 id="recipe-lifecycle"><a class="header" href="#recipe-lifecycle">Recipe Lifecycle</a></h2>
+<ol>
+<li><strong>New recipe created</strong> – Jesse writes it to <code>Projects/drafts/</code> like any other draft, with an archive footer.</li>
+<li><strong>User cooks it</strong> – Reports back with results. Jesse updates cooking notes and family reviews.</li>
+<li><strong>Filing decision:</strong>
+<ul>
+<li>Keeper → move to <code>Knowledge/Cookbook/</code></li>
+<li>Didn’t work → move to <code>Knowledge/Cookbook/did-not-like/</code> with notes on what went wrong</li>
+<li>Needs another try → stays in <code>Projects/drafts/</code> until the next cook</li>
+</ul>
+</li>
+</ol>
+<p>This follows the standard draft lifecycle – recipes in <code>Projects/drafts/</code> get archive footers and are processed like any other draft.</p>
+<h2 id="recipe-format"><a class="header" href="#recipe-format">Recipe Format</a></h2>
+<p>Every recipe follows a consistent structure. Here’s a condensed example:</p>
+<pre><code class="language-markdown"># Lamb Chops with Rosemary and Smashed Potatoes
+
+**Source:** Developed 2026-04-05, adapted from grill reference
+**Tags:** grill, kamado, weekend, high-protein, date-night
+**Verdict:** Big hit for adults, mixed for kids.
+**Last made:** 2026-04-12
+**Times made:** 2
+
+Weekend dinner -- grilled lamb chops with rosemary-garlic smashed potatoes.
+
+## Recipe
+
+**Prep:** 10 min | **Cook:** 35 min | **Serves:** 4
+
+### Ingredients
+
+#### For the Lamb
+- 8 lamb loin chops (~800g total)
+- 2 tbsp olive oil
+- 3 cloves garlic, minced
+- 2 sprigs fresh rosemary, chopped
+- Salt, pepper
+
+### Steps
+
+1. Set up grill for direct heat at 260C / 500F.
+2. Rub chops with oil, garlic, rosemary, salt, pepper. Rest 15 min.
+3. Grill 3 min per side for medium-rare (internal 57C / 135F).
+4. Rest 5 min tented with foil.
+
+### Cooking Notes
+
+- **2026-04-05:** First cook. Grill ran hot (280C), chops closer to medium.
+  Still excellent. Kids ate 1 chop each, left the fat.
+- **2026-04-12:** Dialed to 260C, much better. Added Dijon to the oil
+  rub -- subtle but good, worth keeping.
+
+### Nutrition (per serving)
+
+~680 cal | ~48g protein | ~38g fat | ~35g carbs
+
+### Family Reviews
+
+| Person | Reaction | Notes |
+|--------|----------|-------|
+| Adult 1 | Hit | Rosemary crust is great. Dijon addition is a keeper. |
+| Adult 2 | Hit | Prefers medium-rare -- second cook was better. |
+| Kid 1 | OK | Ate the meat, left the fat and rosemary bits. |
+| Kid 2 | OK -&gt; Hit | Liked second cook with trimmed, smaller chops. |
+
+### Tool References
+
+- Grill setup: [[Knowledge/Cookbook/Tools/Grill-Reference]] -- Lamb section
+</code></pre>
+<h2 id="did-not-like-files"><a class="header" href="#did-not-like-files">“Did Not Like” Files</a></h2>
+<p>When a recipe doesn’t work, file it to <code>Knowledge/Cookbook/did-not-like/</code> instead of deleting. The file preserves what went wrong and what to try differently:</p>
+<pre><code class="language-markdown"># Halibut Acqua Pazza
+
+**Source:** Classic Italian, first cook 2026-03-29
+**Tags:** fish, Italian, poached, weeknight
+**Verdict:** Did not like. Poaching method made the halibut bland and
+textureless. Try pan-seared with crispy skin or grilled instead.
+**Last made:** 2026-03-29
+**Times made:** 1
+
+### What Went Wrong
+
+Acqua pazza works better with thinner, more flavorful fish (branzino,
+snapper). Halibut is too thick and mild -- it steams in the liquid and
+comes out flat.
+
+### What to Salvage
+
+The smashed potatoes from this meal were a huge hit -- split into their
+own recipe: [[Knowledge/Cookbook/Crispy-Smashed-Potatoes]].
+</code></pre>
+<h2 id="ingredient-driven-meal-design"><a class="header" href="#ingredient-driven-meal-design">Ingredient-Driven Meal Design</a></h2>
+<p>The most powerful feature. Describe what you have and Jesse designs a meal:</p>
+<p><strong>You:</strong> “I’ve got chicken thighs, arborio rice, parmesan, and chard from the garden. What should I make?”</p>
+<p><strong>Jesse checks:</strong></p>
+<ol>
+<li><code>Pantry/Garden.md</code> for what’s currently in season (items with no “Last harvest” this year)</li>
+<li>Existing recipes using those ingredients (prioritizes hits)</li>
+<li>Available cooking tools</li>
+<li>Time constraints (weeknight default ~40 min unless stated)</li>
+<li>Remaining macro budget (if diet tracker is active)</li>
+</ol>
+<p><strong>Jesse responds</strong> with a full recipe – ingredients, steps, estimated nutrition – saved to <code>Projects/drafts/</code>. After cooking, you report back, and Jesse updates cooking notes and family reviews, then files to <code>Knowledge/Cookbook/</code>.</p>
+<p>The cookbook gets smarter over time. Jesse learns what ingredients you tend to have, what the household likes, what tools are available, and (with the diet tracker) what the macro situation looks like.</p>
+<h2 id="tool-reference-files"><a class="header" href="#tool-reference-files">Tool Reference Files</a></h2>
+<p>Equipment-specific guides live in <code>Knowledge/Cookbook/Tools/</code>. These are comprehensive references, not recipes – the “I forgot how to set up the grill for ribs” quick-lookup. They cover setup, temperatures, fuel, techniques, and lessons learned. Recipes link to the relevant tool section when technique matters.</p>
+<p>Tool files are optional. Users without specialized equipment get full functionality – tool links just won’t appear.</p>
+<p><strong>Lookup before advising on specialized equipment.</strong> When a recipe uses equipment that has a tool reference file (e.g., a kamado grill), read the relevant <code>Tools/</code> file before giving instructions. Temperatures, vent positions, and fuel setup vary by equipment model; general knowledge will be wrong for users whose tool file specifies different settings. If no tool file exists for that equipment, note the gap and suggest the user create one after their first cook.</p>
+<h2 id="garden--orchard-inventory"><a class="header" href="#garden--orchard-inventory">Garden &amp; Orchard Inventory</a></h2>
+<p><code>Knowledge/Cookbook/Pantry/Garden.md</code> is a living seasonal inventory of what grows on your property. Each item – fruit tree, vegetable, herb – has its own section with a harvest log table tracking first harvest, last harvest, peak months, and notes, year over year.</p>
+<p><strong>How it works:</strong></p>
+<ul>
+<li>Items with no “Last harvest” for the current year are in season and available</li>
+<li>At end of season, fill in the last harvest date – the item stays as a permanent record</li>
+<li>Next year, add a new row; the old rows remain, building the multi-year pattern</li>
+<li>Over time the log answers: “Tomatoes usually start mid-June, peak July–August, done by October”</li>
+</ul>
+<p><strong>Why it’s useful:</strong></p>
+<p>Ingredient-driven meal design starts with what’s actually available. The garden inventory makes that concrete – Jesse checks it before suggesting meals, combining what’s in season with what’s in the fridge and the recipe collection. When the diet tracker is also active, Jesse can identify which in-season produce helps fill a macro gap (e.g., “you have chard from the garden and are low on micronutrient-dense carbs today”).</p>
+<p><strong>Example harvest log entry:</strong></p>
+<pre><code class="language-markdown">### Tomato (Sungold Cherry)
+
+**Harvest log:**
+
+| Year | First harvest | Last harvest | Peak months | Notes |
+|------|--------------|--------------|-------------|-------|
+| 2025 | Jun 22 | Oct 8 | Jul–Sep | Strong yield, 2026-03-20 transplant |
+| 2026 | Jun 15 |  | Jul–Sep | |
+</code></pre>
+<p>The 2026 row has no “Last harvest” – Sungold tomatoes are currently available.</p>
+<p><strong>Cross-references:</strong> Each item links to recipes that use it. When designing a meal, Jesse prioritizes ingredient+recipe combinations that have review history.</p>
+<p>The template file at <code>Knowledge/Cookbook/Pantry/Garden.md</code> includes sections for Fruit Trees, Vegetables, and Herbs with placeholder entries showing the format and the “How This File Works” workflow guide.</p>
+<hr>
+<h2 id="integration-with-diet-tracker"><a class="header" href="#integration-with-diet-tracker">Integration with Diet Tracker</a></h2>
+<p>When both the Cookbook and Diet Tracker are enabled:</p>
+<ul>
+<li><strong>Auto-populated meal logging</strong> – “I made the Chicken Risotto, 1 serving” fills in the food journal from the recipe’s nutrition data</li>
+<li><strong>Macro-aware meal suggestions</strong> – “What should I make for dinner?” considers remaining calorie and macro budget</li>
+<li><strong>Ingredient + macro intersection</strong> – “I have chicken and vegetables, what fits my macros?” combines what’s available with nutritional targeting</li>
+</ul>
+<p>When only the Cookbook is active, nutrition sections are informational only – no dashboards, no tracking, no log updates. Everything still works; it just doesn’t feed into a tracking system.</p>
+<h2 id="tips-and-gotchas"><a class="header" href="#tips-and-gotchas">Tips and Gotchas</a></h2>
+<p><strong>Reviews are per-person, not per-recipe.</strong> A meal can be a hit for one person and a miss for another. Track individual reactions so Jesse can suggest meals the whole household enjoys.</p>
+<p><strong>Recipes evolve.</strong> After every cook, update cooking notes, reviews, and (if it improved) the main steps/ingredients. Keep old versions in Cooking Notes for reference.</p>
+<p><strong>The verdict drives filing.</strong> Keepers go to <code>Knowledge/Cookbook/</code>. Duds go to <code>did-not-like/</code>. Ideas live in <code>Ideas/</code> until tried. New recipes start in <code>Projects/drafts/</code> and file after review.</p>
+<p><strong>Family review names are yours.</strong> No assumptions about household structure. Use real names, nicknames, or roles – whatever makes sense.</p>
+<p><strong>Removing this recipe</strong> is clean: delete <code>Knowledge/Cookbook/</code>, <code>Cookbook-Guidelines.md</code>, and the instruction file hook. Nothing else references it.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../recipes/diet-tracking.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../instruction-file.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../recipes/diet-tracking.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../instruction-file.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

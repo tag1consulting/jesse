@@ -60,6 +60,7 @@ The instruction file is a living document. Revise it every time something goes w
 
 ## What's Next
 
+- Understand the system end to end in [How Jesse Works](./how-jesse-works.md).
 - Read about the [instruction file](./instruction-file.md) in detail.
 - Understand the [vault structure](./vault-structure.md).
 - Browse [recipes](./recipes/index.md) for specific capabilities to add.

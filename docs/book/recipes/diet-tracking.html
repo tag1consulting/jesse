@@ -1,0 +1,699 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Diet &amp; Exercise Tracking - Jesse</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="An AI assistant built from folders of text files, an instruction manual, and no vendor lock-in.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon-4af526f9.svg">
+        <link rel="shortcut icon" href="../favicon-e05eaf80.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../theme/custom-bfe3b20f.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "../searchindex-8e01a1e0.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-7aa894ee.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Jesse</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/tag1consulting/jesse" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/tag1consulting/jesse/edit/main/docs/src/recipes/diet-tracking.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="diet--exercise-tracking"><a class="header" href="#diet--exercise-tracking">Diet &amp; Exercise Tracking</a></h1>
+<p>Daily nutrition and exercise tracking with a Markdown journal, append-only CSV logs, a chat dashboard, and a live HTML dashboard. Includes a first-run setup wizard that derives your targets from first principles, a floors/ceilings/windows macro model, an extensible day-style registry, adaptive calorie targets with a tracker-overestimation haircut, weight tracking with progress visualization, body composition metrics, alcohol enforcement, and weekly accountability reports.</p>
+<blockquote>
+<p><strong>This recipe is optional.</strong> When disabled, the assistant never mentions food, calories, exercise, or weight tracking. It does not include meal planning, recipe suggestions, diet advice, or nutrition coaching. The system records and displays – it doesn’t lecture.</p>
+</blockquote>
+<h2 id="what-you-get"><a class="header" href="#what-you-get">What You Get</a></h2>
+<ul>
+<li><strong>Daily journal</strong> – <code>Projects/Diet/YYYY-MM-DD.md</code> with structured meal tables, activity logs, and running totals</li>
+<li><strong>CSV logs</strong> – <code>diet-logs/food-log.csv</code>, <code>diet-logs/exercise-log.csv</code>, <code>diet-logs/weight-log.csv</code> (weight is its own log, not a workbook sheet) at workspace root</li>
+<li><strong>Chat dashboard</strong> – Colored emoji bars with macro flags and adaptive calorie display after every food or exercise log</li>
+<li><strong>Live HTML dashboard</strong> – <code>Dashboard-Fancy.html</code> at vault root; a static shell that renders external JS data files – macro bars update on every log via <code>diet-today.js</code>, the weight chart and pace bars via data files regenerated on weigh-in. The HTML itself never changes for data</li>
+<li><strong>Weight tracking</strong> – Two progress bars toward user goals, trend analysis, body composition metrics (optional), phases for different training cycles</li>
+<li><strong>Coach’s Notes Log</strong> – <code>Knowledge/Health/Coach-Notes-Log.md</code> tracks dashboard notes across days for consistency; prevents advice from contradicting itself or chasing noise</li>
+<li><strong>Weekly accountability</strong> – Sunday routine with automated analysis report (four sections: Great, Good, Bad, Ugly) plus a floor-miss pattern check, saved to Knowledge/Health/Weekly-Diet-Analysis/</li>
+<li><strong>Setup wizard</strong> – A first-run conversational flow that computes your calorie and macro targets from age, height, weight, body composition, activity, and goal; uses the sex-independent Katch-McArdle formula when body-fat % is known and self-corrects via a calibration loop</li>
+<li><strong>Floors / ceilings / windows macro model</strong> – Each macro is a floor (protein, carbs), a ceiling (calories), or a window (fat); goal chips, bar colors, and flags all derive from the type</li>
+<li><strong>Day-style registry</strong> – An extensible table of day styles (normal, endurance, refeed, sick, carb-load, fasting) that sets which macros are floors, ceilings, or windows for the day</li>
+<li><strong>Adaptive calorie target</strong> – Exercise add-back with an overestimation haircut: discount the logged burn (default 25%), then eat back only half — keeps training-day deficits meaningful without trusting noisy tracker estimates</li>
+<li><strong>Alcohol enforcement</strong> – Alcohol always logged as a separate entry; next-day journal note required with calorie count and percentage of daily target</li>
+</ul>
+<h2 id="getting-started-the-setup-wizard"><a class="header" href="#getting-started-the-setup-wizard">Getting Started: The Setup Wizard</a></h2>
+<p>The tracker works for anyone — weight loss, maintenance, recomposition, or athletic training, for any sex — without hand-tuning targets. The first time you turn it on (or say “set up my diet targets”), the assistant runs a short conversational <strong>setup wizard</strong> that derives your starting calorie and macro targets from first principles. Full spec: <code>Knowledge/Jesse-Guidelines/Diet-Setup-Wizard.md</code>.</p>
+<p>It asks, in order: units, age, height, current and goal weight, <strong>body-fat % if you know it</strong>, sex <em>only if body-fat % is unknown</em>, lifestyle activity level (excluding workouts — those are added per-session), your goal and target rate, and any training events.</p>
+<p><strong>How your targets are computed:</strong></p>
+<ul>
+<li><strong>BMR.</strong> If you know your <strong>body-fat %</strong>, the wizard uses <strong>Katch-McArdle</strong> (<code>BMR = 370 + 21.6 × lean-mass-kg</code>) — it’s based on lean mass, so it’s both more accurate and needs no sex input at all. Otherwise it uses <strong>Mifflin-St Jeor</strong>, which needs a sex coefficient (<code>+5</code> male / <code>−161</code> female).</li>
+<li><strong>TDEE</strong> = BMR × your activity factor (lifestyle only).</li>
+<li><strong>Base calorie target</strong> = TDEE minus a deficit (loss), TDEE (maintain), or plus a surplus (gain), capped at ~1% bodyweight/week of loss to protect lean mass.</li>
+<li><strong>Macros:</strong> protein floor (~1.8–2.2 g/kg), fat floor (~0.5 g/kg) up to a calorie-share cap, carbs as the remainder.</li>
+</ul>
+<p><strong>Sex is a calculation input, not an identity question.</strong> The coefficient reflects average lean-mass differences. If you’d rather not answer, you can enter a measured BMR/TDEE from a lab test or tracker, or use the midpoint of the two coefficients — and either way the <strong>calibration loop</strong> corrects everything from your real data after 2–3 weeks of logging (comparing your actual weight trend to the prediction, 7,700 kcal ≈ 1 kg). The initial estimate is just a seed.</p>
+<h3 id="the-macro-model-floors-ceilings-and-windows"><a class="header" href="#the-macro-model-floors-ceilings-and-windows">The macro model: floors, ceilings, and windows</a></h3>
+<p>Every macro target is one of three types, and the type — not the number — decides what “good” looks like and how the bar is colored:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Type</th><th>Symbol</th><th>Good means</th><th>Examples</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Floor</strong></td><td><code>≥</code></td><td>at or above target</td><td>protein, carbs</td></tr>
+<tr><td><strong>Ceiling</strong></td><td><code>≤</code></td><td>at or under target</td><td>calories on normal days</td></tr>
+<tr><td><strong>Window</strong></td><td><code>↕</code></td><td>between a floor and a cap</td><td>fat (floor + cap); calories on high-fuel days</td></tr>
+</tbody>
+</table>
+</div>
+<p>Protein is a floor because, on a deficit, adequate protein is what makes you lose fat instead of muscle. Fat is a <em>window</em>, not just a cap: too little fat suppresses hormones and blocks fat-soluble vitamin absorption (a risk that rises with age and at low body-fat), so the fat bar turns <strong>red when you’re too low</strong>, not only when you’re over. Carbs are a remainder floor. Each dashboard bar shows a colored goal chip for its type, and a compact legend sits at the bottom of the macro panel.</p>
+<h3 id="adaptive-calorie-target-the-exercise-haircut"><a class="header" href="#adaptive-calorie-target-the-exercise-haircut">Adaptive calorie target (the exercise haircut)</a></h3>
+<p>Logged exercise raises your calorie target in two steps, because trackers overestimate burn and eating back the full burn erases your deficit:</p>
+<pre><code>Calorie target = base + 0.50 × (logged burn × (1 − 0.25))
+</code></pre>
+<p>First discount the logged burn by 25% (the tracker haircut — swims and ellipticals over-report the most), then add back only half. A 1,000-kcal logged session raises your target by ~375, not 500. Both rates are configurable. Rest days log no exercise, so the target stays at base — rest vs. training is handled by the add-back, not a separate category.</p>
+<h3 id="day-styles"><a class="header" href="#day-styles">Day styles</a></h3>
+<p>Most days are <code>normal</code>. For special days, set a <strong>day style</strong> and the dashboard reshapes the bars accordingly — for example, on a carb-load day calories become a <em>window</em> and fat a <em>minimize-it ceiling</em> to free room for carbs. The styles ship as an extensible registry (<code>normal</code>, <code>long-run</code>/<code>endurance</code>, <code>refeed</code>, <code>sick</code>, <code>carb-load-training</code>, <code>carb-load-race</code>, <code>fasting</code>); adding one is a single table row. The canonical table lives in <code>Diet-Logging-Flow.md</code>, and the HTML keeps a matching <code>STYLE_PROFILES</code> map in sync.</p>
+<h2 id="vault-structure"><a class="header" href="#vault-structure">Vault Structure</a></h2>
+<pre><code>Dashboard-Fancy.html         # Live HTML dashboard -- static shell (vault root)
+diet-today.js                # Today's food/macro data (rewritten on every log; see diet-today.example.js in the template)
+diet-weight-history.js       # Weight trend data for the chart (regenerated on morning roll / weigh-in)
+diet-progress.js             # Progress, pace, and zone values for the bars (regenerated on morning roll / weigh-in)
+diet-coach-notes.js          # Coach's notes, what's-ahead, quote (regenerated on morning roll / weigh-in)
+proposed-diet-today.js       # Optional meal plan; absent when no plan exists
+diet-logs/                   # Append-only CSV logs (workspace root) -- the permanent record
+  food-log.csv               # One row per food item (Date, Meal, Item, ..., Fiber_g)
+  exercise-log.csv           # One row per activity
+  weight-log.csv             # One row per weigh-in (Date, Weight_lbs, ..., Phase, ...)
+Projects/
+  Diet/
+    Overview.md              # Targets, goals, phases, body composition goals
+    Journal.md               # Entity journal -- dated notes on the diet project itself
+    Timeline.md              # Milestones (start, phase changes, goals reached)
+    YYYY-MM-DD.md            # Daily journals (one per day)
+Knowledge/
+  Jesse-Guidelines/
+    Diet-Setup-Wizard.md           # First-run target derivation (BMR/TDEE, macros, calibration)
+    Diet-Logging-Flow.md           # Per-log-event flow, diet-today.js spec, macro model, day-style registry
+    Diet-Dashboard-Guidelines.md   # ASCII dashboard format, goal chips, floor/ceiling/window colors, gated flags
+    Diet-Dashboard-Display.md      # Read-only status display (state queries without new data)
+    Weight-Tracker-Spec.md         # Weight tracking, progress bars, trends, phases
+    Fancy-Dashboard-Build.md       # HTML dashboard architecture — single source of truth
+    Sunday-Weekly-Diet-Analysis.md # Weekly accountability report format
+  Health/
+    Coach-Notes-Log.md             # Rolling log of dashboard coach's notes (30-day retention)
+    Weekly-Diet-Analysis/          # Archive of weekly reports (date-prefixed)
+</code></pre>
+<h2 id="configuration"><a class="header" href="#configuration">Configuration</a></h2>
+<h3 id="1-create-the-diet-directory"><a class="header" href="#1-create-the-diet-directory">1. Create the Diet directory</a></h3>
+<pre><code class="language-bash">mkdir -p Projects/Diet Knowledge/Health/Weekly-Diet-Analysis
+</code></pre>
+<h3 id="2-create-your-overview-file"><a class="header" href="#2-create-your-overview-file">2. Create your Overview file</a></h3>
+<p>Create <code>Projects/Diet/Overview.md</code> with your targets and goals. Use this template:</p>
+<pre><code class="language-markdown"># Diet Journal -- Overview
+
+Daily food tracking. Individual daily logs in this directory, named `YYYY-MM-DD.md`.
+
+---
+
+## Goals
+
+Your personal goals drive progress bars and phases. Examples:
+- Lose weight for an event (wedding, reunion, vacation, photo shoot)
+- Hit a target weight or body composition
+- Train for a race or athletic event
+- Build muscle / body recomposition
+- Improve energy levels or manage a health condition
+- General longevity and health
+
+**My goal(s):**
+- [your goal here]
+
+---
+
+## Current Metrics
+
+- **Current weight:** [weight] lbs / [kg]
+- **Current body fat %:** [if you have it; optional]
+- **Current muscle mass:** [if you have it; optional]
+- **Age/sex:** [for TDEE context]
+
+## Target Metrics
+
+- **Target weight:** [weight] lbs / [kg]
+- **Target body fat %:** [optional]
+- **Target muscle mass:** [optional]
+
+## Calorie Targets
+
+| Metric | Rest Day | Training Day | Long Event Day |
+|--------|----------|--------------|----------------|
+| Base calories | [e.g., 2,000] | [e.g., 2,300] | [e.g., 2,600] |
+| Protein | [e.g., 130g] | [e.g., 150g] | [e.g., 160g] |
+| Carbs | [calculated] | [calculated] | [calculated] |
+| Fat | [calculated] | [calculated] | [calculated] |
+
+**How adaptive targets work:**
+- **Base calories:** Your maintenance or deficit/surplus baseline (e.g. TDEE − 300 for a cut). The setup wizard derives this; see `Diet-Setup-Wizard.md`.
+- **Exercise add-back with haircut:** discount the logged burn by `[TRACKER_HAIRCUT]` (default 25%), then add back `[ADD_BACK_RATE]` (default 50%): `base + 0.50 × (burn × 0.75)`.
+  - Example: 800 kcal run → 800 × 0.75 = 600, × 0.50 = +300 → target becomes 2,000 + 300 = 2,300 cal
+  - Discounting first guards against noisy tracker estimates; eating back only half keeps the deficit meaningful
+  - Edit `[TRACKER_HAIRCUT]` and `[ADD_BACK_RATE]` here to adjust
+
+**Macros (floors, ceilings, windows):**
+- Protein: a **floor** (≥), set first — ~1.8–2.2 g/kg, higher while cutting
+- Fat: a **window** (↕) — a floor (~0.5 g/kg, protects hormones and vitamin absorption) up to a cap (~30% of calories / 9 cal per gram)
+- Carbs: a **floor** (≥), the remainder after protein and fat
+- Calories: a **ceiling** (≤) on normal days; a window on high-fuel days
+
+## Day Styles
+
+Most days are `normal` (rest or training — the exercise add-back differentiates them). Set a `dayStyle` only for special days; the registry in `Diet-Logging-Flow.md` is canonical:
+- **`normal`:** default — calories ceiling, fat window, protein/carbs floors
+- **`long-run` / `endurance`:** a long session that day; adds a glycogen carb bonus
+- **`refeed`:** periodic diet-break on a long cut; pauses the deficit, extra calories to carbs
+- **`sick`:** illness/recovery; eat to maintenance, floor-miss flags suppressed
+- **`carb-load-training` / `carb-load-race`:** before a long event; calories become a window, fat a minimize-it ceiling
+- **`fasting`:** optional, off by default; confirm your protocol's numbers
+
+## Weight Phases
+
+Define phases for different training cycles. `diet-logs/weight-log.csv` includes a Phase column.
+
+Example phases:
+- **Phase 1: Aggressive cut** (target -1.5 lbs/week)
+- **Phase 2: Moderate cut** (target -0.75 lbs/week)
+- **Phase 3: Maintenance** (stable)
+- **Phase 4: Build** (slight surplus)
+
+*Format: Name | Start Date | Target Weight | Target Rate | Notes*
+
+| Phase | Start | Target Weight | Target Rate | Notes |
+|-------|-------|---------------|-------------|-------|
+| [phase 1] | [date] | [weight] | [rate] | |
+| [phase 2] | [date] | [weight] | [rate] | |
+
+## Snack Library
+
+*Add foods you eat regularly; sort by macro benefit or category.*
+
+### High Protein (quick snacks)
+- [your items]
+
+### Quick Carbs (training fuel)
+- [your items]
+
+### Balanced Options
+- [your items]
+
+## Event Prep Modes
+
+Optional: If you're training for an event, define special target overrides. These override normal targets temporarily (e.g., carb loading, diet break, refeed days).
+
+| Mode | Trigger | Calorie Mod | Carb Mod | Duration | Notes |
+|------|---------|------------|----------|----------|-------|
+| [e.g., Carb Load] | 2 days before race | +300 | +50g | 2 days | race prep |
+
+## Running Averages
+
+*Updated as journals accumulate.*
+
+| Period | Avg Calories | Avg Protein | Days Tracked | Notes |
+|--------|-------------|-------------|--------------|-------|
+| Last week | -- | -- | 0 | |
+| Last 2 weeks | -- | -- | 0 | |
+</code></pre>
+<h3 id="3-copy-the-guidelines-files-from-the-template"><a class="header" href="#3-copy-the-guidelines-files-from-the-template">3. Copy the guidelines files from the template</a></h3>
+<p>The template ships these files in <code>Knowledge/Jesse-Guidelines/</code>. Copy them to your vault:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>File</th><th>Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td><code>Diet-Setup-Wizard.md</code></td><td>First-run target derivation — BMR/TDEE math, sex/non-binary handling, macros, calibration loop</td></tr>
+<tr><td><code>Diet-Logging-Flow.md</code></td><td>Per-log-event flow, <code>diet-today.js</code> spec, macro model, calorie haircut formula, Day-Style Registry, floor-miss monitoring</td></tr>
+<tr><td><code>Diet-Dashboard-Guidelines.md</code></td><td>ASCII dashboard format, goal chips, floor/ceiling/window colors, time-gated flags, sync rules</td></tr>
+<tr><td><code>Diet-Dashboard-Display.md</code></td><td>Read-only status display – how to answer state queries (“where am I today?”) without logging new data</td></tr>
+<tr><td><code>Weight-Tracker-Spec.md</code></td><td>Weight tracking, 14-day dual regression, progress bars, phases, body composition</td></tr>
+<tr><td><code>Fancy-Dashboard-Build.md</code></td><td>HTML dashboard architecture — single source of truth for <code>Dashboard-Fancy.html</code></td></tr>
+<tr><td><code>Sunday-Weekly-Diet-Analysis.md</code></td><td>Weekly accountability report format (Great / Good / Bad / Ugly) + floor-miss pattern</td></tr>
+</tbody>
+</table>
+</div>
+<p>Also copy <code>Knowledge/Health/Coach-Notes-Log.md</code> from the template.</p>
+<h3 id="4-add-to-your-instruction-file"><a class="header" href="#4-add-to-your-instruction-file">4. Add to your instruction file</a></h3>
+<p>Add to your instruction file’s <code>## Rules</code> section:</p>
+<pre><code class="language-markdown">### Diet Tracking
+
+Daily food journal at `[[Projects/Diet/Overview]]` (targets and goals defined there). Daily logs are `Projects/Diet/YYYY-MM-DD.md`. CSV logs in `diet-logs/` at workspace root: `food-log.csv`, `exercise-log.csv`, `weight-log.csv` -- the single source of truth; append the CSV row first on any log event. When the user logs a meal or exercise, follow `[[Knowledge/Jesse-Guidelines/Diet-Logging-Flow]]`. When the user asks about their state without new data, follow `[[Knowledge/Jesse-Guidelines/Diet-Dashboard-Display]]` (read-only; ASCII format per `[[Knowledge/Jesse-Guidelines/Diet-Dashboard-Guidelines]]`). Weight tracking uses `diet-logs/weight-log.csv` per `[[Knowledge/Jesse-Guidelines/Weight-Tracker-Spec]]`. HTML dashboard lives at `Dashboard-Fancy.html` (vault root) -- see `[[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]` for build rules. Every Sunday, produce a weekly accountability report per `[[Knowledge/Jesse-Guidelines/Sunday-Weekly-Diet-Analysis]]` and save to `Knowledge/Health/Weekly-Diet-Analysis/`.
+</code></pre>
+<h3 id="5-create-the-csv-logs"><a class="header" href="#5-create-the-csv-logs">5. Create the CSV logs</a></h3>
+<p>On first use, create <code>diet-logs/</code> at the workspace root with three CSV files. Each holds exactly its header row until the first log event; every log appends one complete row.</p>
+<p><strong>diet-logs/food-log.csv:</strong></p>
+<pre><code>Date,Meal,Item,Amount,Unit,Cal_per_100g,Grams,Calories,Protein_g,Fat_g,Carbs_g,Notes,Time,Meal_Type,Fiber_g
+</code></pre>
+<p><strong>diet-logs/exercise-log.csv:</strong></p>
+<pre><code>Date,Type,Description,Distance_km,Duration,Pace_min_per_km,Elevation_m,Avg_HR,Cadence,Calories,Plan_Source,Notes,Start_Time
+</code></pre>
+<p><strong>diet-logs/weight-log.csv:</strong></p>
+<pre><code>Date,Weight_lbs,Weight_kg,Phase,BodyFat_pct,MuscleMass_lbs,Notes
+</code></pre>
+<p>Optionally add <code>diet-logs/daily-targets.csv</code> (<code>Date,Mode,Cal_Target,Carb_Target_g,Protein_Target_g,Fat_Target_g,Exercise_Cal,Notes,Fiber_Target_g</code>) if you want a per-day record of what the targets were, not just what was eaten.</p>
+<p>Blank cells stay blank – an empty BodyFat_pct or Fiber_g field is the honest “not measured” signal, never <code>0</code> or <code>None</code>. Every appended row is complete (its own Date, Meal or Type, and Time).</p>
+<h2 id="why-csv-files"><a class="header" href="#why-csv-files">Why CSV Files</a></h2>
+<p>The logs are plain CSV on purpose. An earlier iteration of this system used Excel
+workbooks (<code>food-log.xlsx</code> with a Weight sheet, <code>exercise-log.xlsx</code>); they were replaced
+with three append-only CSV files, and the difference shows up every day:</p>
+<ul>
+<li><strong>Agent-native.</strong> The assistant reads and appends CSV with ordinary file tools – no
+spreadsheet library, no binary round-trip, no risk of a half-written workbook. A log
+event is one appended line.</li>
+<li><strong>Git-diffable.</strong> A day of eating is a handful of added rows in <code>git diff</code>. Binary
+workbooks are opaque blobs; CSVs give you history, blame, and clean merges in a vault
+that is already a git repository.</li>
+<li><strong>Human-inspectable.</strong> <code>head</code>, <code>grep</code>, and any text editor can audit any entry. Nothing
+hides in cell formatting or formulas.</li>
+<li><strong>Atomic appends.</strong> Each log is one new row at the end of one file. There is no
+workbook-wide rewrite, so an interrupted write can’t corrupt months of history.</li>
+<li><strong>No Excel dependency.</strong> Nothing to install, license, or version-match – any language,
+any tool, indefinitely.</li>
+<li><strong>Merge-conflict-resolvable.</strong> If two machines both appended rows, the conflict is
+visible text with an obvious resolution. With xlsx it’s a coin flip.</li>
+</ul>
+<p>Two rules keep the CSVs trustworthy:</p>
+<ul>
+<li><strong>RFC-4180 quoting.</strong> Food items and notes routinely contain commas (“Egg (whole,
+large)”). Any field containing a comma, double-quote, or newline must be wrapped in
+double-quotes with embedded quotes doubled (<code>""</code>).</li>
+<li><strong>Always parse with a real CSV reader</strong> – Python’s <code>csv</code>, Node’s <code>csv-parse</code>, or
+equivalent. Never <code>line.split(',')</code>; it silently mangles quoted fields, and the Notes
+column will eventually contain a comma.</li>
+</ul>
+<p>The daily journal and the dashboard JS files are <em>derived</em> views. If they ever disagree
+with the CSVs, the CSVs win – regenerate the views, don’t edit them by hand.</p>
+<h2 id="daily-journal-format"><a class="header" href="#daily-journal-format">Daily Journal Format</a></h2>
+<p>Each day’s journal follows this structure:</p>
+<pre><code class="language-markdown"># Food Journal -- [Day], [Date]
+
+**Day type:** [Rest / Training / Long Event] ([activity context])
+**Weight:** [if weighed in]
+**Phase:** [current phase, if tracking]
+
+## Breakfast
+
+| Item | Amount | Grams | Calories | Protein | Fat | Carbs | Notes |
+|------|--------|-------|----------|---------|-----|-------|-------|
+| | | | | | | | |
+| **BREAKFAST TOTAL** | | **g** | **cal** | **g** | **g** | **g** | |
+
+## Lunch
+
+[same table format]
+
+## Dinner
+
+[same table format]
+
+## Snack
+
+[same table format -- added when snacks are logged]
+
+## Activity
+
+**Activity 1:** [type]
+**Workout stats:** [duration] | avg HR [bpm] | [distance if applicable] | [calories burned]
+**Notes:**
+
+## Running Totals
+
+| Meal | Calories | Protein | Fat | Carbs |
+|------|----------|---------|-----|-------|
+| Breakfast | | | | |
+| Lunch | | | | |
+| Dinner | | | | |
+| Snack | | | | |
+| **Day Total** | | | | |
+
+**Target ([day type]):** [adaptive cal] cal / [protein]g protein
+**Remaining:** [cal] cal, [protein]g protein
+**Exercise burn:** [total] kcal
+
+**Progress to goals:**
+- Weight: [current] → [target] ([days to goal at current pace])
+- [Other goals as applicable]
+</code></pre>
+<h2 id="how-it-works"><a class="header" href="#how-it-works">How It Works</a></h2>
+<h3 id="dashboard-architecture-static-shell--data-files"><a class="header" href="#dashboard-architecture-static-shell--data-files">Dashboard Architecture: Static Shell + Data Files</a></h3>
+<p><code>Dashboard-Fancy.html</code> (vault root) is a <strong>static shell</strong> – structure, CSS, and rendering JavaScript only, with no data inside. All data lives in small external JS files next to it, loaded with a cache-busting loader so the browser never serves a stale copy:</p>
+<ul>
+<li><strong><code>diet-today.js</code></strong> – today’s meals, exercise, targets, and weigh-in as <code>window.DIET_TODAY</code>. Rewritten on every food or exercise log; drives the macro bars, food journal, and exercise cards.</li>
+<li><strong><code>diet-weight-history.js</code></strong>, <strong><code>diet-progress.js</code></strong>, <strong><code>diet-coach-notes.js</code></strong> – weight trend, progress/pace values, and coach’s notes. Regenerated on morning roll and weigh-in; drive the chart, metric cards, pace and progress bars, and notes.</li>
+<li><strong><code>proposed-diet-today.js</code></strong> – optional meal plan (see Meal Planning below).</li>
+</ul>
+<p>Reloading the browser picks up whatever changed. The HTML itself is rebuilt only when its layout or rendering logic changes – never for data. Contracts and build rules: <code>Fancy-Dashboard-Build.md</code>.</p>
+<h3 id="logging-meals"><a class="header" href="#logging-meals">Logging Meals</a></h3>
+<ol>
+<li>User says: “log breakfast: two eggs, toast with butter, coffee with whole milk”</li>
+<li>Assistant estimates macros from knowledge base; checks <code>food-log.csv</code> for recent entries of the same items (real CSV parser) to reuse values (prevents drift)</li>
+<li>Appends the row(s) to <code>food-log.csv</code> first, then updates the daily journal table and recalculates running totals</li>
+<li>Rewrites <code>diet-today.js</code> with updated macro totals, meal items, and flags</li>
+<li>Shows the ASCII dashboard in chat with colored emoji bars</li>
+<li>Fancy dashboard auto-updates on next browser reload via <code>diet-today.js</code></li>
+</ol>
+<h3 id="logging-exercise"><a class="header" href="#logging-exercise">Logging Exercise</a></h3>
+<ol>
+<li>User says: “logged a 7km run, 38 minutes, avg HR 155”</li>
+<li>Assistant estimates calories burned, appends the row to <code>exercise-log.csv</code>, updates the daily journal Activity section</li>
+<li>Rewrites <code>diet-today.js</code>; ASCII dashboard shows two-line calorie display:
+<ul>
+<li>Line 1: baseline intake vs. adaptive target</li>
+<li>Line 2: net (intake − burn), gray bars, informational only</li>
+</ul>
+</li>
+<li>Adaptive target uses the exercise add-back with an overestimation haircut: discount the logged burn by 25%, then add back 50% (<code>base + 0.50 × (burn × 0.75)</code>). Both rates configurable in <code>Overview.md</code>.</li>
+</ol>
+<h3 id="logging-weight-weigh-in"><a class="header" href="#logging-weight-weigh-in">Logging Weight (Weigh-In)</a></h3>
+<ol>
+<li>User says: “weighed in: 175.5 lbs”</li>
+<li>Assistant appends a row to <code>weight-log.csv</code></li>
+<li>Regenerates the dashboard data files (<code>diet-weight-history.js</code>, <code>diet-progress.js</code>, <code>diet-coach-notes.js</code>): weight chart updates, pace bars recalculate from the 14-day trailing window (trough + raw regression shown as a range), progress bars refresh, coach’s notes regenerate – all on the next browser reload, with no HTML rebuild</li>
+<li>New notes appended to <code>Knowledge/Health/Coach-Notes-Log.md</code></li>
+</ol>
+<h3 id="logging-alcohol"><a class="header" href="#logging-alcohol">Logging Alcohol</a></h3>
+<p>Alcohol is always logged as a separate <strong>Alcohol</strong> meal entry:</p>
+<ol>
+<li>Calories logged under meal name “Alcohol”</li>
+<li>The next day’s journal includes a note: total alcohol calories and percentage of daily target</li>
+</ol>
+<h3 id="day-styles-carb-load-refeed-sick-endurance-fasting"><a class="header" href="#day-styles-carb-load-refeed-sick-endurance-fasting">Day Styles (carb-load, refeed, sick, endurance, fasting)</a></h3>
+<p>Set <code>dayStyle</code> in <code>diet-today.js</code> to reshape the day’s bars. The styles live in an extensible registry (canonical table in <code>Diet-Logging-Flow.md</code>; matching <code>STYLE_PROFILES</code> in the HTML). For example, on a carb-load style:</p>
+<ul>
+<li>Calories render as a <strong>window</strong> (green only within <code>targets.calories</code>–<code>targets.caloriesCap</code>, not ceiling-only)</li>
+<li>Fat becomes a <strong>minimize-it ceiling</strong> to free calorie room for carbs; carbs get a high floor</li>
+<li>Activation cross-check at day-end: calories in window, carbs ≥ floor, fat ≤ cap</li>
+</ul>
+<p>Other styles: <code>refeed</code> (diet-break — pause the deficit, extra calories to carbs), <code>sick</code> (eat to maintenance, floor-miss flags off), <code>long-run</code>/<code>endurance</code> (glycogen carb bonus), <code>fasting</code> (optional, off by default). Rest vs. training is <strong>not</strong> a style — the exercise add-back handles it.</p>
+<h3 id="weekly-accountability-sunday"><a class="header" href="#weekly-accountability-sunday">Weekly Accountability (Sunday)</a></h3>
+<ol>
+<li>Every Sunday at start of day, assistant generates a report with four sections: Great, Good, Bad, Ugly</li>
+<li>Ranked improvement suggestions based on actual data</li>
+<li>Week-over-week trend table</li>
+<li>Saved to Knowledge/Health/Weekly-Diet-Analysis/ with date prefix</li>
+<li>Brief summary shown in morning briefing</li>
+</ol>
+<h3 id="correcting-entries"><a class="header" href="#correcting-entries">Correcting Entries</a></h3>
+<p>If the user corrects a value (“that was 350 not 300”):</p>
+<ul>
+<li>Update the corresponding row in <code>food-log.csv</code></li>
+<li>Update the daily journal table</li>
+<li>Recalculate running totals</li>
+<li>Rewrite <code>diet-today.js</code> with corrected values</li>
+<li>Refresh ASCII dashboard in chat</li>
+</ul>
+<h2 id="optional-duckdb-for-dynamic-queries"><a class="header" href="#optional-duckdb-for-dynamic-queries">Optional: DuckDB for Dynamic Queries</a></h2>
+<p>The baseline flow needs nothing beyond the CSV files and a text editor. If your logs grow
+to months of data and you want ad-hoc analysis – weekly roll-ups, compliance counts,
+alcohol totals, rolling averages – <a href="https://duckdb.org/">DuckDB</a> can query the CSVs in
+place. No import step, no database file, read-only:</p>
+<pre><code class="language-bash">duckdb -c "SELECT Date, SUM(Calories) AS cal, SUM(Protein_g) AS protein_g
+           FROM read_csv_auto('diet-logs/food-log.csv')
+           GROUP BY Date ORDER BY Date DESC LIMIT 7"
+</code></pre>
+<p><code>read_csv_auto</code> infers the schema from the header row and handles RFC-4180 quoting
+correctly. You get full SQL – joins across the food, exercise, and weight logs, window
+functions for rolling averages – and it stays instant well past the point where
+hand-parsing becomes slow or error-prone.</p>
+<p>A pattern that works well: keep your weekly-report queries in a <code>week.sql</code> file and run
+them every Sunday (<code>duckdb -c ".read week.sql"</code>), pasting the output tables into the
+accountability report verbatim. The queries do the counting so the analysis can do the
+thinking – and the report’s numbers stop depending on anyone’s mental arithmetic.</p>
+<p>This is strictly optional. The CSVs remain the single source of truth; DuckDB is a
+read-only lens over them. If you never install it, everything in this recipe still works.</p>
+<h2 id="tips-and-gotchas"><a class="header" href="#tips-and-gotchas">Tips and Gotchas</a></h2>
+<p><strong>Estimates are estimates.</strong> Calorie and macro values come from the assistant’s knowledge, not a food database API. They’re close enough for tracking trends but not lab-precise. Correct values when you know better, and the system reuses those values for future entries of the same food.</p>
+<p><strong>The ASCII dashboard is configurable.</strong> The 20-character bar width, colored emojis, flag thresholds, and adaptive calorie formula are all defined in <code>Diet-Dashboard-Guidelines.md</code>. Edit that file to change them.</p>
+<p><strong>Day styles are an extensible registry.</strong> The template ships normal, endurance, refeed, sick, carb-load, and fasting styles; adding one is a single row in the registry table in <code>Diet-Logging-Flow.md</code> plus a matching entry in the HTML’s <code>STYLE_PROFILES</code> map. Each style sets which macros are floors, ceilings, or windows for the day.</p>
+<p><strong>The calorie haircut prevents over-fueling on noisy estimates.</strong> Wearables and machines overestimate burn, so the system discounts the logged number (default 25%) before adding back only half of it. A 1,000-kcal logged session raises the target by ~375, not 500. Both rates are configurable in <code>Diet-Logging-Flow.md</code> / <code>Overview.md</code>.</p>
+<p><strong>Targets self-correct.</strong> The setup wizard’s BMR estimate is a seed. After 2–3 weeks of logging, the calibration loop compares your actual weight trend to the prediction and adjusts your TDEE — so the initial body-composition and sex inputs are low-stakes. See <code>Diet-Setup-Wizard.md</code>.</p>
+<p><strong>Weight tracking is optional.</strong> If you don’t have a scale, skip <code>weight-log.csv</code> and the HTML dashboard. The system works fine with just food and exercise data.</p>
+<p><strong>The CSVs are the long-term record.</strong> Daily journals are good for day-of review, and the JS data files are a display cache. The CSVs are the archive – they feed weekly/monthly trend analysis and the Sunday accountability reports.</p>
+<p><strong>Food identification prevents drift.</strong> The system reuses nutritional values from your recent <code>food-log.csv</code> entries for the same item, preventing the slow creep of inconsistent estimates over time.</p>
+<p><strong>Event-prep modes override targets temporarily.</strong> Define a mode in Overview.md; the dashboard header reflects it and targets shift. Regular targets return when the mode period expires.</p>
+<p><strong>Works with the <a href="./cookbook.html">Cookbook</a>.</strong> When both are active, logging a meal from a tracked recipe auto-populates nutrition data, and meal suggestions consider remaining macro budget. Either works standalone.</p>
+<p><strong>Removing this recipe</strong> is clean: delete <code>Projects/Diet/</code> (including <code>Journal.md</code> and <code>Timeline.md</code>), <code>Dashboard-Fancy.html</code>, the five data files (<code>diet-today.js</code>, <code>diet-weight-history.js</code>, <code>diet-progress.js</code>, <code>diet-coach-notes.js</code>, <code>proposed-diet-today.js</code>), the <code>diet-logs/</code> directory, the guidelines files, the coach’s notes log, the weekly analysis archive, and the instruction file hooks. Nothing else references it.</p>
+<hr>
+<h2 id="meal-planning-proposed-diet-todayjs"><a class="header" href="#meal-planning-proposed-diet-todayjs">Meal Planning (<code>proposed-diet-today.js</code>)</a></h2>
+<p>The system supports optional meal planning. When you discuss meal ideas with the assistant (“what should I make for dinner?”), it can write a <code>proposed-diet-today.js</code> file at the vault root. The HTML dashboard picks this up and shows a “Meal Ideas” section with estimated macros and a gap analysis (“after these meals, you’ll be at X cal, Y protein”).</p>
+<p><strong>Lifecycle:</strong></p>
+<ol>
+<li>Assistant creates <code>proposed-diet-today.js</code> with planned meals and their estimated nutrition</li>
+<li>Dashboard shows the plan in a “Meal Ideas” panel</li>
+<li>As you log actual meals, the corresponding ideas are removed from the proposed file</li>
+<li>When all planned meals are logged (or the day ends), the file is deleted</li>
+</ol>
+<p>This is entirely optional. If the file doesn’t exist, the dashboard simply hides the Meal Ideas panel.</p>
+<h2 id="viewing-in-a-browser"><a class="header" href="#viewing-in-a-browser">Viewing in a Browser</a></h2>
+<p>The HTML dashboard loads its data files via relative paths (through a cache-busting loader, so a plain reload always shows current data). Browsers block local file loading (<code>file://</code> protocol) for security, so you need a lightweight HTTP server.</p>
+<p>Any static file server works. One easy option is <a href="https://github.com/svenstaro/miniserve">miniserve</a> (Rust, single binary, zero config):</p>
+<pre><code class="language-bash"># Install (macOS)
+brew install miniserve
+
+# Serve only the dashboard files via a symlink directory
+mkdir -p ~/dashboard
+ln -s /path/to/vault/Dashboard-Fancy.html ~/dashboard/index.html
+ln -s /path/to/vault/diet-today.js ~/dashboard/
+ln -s /path/to/vault/diet-weight-history.js ~/dashboard/
+ln -s /path/to/vault/diet-progress.js ~/dashboard/
+ln -s /path/to/vault/diet-coach-notes.js ~/dashboard/
+ln -s /path/to/vault/proposed-diet-today.js ~/dashboard/
+
+# Serve it
+miniserve ~/dashboard --port 8080
+# Open http://localhost:8080
+</code></pre>
+<p>The symlink directory means you serve only the dashboard and its data files — not your entire vault. To auto-start the server on login, add it to your OS’s startup mechanism (launchd on macOS, systemd on Linux). The server is stateless; restarting it loses nothing.</p>
+<p>After logging food or exercise, just reload the browser tab — the assistant rewrites the JS data files, and the HTML picks up the new values on reload.</p>
+<h2 id="debugging"><a class="header" href="#debugging">Debugging</a></h2>
+<p><strong>Macro bars show wrong values after a log.</strong> The fancy dashboard reads from <code>diet-today.js</code>. The cache-busting loader means a normal reload always fetches fresh data – so if the bars are stale after a reload, the file on disk is stale: check that the log event actually rewrote <code>diet-today.js</code> (and that your server is serving the current file), not the browser.</p>
+<p><strong>Field name mismatch: bars blank or undefined.</strong> If a macro bar in the HTML shows nothing or <code>NaN</code>, the JavaScript is reading a field name that doesn’t exist in <code>window.DIET_TODAY</code>. Compare the field names in <code>diet-today.js</code> against the contract table in <code>Fancy-Dashboard-Build.md</code>. The contract is exact – casing and spelling must match.</p>
+<p><strong>Chart missing or broken.</strong> The weight chart and the food log renderer run in separate error isolation blocks. A Chart.js failure will not break the food log, and vice versa. Open the browser console to see which block failed. Common causes: the CDN chart library blocked or offline, or <code>diet-weight-history.js</code> missing/empty.</p>
+<p><strong><code>textContent</code> destroying child elements.</strong> If a metric card goes blank after an update, the renderer likely called <code>element.textContent = value</code> on a container that has child nodes – this wipes all children. The fix is to target the specific leaf node (e.g., <code>card-weight-value</code> not <code>card-weight</code>). See the error isolation section of <code>Fancy-Dashboard-Build.md</code>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../recipes/semantic-search.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../recipes/cookbook.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../recipes/semantic-search.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../recipes/cookbook.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
+
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
