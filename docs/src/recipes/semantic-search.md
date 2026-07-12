@@ -138,6 +138,14 @@ read entire directories or guess at file paths.
   won't appear in search results until the next index run.
 - First sub-query in a search gets 2× weight — put your strongest
   signal first.
+
+The vault can have many hundreds of files with accumulated context. A 2-second
+QMD query prevents embarrassing misses like failing to find a person who
+already has a detailed People file, or re-researching a topic that was
+already covered.
+
+This applies equally to research tasks -- see the "Vault First" section of
+[[Knowledge/Jesse-Guidelines/Research-Guidelines]].
 ```
 
 Then add a one-line pointer in your instruction file's `## Rules` section:

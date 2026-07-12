@@ -34,21 +34,22 @@ in `Projects/Research/`, not a conversational reply.
 
 ## The Guidelines File
 
-The template includes this file at `Knowledge/Jesse-Guidelines/Research-Guidelines.md`:
+The template ships a full research methodology at [`template/Knowledge/Jesse-Guidelines/Research-Guidelines.md`](https://github.com/tag1consulting/jesse/blob/main/template/Knowledge/Jesse-Guidelines/Research-Guidelines.md) -- too long to embed here, and canonical in the template rather than in this page. What it covers:
 
-````markdown
-# Research Guidelines
+- **Vault first** -- search the vault (QMD or grep) before any web search; previously extracted knowledge with citations counts as a source, with a freshness heuristic for when to re-search.
+- **Scope confirmation** -- confirm scope on ambiguous requests; in unattended runs (scheduled tasks, inbox processing), make the most reasonable interpretation, record it in the scope statement, and never stall.
+- **Writing quality** -- narrative flow, no filler, specific over general: numbers, dates, names.
+- **Critical thinking** -- question the premise, show reasoning, identify gaps, name fallacies.
+- **Source hierarchy** -- four tiers (primary > institutional > quality journalism > everything else with caveats), inline trustworthiness ratings, numbered citations.
+- **Web search mandate** -- training knowledge is never a citable source; every non-trivial fact traces to a retrieved, dated, linkable source (or a cited vault extraction).
+- **Multilingual sourcing** -- mandatory for non-English contexts; "sparse in English" means the search stopped too early.
+- **Structural hints by research type** -- technical, market/competitive, and domain research patterns.
+- **Devil's advocate, three layers** -- steelman, best counterargument, nuanced resolution.
+- **Pre-delivery quality check** -- a self-review checklist (source monoculture, blurred epistemic lines, stale sources, missing "so what", orphaned tangents).
+- **Report skeleton** -- scope statement, executive overview (scaled to length), body, devil's advocate, summary, actionability (never skipped), one or more appendices for tangents, source list.
+- **Archive footer** -- every research file ends with the checkbox footer from [[Knowledge/Jesse-Guidelines/Archive-Footer-Guidelines]] so it can be processed from Obsidian.
 
-Research output is for human consumption. It must be accurate, but also accessible -- written so the reader can come away understanding the topic, not just holding a pile of citations. Start with a scope statement (what's covered, what's excluded, and why), followed by a 2-3 sentence executive overview that delivers the takeaway up front. The body should explore the topic from multiple angles, choosing angles relevant to the reason the research was requested when known. Structure depth per section based on what the material needs: use accessible overviews where a concept just needs to land, and include technical deep-dives where the subject demands full understanding. Not every section needs both -- match the depth to the content, don't force a uniform structure across the whole piece.
-
-When a product or system comes in multiple tiers, configurations, or variants, identify all of them early. Don't collapse a product line into a single spec number -- a "Max" chip with 32-core and 40-core GPU options has two different bandwidth figures, and using just one misrepresents the picture. Build comparison structures (tables, side-by-side breakdowns) that show the full variant landscape so the reader can locate themselves in it.
-
-Find multiple sources and prefer primary over secondary: manufacturer specs, published papers, official announcements, and direct interviews over blog recaps and aggregator summaries. Non-English sources are valid and sometimes critical -- even when a topic appears US- or English-centric, actively check whether relevant non-English perspectives exist (a Dutch sysadmin's career, a European standards body, an Italian regulatory filing). Don't force irrelevant sources, but don't default to English-only either. Note each source's publication date and flag when key claims rest on outdated data. Rate source trustworthiness inline and state why: an official spec sheet outranks an anonymous forum post, a peer-reviewed study outranks a vendor whitepaper. Use numbered citations [1] [2] inline throughout the text, with a full source list (URL, title, date, language if non-English) at the end.
-
-Distinguish reported fact from analyst speculation from your own synthesis, and make the boundaries obvious. When sources conflict, surface both claims with context on methodology -- don't silently pick a winner or split the difference. When a conflict is noticed mid-analysis, resolve it inline: state both figures, identify which source is more authoritative and why, use the stronger source for any calculations or conclusions, and flag the remaining uncertainty so the reader knows the number isn't settled. Explicitly note gaps: if no source covers an obvious question, or if all available data is outdated or single-sourced, say so. "No independent benchmarks exist yet" is a finding, not an omission. But if a gap could be closed with additional source work -- a GitHub repo, a changelog, a release blog -- close it rather than flagging it as unresolved.
-
-End with a detailed summary that draws all threads together into a coherent picture, followed by an actionability section. If the research was triggered by a decision, state what the findings mean for that decision. If there's nothing actionable yet, say that -- the section is never skipped. Always save research output to `Projects/Research/` as a standalone file.
-````
+Copy the file from the template and edit it for your needs; the version in your vault is the one Jesse follows.
 
 ## How It Works
 

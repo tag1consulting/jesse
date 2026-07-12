@@ -39,4 +39,4 @@ read entire directories or guess at file paths.
 
 The vault can have many hundreds of files with accumulated context. A 2-second QMD query prevents embarrassing misses like failing to find a person who already has a detailed People file, or re-researching a topic that was already covered.
 
-This applies equally to research tasks — before launching web research on any subject, search QMD first. The vault may already have prior research, knowledge collection entries, local knowledge files, or project context that should inform (and be referenced alongside) external findings.
+This applies equally to research tasks -- see the "Vault First" section of [[Knowledge/Jesse-Guidelines/Research-Guidelines]].

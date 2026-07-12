@@ -8,6 +8,8 @@ Before any web search, query QMD (or another configured search tool -- never glo
 
 Before beginning research, confirm scope with the requester when the instruction is ambiguous or broad. State what you plan to cover, what you plan to exclude, and your intended depth. For focused, specific requests ("what's the max throughput of X?") this is unnecessary -- just do the work. For open-ended or multi-faceted topics ("research our options for Y"), a one-paragraph scope confirmation prevents misalignment before effort is spent. Keep it brief: this is a sanity check, not a planning document.
 
+**Unattended mode.** When research is triggered with no one available to answer -- a scheduled task, overnight inbox processing, batch work -- never block on scope confirmation and never defer the work to a backlog. Make the most reasonable interpretation, treating the instruction as the minimum scope rather than the maximum, and record the interpretation in the report's scope statement: what was assumed, what was deliberately excluded, and any open questions the requester should answer if the scope missed. If the instruction is so ambiguous that no reasonable interpretation exists, still produce a file in `Projects/Research/` -- a short scoping note stating the interpretations considered and what's needed to proceed. Unattended research must always leave a file trail, never a silent stall.
+
 ## Writing Quality
 
 Research must read like something a sharp analyst wrote. Narrative flow over section checklists -- each section should build on the last, not repeat a template. Varied sentence structure. No filler words, no hedge-stacking ("it could potentially perhaps be argued that..."). Be specific: include numbers, dates, names, version numbers, scores, percentages, named organizations, and named individuals. Every factual claim should carry its specifics. Use tables for comparison and prose for explanation -- don't use one where the other belongs.
@@ -35,11 +37,15 @@ Research standard is exhaustive literature review, not survey. Multiple sources 
 3. **High-quality journalism** -- named reporters at established outlets with domain expertise, investigative pieces, long-form analysis.
 4. **Everything else** -- with explicit caveats about reliability. Blog posts, forum discussions, social media, and vendor marketing can provide leads but are never authoritative alone.
 
-Web search is mandatory for all non-trivial factual claims. Training knowledge provides context and helps evaluate sources, but it is not itself a citable source -- every non-trivial fact in the final document must trace to a retrieved, dated, linkable source. If web search is unavailable, state that limitation prominently at the top of the document rather than filling gaps from memory.
+Web search is mandatory for all non-trivial factual claims that the vault cannot already source. Training knowledge provides context and helps evaluate sources, but it is not itself a citable source -- every non-trivial fact in the final document must trace to a retrieved, dated, linkable source. Knowledge previously extracted into `Knowledge/` counts, provided it carries its own citations: research builds on research, and repeating a search the vault already answered wastes effort. When reusing extracted knowledge, cite both the vault file and the original source with its date, so staleness stays visible.
+
+Apply a freshness heuristic when deciding whether to re-search: the older the extracted data and the faster-moving the domain, the more a new search is warranted. Stable facts (historical events, physical constants, settled standards) rarely need re-verification. Volatile facts (prices, versions, benchmarks, regulations, market data) should be re-searched when the original source's age exceeds the domain's rate of change -- the 2-year staleness bar in the pre-delivery check is a reasonable default. Vault knowledge with no source attached is a lead, not a citation: verify it externally before it carries a conclusion.
+
+If web search is unavailable, state that limitation prominently at the top of the document rather than filling gaps from memory.
 
 Rate source trustworthiness inline and state why: an official spec sheet outranks an anonymous forum post, a peer-reviewed study outranks a vendor whitepaper. Note each source's publication date and flag when key claims rest on outdated data. Use numbered citations [1] [2] inline throughout the text, with a full source list at the end.
 
-**Multilingual sourcing is mandatory** for any topic touching Italy or non-English contexts. Search in the relevant language first (Italian for Italian topics), then neighboring languages (French, German, Spanish), then English. "Sparse in English-language sources" is never an acceptable finding -- it means you stopped too early. Even for topics that appear US- or English-centric, actively check whether relevant non-English perspectives exist (European standards bodies, non-English technical communities, local regulatory filings). Don't force irrelevant sources, but don't default to English-only either.
+**Multilingual sourcing is mandatory** for any topic touching a non-English-speaking country or context -- especially the user's own country of residence when it isn't English-speaking. Search in the relevant local language first, then neighboring languages with strong traditions in the domain, then English. "Sparse in English-language sources" is never an acceptable finding -- it means you stopped too early. Even for topics that appear US- or English-centric, actively check whether relevant non-English perspectives exist (European standards bodies, non-English technical communities, local regulatory filings). Don't force irrelevant sources, but don't default to English-only either.
 
 ## Structural Hints by Research Type
 
@@ -75,7 +81,11 @@ An "editorial framing" section assessing the user's intuition is acceptable brie
 
 ## Appendices for Tangents
 
-When research uncovers interesting tangents -- historical context, adjacent fields, named researchers, cultural traditions, technical deep-dives -- add appendices. These should be self-contained, clearly labeled, and genuinely interesting. Bonus knowledge, not padding. If a tangent isn't worth reading on its own, cut it.
+When research uncovers an interesting tangent -- something related to the topic but not directly answering the core question -- add one or more appendices at the end of the report. A report can carry several; give each tangent its own clearly labeled appendix rather than merging unrelated material.
+
+Good appendix material: historical context that explains why something is the way it is, adjacent fields that share surprising connections, a named researcher whose work is worth following, a cultural or regional tradition that provides unexpected perspective, a technical deep-dive that would interrupt the main report's flow but rewards the curious reader.
+
+Appendices are self-contained (readable independently) and labeled with what they cover. They're bonus knowledge, not padding -- only include a tangent when it's genuinely interesting on its own.
 
 ## Handling Conflicts and Gaps
 
@@ -92,6 +102,7 @@ Before finalizing, self-review the document for these common failure modes:
 - **Blurred epistemic lines:** Re-check that the reader can always tell what's a reported fact, what's analyst opinion, and what's your synthesis. These boundaries are easy to blur during drafting.
 - **Stale sources driving conclusions:** If a key conclusion rests on a source more than 2 years old, flag it -- the conclusion may still hold, but the reader should know the evidence isn't recent.
 - **Missing "so what":** Every section should connect back to the reason the research was requested. If a section is informative but doesn't serve the triggering question, either cut it or explain why it's relevant context.
+- **Orphaned tangents:** Interesting material that doesn't serve the triggering question belongs in an appendix (there can be more than one), not in the body and not silently cut. Before deleting a section for relevance, check whether it earns a place as an appendix.
 
 ## Report Structure
 
@@ -103,7 +114,7 @@ Every research report follows this skeleton:
 4. **Devil's advocate** -- three layers as described above (or woven into body sections).
 5. **Summary** -- draws all threads together into a coherent picture.
 6. **Actionability** -- what the findings mean for decisions. If nothing is actionable yet, say so. Never skip this section.
-7. **Appendices** -- optional, for tangents worth preserving.
+7. **Appendices** -- optional; one or more, for tangents worth preserving.
 8. **Source list** -- numbered, with URL, title, date, author when available, language if non-English.
 
 Always save research output to `Projects/Research/` as a standalone file.
