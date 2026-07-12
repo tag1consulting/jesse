@@ -9,7 +9,7 @@ The full starter version is in the template at [`template/JESSE.md`](https://git
 JESSE.md contains:
 
 - **Core Principles** -- The four rules the agent reads every session (act on inbox, track until acknowledged, show judgment calls, always markdown).
-- **Context Management** -- Guidelines for loading files on demand, delegating verbose tools to subagents, and using direct reads for known paths.
+- **Context Management** -- Guidelines for keeping the agent's context lean: load Knowledge/ files on demand, delegate verbose tools to subagents, brief those subagents on which guidelines apply, restore guideline files after compaction, and use direct reads for known paths.
 - **Routines** -- Short summaries that point to detailed procedures in Knowledge/ files. The Start of Day routine is a three-line phase summary with a link to `[[Knowledge/Jesse-Guidelines/Start-of-Day-Routine]]`. Weekly maintenance is a one-liner pointing to `[[Knowledge/Jesse-Guidelines/Weekly-Vault-Maintenance]]`.
 - **Rules** -- Naming conventions, timestamps, draft lifecycle, and pointers to Knowledge/ files for people KB, research, writing voice, and meeting agendas.
 - **Preferences** -- Your communication style and working expectations.
