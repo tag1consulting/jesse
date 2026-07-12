@@ -15,9 +15,9 @@ Your connector needs at minimum: `read_channel` (with timestamp filtering), `sea
 
 ## Configuration
 
-### 1. Create a Slack config section in your instruction file
+### 1. List your priority channels and frequent DM contacts
 
-Add a section listing your priority channels and frequent DM contacts. This is the data the scanning routine uses -- keep it updated as your channels and contacts change.
+Add a section listing your priority channels and frequent DM contacts. This is the data the scanning routine uses -- keep it updated as your channels and contacts change. Put the tables in `Knowledge/Jesse-Guidelines/Slack-Scanning-Guidelines.md` (created in step 3), not in your instruction file: the instruction file stays an index, and per-source data keeps one home. Do not duplicate the IDs anywhere else.
 
 ```markdown
 ## Slack
@@ -61,7 +61,7 @@ Replace or extend the "Scan messaging" step in `Knowledge/Jesse-Guidelines/Start
     priority channel (listed in instruction file).
   - Two-pronged DM scan: `to:me after:YYYY-MM-DD` search PLUS
     direct reads of known DM channels.
-  - Dedup against Dashboard.md's Slack section before surfacing.
+  - Dedup against Dashboard.md (or the relevant Dashboard topic file) before surfacing.
 ```
 
 ### 3. Create the detailed guidelines file
@@ -132,6 +132,8 @@ buffered = last_session - timedelta(hours=4)
 print(f'{buffered.timestamp():.0f}')
 "
 ```
+
+**Alternative: a scan-state file.** Parsing Dashboard.md's "Last updated" line is indirect -- it assumes the Dashboard is updated every session, in a parseable format. A more robust pattern is a small state file, e.g. `Knowledge/Jesse-Guidelines/Slack-Scan-State.md`, holding a per-channel last-scanned timestamp plus a one-line run log. Update it at the end of every scan and anchor the next scan window to it (still with the overlap buffer); fall back to the Dashboard date only when the state file is missing. Explicit markers catch stale anchors and false misses that date parsing silently absorbs.
 
 ## Channel Reads
 
@@ -218,7 +220,7 @@ message ("^", "+1", etc.), use `slack_read_thread` with the
 
 Before surfacing any item:
 
-1. Check Dashboard.md Slack section for existing entries.
+1. Check Dashboard.md (or the relevant Dashboard topic file) for an existing entry tracking the same item.
 2. Same item + no state change = skip.
 3. Same item + state change = surface with delta noted.
 
