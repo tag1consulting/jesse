@@ -92,7 +92,7 @@ The sex coefficient in Mifflin-St Jeor reflects *average physiological differenc
 
 After ~2–3 weeks of consistent logging:
 
-1. Take the trend weight change over the window (use the moving-average / regression trend, not a single day — see [[Knowledge/Jesse-Guidelines/Weight-Tracker-Guidelines]]).
+1. Take the trend weight change over the window (use the moving-average / regression trend, not a single day — see [[Knowledge/Jesse-Guidelines/Weight-Tracker-Spec]]).
 2. Convert to an energy balance: **7,700 kcal ≈ 1 kg of fat** (≈3,500 kcal/lb).
    ```
    actual_daily_balance = (trend_kg_change × 7700) / days_in_window

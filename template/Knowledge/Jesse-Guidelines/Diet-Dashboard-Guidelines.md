@@ -210,7 +210,7 @@ Syncing prevents drift and keeps all tools speaking the same language.
 
 ## Weight Tracker Integration
 
-When you log a weigh-in, the dashboard expands to include weight context. Reference [[Knowledge/Jesse-Guidelines/Weight-Tracker-Guidelines]] for the full spec.
+When you log a weigh-in, the dashboard expands to include weight context. Reference [[Knowledge/Jesse-Guidelines/Weight-Tracker-Spec]] for the full spec.
 
 **Brief integration:**
 - Render weight progress bars below the macro bars on weigh-in days

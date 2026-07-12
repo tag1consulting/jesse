@@ -78,7 +78,7 @@ Knowledge/
     Diet-Setup-Wizard.md           # First-run target derivation (BMR/TDEE, macros, calibration)
     Diet-Logging-Flow.md           # Per-log-event flow, diet-today.js spec, macro model, day-style registry
     Diet-Dashboard-Guidelines.md   # ASCII dashboard format, goal chips, floor/ceiling/window colors, gated flags
-    Weight-Tracker-Guidelines.md   # Weight tracking, progress bars, trends, phases
+    Weight-Tracker-Spec.md   # Weight tracking, progress bars, trends, phases
     Fancy-Dashboard-Build.md       # HTML dashboard architecture — single source of truth
     Sunday-Weekly-Diet-Analysis.md # Weekly accountability report format
   Health/
@@ -222,7 +222,7 @@ The template ships these files in `Knowledge/Jesse-Guidelines/`. Copy them to yo
 | `Diet-Setup-Wizard.md` | First-run target derivation — BMR/TDEE math, sex/non-binary handling, macros, calibration loop |
 | `Diet-Logging-Flow.md` | Per-log-event flow, `diet-today.js` spec, macro model, calorie haircut formula, Day-Style Registry, floor-miss monitoring |
 | `Diet-Dashboard-Guidelines.md` | ASCII dashboard format, goal chips, floor/ceiling/window colors, time-gated flags, sync rules |
-| `Weight-Tracker-Guidelines.md` | Weight tracking, 14-day dual regression, progress bars, phases, body composition |
+| `Weight-Tracker-Spec.md` | Weight tracking, 14-day dual regression, progress bars, phases, body composition |
 | `Fancy-Dashboard-Build.md` | HTML dashboard architecture — single source of truth for `Dashboard-Fancy.html` |
 | `Sunday-Weekly-Diet-Analysis.md` | Weekly accountability report format (Great / Good / Bad / Ugly) + floor-miss pattern |
 
@@ -235,7 +235,7 @@ Add to your instruction file's `## Rules` section:
 ```markdown
 ### Diet Tracking
 
-Daily food journal at `[[Projects/Diet/Overview]]` (targets and goals defined there). Daily logs are `Projects/Diet/YYYY-MM-DD.md`. CSV logs in `diet-logs/` at workspace root: `food-log.csv`, `exercise-log.csv`, `weight-log.csv` -- the single source of truth; append the CSV row first on any log event. When the user logs a meal or exercise, follow `[[Knowledge/Jesse-Guidelines/Diet-Logging-Flow]]`. When the user asks about their state without new data, show the ASCII dashboard per `[[Knowledge/Jesse-Guidelines/Diet-Dashboard-Guidelines]]`. Weight tracking uses `diet-logs/weight-log.csv` per `[[Knowledge/Jesse-Guidelines/Weight-Tracker-Guidelines]]`. HTML dashboard lives at `Dashboard-Fancy.html` (vault root) — see `[[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]` for build rules. Every Sunday, produce a weekly accountability report per `[[Knowledge/Jesse-Guidelines/Sunday-Weekly-Diet-Analysis]]` and save to `Knowledge/Health/Weekly-Diet-Analysis/`.
+Daily food journal at `[[Projects/Diet/Overview]]` (targets and goals defined there). Daily logs are `Projects/Diet/YYYY-MM-DD.md`. CSV logs in `diet-logs/` at workspace root: `food-log.csv`, `exercise-log.csv`, `weight-log.csv` -- the single source of truth; append the CSV row first on any log event. When the user logs a meal or exercise, follow `[[Knowledge/Jesse-Guidelines/Diet-Logging-Flow]]`. When the user asks about their state without new data, show the ASCII dashboard per `[[Knowledge/Jesse-Guidelines/Diet-Dashboard-Guidelines]]`. Weight tracking uses `diet-logs/weight-log.csv` per `[[Knowledge/Jesse-Guidelines/Weight-Tracker-Spec]]`. HTML dashboard lives at `Dashboard-Fancy.html` (vault root) — see `[[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]` for build rules. Every Sunday, produce a weekly accountability report per `[[Knowledge/Jesse-Guidelines/Sunday-Weekly-Diet-Analysis]]` and save to `Knowledge/Health/Weekly-Diet-Analysis/`.
 ```
 
 ### 5. Create the CSV logs

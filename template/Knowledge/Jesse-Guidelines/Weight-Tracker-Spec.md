@@ -1,4 +1,4 @@
-# Weight Tracker Guidelines
+# Weight Tracker Spec
 
 ## Overview
 
@@ -11,17 +11,17 @@ This document describes the weight tracking system: data pipeline, phase model, 
 ## Data Pipeline
 
 ### Source
-Weight data lives in `food-log.xlsx` on the **Weight** sheet.
+Weight data lives in `diet-logs/weight-log.csv` -- an append-only RFC-4180 CSV, one row per weigh-in. The `Notes` field contains commas, so parse with a real CSV parser, never `split(',')`.
 
-### Required Columns
+### Columns
 | Column | Type | Notes |
 |--------|------|-------|
 | Date | Date | YYYY-MM-DD format |
-| Weight (lbs) | Number | Daily measurement |
-| Weight (kg) | Number | Derived: lbs ÷ 2.20462 |
+| Weight_lbs | Number | Daily measurement |
+| Weight_kg | Number | Derived: lbs ÷ 2.20462; the assistant computes it on append |
 | Phase | Text | User-defined phase label (see Phase Model below) |
-| Body Fat % | Number | Optional; only log when measured (not estimated) |
-| Muscle Mass (lbs) | Number | Optional; only when Body Fat % is logged |
+| BodyFat_pct | Number | Optional; only log when measured (not estimated); blank when not measured |
+| MuscleMass_lbs | Number | Optional; only when BodyFat_pct is logged; blank when not measured |
 | Notes | Text | Context: travel, illness, equipment variance, hydration level |
 
 ### Precision Requirements
@@ -53,9 +53,9 @@ Copy this table into your tracking overview and fill in your own phases:
 
 | Phase | Weight Range | Ideal Pace (lbs/week) | Scale Cap | Zone Breakdown |
 |-------|--------------|----------------------|-----------|---|
-| Phase 1 | > 200 lbs | 1.0 – 2.0 | 3.0 | TOO SLOW: <1.0 / SLOW: 1.0–2.0 / IDEAL: 1.0–2.0 / TOO FAST: >2.0 |
-| Phase 2 | 200 – 180 lbs | 0.75 – 1.5 | 2.5 | TOO SLOW: <0.75 / SLOW: 0.75–1.5 / IDEAL: 0.75–1.5 / TOO FAST: >1.5 |
-| Maintenance | ≤ 180 lbs | 0.0 – 0.25 | — | Widget disabled |
+| Phase 1 | > 190 lbs | 1.0 – 2.0 | 3.0 | TOO SLOW: <1.0 / SLOW: 1.0–2.0 / IDEAL: 1.0–2.0 / TOO FAST: >2.0 |
+| Phase 2 | 190 – 170 lbs | 0.75 – 1.5 | 2.5 | TOO SLOW: <0.75 / SLOW: 0.75–1.5 / IDEAL: 0.75–1.5 / TOO FAST: >1.5 |
+| Maintenance | ≤ 170 lbs | 0.0 – 0.25 | — | Widget disabled |
 
 ### How to Define Your Phases
 
@@ -68,7 +68,7 @@ Copy this table into your tracking overview and fill in your own phases:
    - **TOO FAST:** Pace exceeds the high end of ideal (risk of unsustainability, muscle loss, rebound).
 4. **Scale cap** controls the visualization height. Set it to 1.5× your highest zone boundary so blocks have room to breathe.
 
-**Important:** Phases are NOT hard cutoffs. If your weight is 180.5 lbs and Phase 2 covers 200–180, you're in Phase 2 (still active). Only disable the widget when you reach maintenance and no longer want to track pace.
+**Important:** Phases are NOT hard cutoffs. If your weight is 170.5 lbs and Phase 2 covers 190–170, you're in Phase 2 (still active). Only disable the widget when you reach maintenance and no longer want to track pace.
 
 ---
 
@@ -102,6 +102,14 @@ else:
     color = EMPTY (⬜)
 ```
 
+### Converged-Range Collapse
+
+If the range converges within 0.1 lbs/week (`high - low < 0.1`), collapse to a **single value**: render one block (the block whose center is closest to the value, colored by its zone) and label with the single number plus its zone name (e.g. `1.4 lbs/wk · IDEAL`), not a degenerate range. Skip the explanation lines -- there is no divergence to explain.
+
+### Off-Scale Rendering
+
+If the range extends past the scale cap, cap the *rendered* range at the scale cap but preserve the actual value in the label with an explicit suffix: `X.X - Y.Y+ lbs/wk (off scale)`. If even the low end is past the cap, color the rightmost block in the low end's zone color -- the bar must never render fully empty on a real signal. A persistent off-scale reading means the phase's scale cap needs raising in the overview config.
+
 ### Calculating Trough vs. Raw Pace
 
 Both are computed from the 14-day trailing window.
@@ -128,6 +136,24 @@ Both are computed from the 14-day trailing window.
   - Blocks 8–12 (centers 1.0–1.5) are IDEAL; blocks 7–8 (center 0.875–1.0) are SLOW.
   - Both 0.966 and 0.994 fall in SLOW or IDEAL range, so 1–3 blocks are colored.
 
+### The Low/High Label Rule
+
+When the range is divergent, the explanation lines under the bar name each end:
+
+```
+Low  <value> = trough regression (smoothed, primary signal)
+High <value> = raw regression (noisy -- short-term water fluctuation)
+```
+
+**The methodology descriptor follows the pace VALUE, not the Low/High position.** Trough is usually the numerically low end, but on windows dominated by hard-training mornings the rolling minimums can ratchet the trough slope steeper, making trough the numerically HIGH end. When that happens, the `Low`/`High` words follow the numeric sort, but trough always carries "trough regression (smoothed, primary signal)" and raw always carries "raw regression (noisy -- <cause>)" -- never swap the descriptor to match the Low/High word:
+
+```
+Low  <raw value>    = raw regression (noisy -- <cause>)
+High <trough value> = trough regression (smoothed, primary signal)
+```
+
+Trough remains the primary signal wherever it lands numerically -- it drives the progress-bar color regardless of which end of the range it sits on.
+
 ---
 
 ## Progress Bars
@@ -143,12 +169,12 @@ Progress bars show movement toward **user-defined goal weights**. Define these i
 
 ### Example
 
-- Start: 200 lbs
-- Current: 186.5 lbs
-- Goal: 175 lbs
+- Start: 210 lbs
+- Current: 196.5 lbs
+- Goal: 185 lbs
 - Trough pace: 1.2 lbs/week (IDEAL zone, if range is 0.75–1.5)
 
-Progress bar fills 13.5 ÷ 25 = 54%, colored IDEAL green. Label reads: `13.5 / 25 lbs to 175 (54%)`.
+Progress bar fills 13.5 ÷ 25 = 54%, colored IDEAL green. Label reads: `13.5 / 25 lbs to 185 (54%)`.
 
 ---
 
@@ -203,38 +229,39 @@ Shows the change in lean (non-fat) mass in lbs/week.
 3. Linear regression on all pairs.
 
 **Visualization:**
-- 20 blocks, scale 0 → +1.0 lbs/week (lean gain is a positive outcome; scale cap is fixed).
-- Single-block highlight at lean_pace.
-- All other blocks are empty.
+- 20 blocks, scale 0 → 1.0 lbs/week of lean **loss** (positive = losing lean mass; same sign convention as the pace bars). The scale cap is fixed across phases -- the concerning threshold for muscle catabolism doesn't scale with weight.
+- Single-block highlight at lean_pace; all other blocks are empty.
+- GAINING (lean_pace < 0): leftmost block blue; label reads `X.X lb/wk lean gain · GAINING`.
+- Off-scale (lean_pace > 1.0): rightmost block red.
 
-**Zone coloring for lean gain:**
-- **TOO FAST (red):** >0.75 lbs/week gain (muscle is being built, but risk of fat gain if calories are too high).
-- **IDEAL (green):** 0.25–0.75 lbs/week.
-- **SLOW (blue):** 0–0.25 lbs/week.
-- **TOO SLOW (gray):** Negative (lean loss; may indicate undereating or inadequate stimulus).
+**Zone coloring (BIA-noise-aware):**
+- **GOOD (green):** <0.5 lbs/week loss -- within BIA test-retest noise plus plausible glycogen shifts during a sustained deficit.
+- **WATCH (yellow):** 0.5–1.0 lbs/week loss -- above noise; approaching real muscle-loss territory.
+- **CONCERN (red):** >1.0 lbs/week loss -- clear catabolism signal; the deficit should be eased.
+- **GAINING (blue):** negative -- lean mass increasing; rare on a deficit, usually water retention or measurement drift. Note it in the label.
 
 ---
 
 ## Fancy Dashboard (HTML File)
 
-Full build rules live in [[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]. That file is the single source of truth for generating `Dashboard-Fancy.html`. Summary of contents:
+Full build rules live in [[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]. That file is the single source of truth for `Dashboard-Fancy.html` and its external data files. The weight data from this spec populates `diet-weight-history.js` and `diet-progress.js`; the HTML shell never changes for data. Summary of contents:
 
-1. **Line chart (Chart.js):**
-   - Daily weight (scatter).
-   - 7-day moving average (line).
-   - Goal weight lines (dashed).
-   - **Trajectory line:** A dotted reference line through four reference weights: start weight, first goal weight, second goal weight (if defined), and the projected weight at the current pace on the goal-target date (if set). Distinguishes intent from actual data.
-   - Y-axis labeled in lbs; legend shows all series.
+1. **Line chart:**
+   - Daily weight (points).
+   - 7-day moving average (dashed line).
+   - Goal weight lines (dashed, one per goal).
+   - **Trajectory line** *(optional)*: a dotted reference line through the start weight and goal weights (and, if a target date is set, the projected weight at the current pace on that date). Distinguishes intent from actual data.
+   - Y-axis in lbs, bounds computed from the data; legend shows all series.
 
 2. **Metric cards:**
-   - Current weight, weight lost from start, phase, pace range.
+   - Current weight, weight lost from start, phase, pace range. On no-weigh-in days the weight card falls back to the last recorded weigh-in; BF%/lean stay blank.
 
 3. **Bar visualizations:**
-   - Pace bar (range-as-subset), progress bars (fill-to-position), composition bars (single-block highlight) — all rendered as 12×16 px colored blocks.
+   - Pace bar (range-as-subset), progress bars (fill-to-position), composition bars (single-block highlight) — all rendered as 14×16 px colored blocks. Algorithms live in the HTML; numbers come from `diet-progress.js`.
 
 4. **Light/dark mode** — reads system preference; user can toggle.
 
-5. **Coach's notes section** — pattern-based observations, regenerated on each HTML rebuild. See Fancy-Dashboard-Build.md for continuity rules and Coach-Notes-Log.md format.
+5. **Coach's notes section** — pattern-based observations, regenerated with the data files on morning roll and weigh-in. See Fancy-Dashboard-Build.md for continuity rules and Coach-Notes-Log.md format.
 
 ---
 
@@ -316,8 +343,8 @@ If raw pace is 1.2 and ideal is 1.0–1.5, coloring blocks 0.0–1.0 as "slow" i
 ### Rule 4: Don't go back to a zone ribbon.
 It loses position information. The pace bar MUST show where on the scale the measurement falls.
 
-### Rule 5: Don't use yellow for "too fast."
-Yellow reads as "caution / slow down" in everyday UI. Use red or blue (reserved for gain-too-fast or loss-too-fast). Yellow is for truly intermediate zones (SLOW range) if needed, but prefer green for IDEAL and blue for TOO FAST.
+### Rule 5: Yellow is slow-side only; TOO FAST is orange; blue is reserved for GAINING.
+Yellow reads as "caution / slow down" in everyday UI, so it is never used for the fast side. TOO FAST gets **orange** (`#F97316`) -- it reads as a warning, which matches the semantic intent (blue carries no urgency for a warning condition). **Blue is reserved exclusively for GAINING** -- an anomalous state in a loss phase, a different category from being fast or slow. The full palette: red TOO SLOW, yellow SLOW, green IDEAL, orange TOO FAST, blue GAINING.
 
 ### Rule 6: Keep FatLb and LeanΔ as single-block highlights, not trough/raw ranges.
 Body composition changes are slower and noisier than weight pace. A single block (closest to the computed pace) is more appropriate than a range. Don't apply the range-as-subset design to composition bars.
@@ -339,9 +366,9 @@ Phase 2 cap might be 2.0, but Phase 1 cap is 3.0. If you hardcode caps, users ca
 ## Implementation Checklist
 
 - [ ] Define phases in tracking overview (weight ranges, ideal paces, zone boundaries, scale caps).
-- [ ] Populate `food-log.xlsx` Weight sheet with dates, daily weights, phases, and (optional) body fat % + muscle mass.
+- [ ] Populate `diet-logs/weight-log.csv` with dates, daily weights, phases, and (optional) body fat % + muscle mass.
 - [ ] Create Markdown tracker file with pace bar (trough/raw), progress bars (vs. goals), and composition bars (if data available).
-- [ ] Optional: Create `dashboard.html` with Chart.js visualization, metric cards, and coach's notes.
+- [ ] Optional: Set up `Dashboard-Fancy.html` and its data files per [[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]] (chart, metric cards, bars, coach's notes).
 - [ ] Set a weekly reminder to review pace trends and update notes (every Sunday or Monday).
 - [ ] Document your phase boundaries and scale caps clearly so future edits reference them.
 
@@ -359,12 +386,12 @@ Phase 2 cap might be 2.0, but Phase 1 cap is 3.0. If you hardcode caps, users ca
 - That's expected. Weight pace is (weight change per day × 7); fat/lean paces are derived from BF% changes, which are noisier than raw weight. They're correlated but not identical.
 
 **"I changed my phase. Do I need to update the tracker?"**
-- Update your phase config in the overview, but the tracker will auto-detect the new phase from the "Phase" column in `food-log.xlsx`. No manual edit needed.
+- Update your phase config in the overview, but the tracker will auto-detect the new phase from the "Phase" column in `weight-log.csv`. No manual edit needed.
 
 ---
 
 ## References
 
 - **Overview file:** Where phase definitions, goals, and tracking rules live. Update this whenever your targets change.
-- **food-log.xlsx:** Single source of truth for all weight data. Formulas should auto-compute kg from lbs.
-- **dashboard.html:** Optional rich visualization. Sync data from food-log.xlsx export (CSV or direct load).
+- **`diet-logs/weight-log.csv`:** Single source of truth for all weight data. The assistant computes kg from lbs on append.
+- **`Dashboard-Fancy.html`:** Optional rich visualization. Its data files (`diet-weight-history.js`, `diet-progress.js`) are generated from `weight-log.csv`; see [[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]].

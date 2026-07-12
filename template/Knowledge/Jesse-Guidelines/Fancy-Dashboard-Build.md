@@ -425,7 +425,7 @@ From `DIET_COACH.quote`. Centered, italic, bottom of dashboard.
 
 ## HARD RULE: Bar Rendering Algorithms (regression prevention)
 
-**These algorithms are baked into the HTML's JavaScript. They read numeric values from `diet-progress.js`, but the rendering logic does NOT change between days.** That is the point of the static shell -- the algorithms are stable, only the data changes. Zone definitions and the design history live in [[Knowledge/Jesse-Guidelines/Weight-Tracker-Guidelines]].
+**These algorithms are baked into the HTML's JavaScript. They read numeric values from `diet-progress.js`, but the rendering logic does NOT change between days.** That is the point of the static shell -- the algorithms are stable, only the data changes. Zone definitions and the design history live in [[Knowledge/Jesse-Guidelines/Weight-Tracker-Spec]].
 
 ### Pace bar: range-as-subset
 

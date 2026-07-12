@@ -51,7 +51,7 @@ Same steps 1–6 (step 3 appends to `diet-logs/weight-log.csv`), plus:
 **Weigh-in judgment:**
 
 - **Weigh-in triple.** If the user's scale reports body-fat % and muscle/lean mass, prompt once when they're missing from a weigh-in; if unavailable, log the weight alone and leave the fields blank. Never infer or carry BF%/MM forward -- blank is the honest signal in the trend.
-- **Hydration artifacts.** Bioimpedance BF% readings taken near intense exercise or high hydration variance are unreliable. Log the value for completeness but flag it in the Notes field with the exact marker string `⚠️ hydration artifact` -- the weight tracker filters on that string (see [[Knowledge/Jesse-Guidelines/Weight-Tracker-Guidelines]]), so exclusion is greppable rather than a judgment call per read.
+- **Hydration artifacts.** Bioimpedance BF% readings taken near intense exercise or high hydration variance are unreliable. Log the value for completeness but flag it in the Notes field with the exact marker string `⚠️ hydration artifact` -- the weight tracker filters on that string (see [[Knowledge/Jesse-Guidelines/Weight-Tracker-Spec]]), so exclusion is greppable rather than a judgment call per read.
 
 ### Correction workflow
 
