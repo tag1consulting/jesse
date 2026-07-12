@@ -10,6 +10,7 @@ Recipes are self-contained guides for setting up specific Jesse capabilities. Ea
 | [Email Integration](./email.md) | Scanning Gmail, Fastmail, or other email for action items during the morning routine |
 | [Slack Integration](./slack.md) | Scanning Slack channels and DMs with timestamp-gated reads to avoid stale data and missed messages |
 | [WhatsApp Integration](./whatsapp.md) | Scanning WhatsApp chats for action items via a local bridge |
+| [iOS Obsidian Quick-Note Shortcut](./ios-obsidian-quick-note-shortcut.md) | Two-tap iOS Shortcut that drops timestamped quick-capture notes into the vault's Inbox/ folder |
 | [Draft Lifecycle](./draft-lifecycle.md) | Managing active drafts, archiving sent communications, and extracting key details |
 | [People Knowledge Base](./people-kb.md) | Automatic contact directory maintenance with categorization and cross-linking |
 | [Weekly Vault Maintenance](./vault-maintenance.md) | Automated hygiene: broken links, naming conventions, archive cleanup |

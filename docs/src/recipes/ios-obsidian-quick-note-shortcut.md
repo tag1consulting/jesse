@@ -4,7 +4,7 @@ A two-tap iOS Shortcut for capturing notes from your phone directly into your va
 
 ## The Problem
 
-Ideas, follow-ups, and quick reminders happen away from the desk — in the car, on a walk, mid-meeting, in the kitchen. Without a frictionless capture path, they either rot in your head or get scattered across notes apps, email-to-self, and whatever scratch surface was nearest. Jesse's Inbox flow only works if there's a fast, reliable way to drop notes into it from a phone.
+Ideas, follow-ups, and quick reminders happen away from the desk -- in the car, on a walk, mid-meeting, in the kitchen. Without a frictionless capture path, they either rot in your head or get scattered across notes apps, email-to-self, and whatever scratch surface was nearest. Jesse's Inbox flow only works if there's a fast, reliable way to drop notes into it from a phone.
 
 ## The Solution
 
@@ -49,7 +49,7 @@ No configuration. Outputs the current timestamp into the variable chain.
 - Locale: **Default**
 - Input: the **Current Date** variable from step 2
 
-Produces a string like `2026-05-01-0631`. The `HHmm` token (24-hour time, no separator) keeps the filename shell- and link-friendly — no spaces, colons, or AM/PM tokens.
+Produces a string like `2026-05-01-0631`. The `HHmm` token (24-hour time, no separator) keeps the filename shell- and link-friendly -- no spaces, colons, or AM/PM tokens.
 
 ### 4. URL Encode
 
@@ -68,7 +68,7 @@ Turns line breaks, spaces, and other characters into safe URL escape sequences s
   obsidian://new?vault=YourVaultName&file=Inbox/[Formatted Date]-Quick-Note&content=[URL Encoded Text]&overwrite
   ```
 
-  Where the bracketed pieces are variable references inserted by tapping into the URL field and choosing the variable from the picker — they should NOT be typed as literal text:
+  Where the bracketed pieces are variable references inserted by tapping into the URL field and choosing the variable from the picker -- they should NOT be typed as literal text:
   - `[Formatted Date]` is the **Formatted Date** variable from step 3.
   - `[URL Encoded Text]` is the **URL Encoded Text** variable from step 4.
 
@@ -77,10 +77,10 @@ What each piece does:
 | URL piece | Purpose |
 |-----------|---------|
 | `obsidian://new` | Obsidian's URL scheme handler for "create a new note." |
-| `vault=YourVaultName` | Tells Obsidian which vault to create the note in. URL-encoded — replace spaces with `%20`. |
+| `vault=YourVaultName` | Tells Obsidian which vault to create the note in. URL-encoded -- replace spaces with `%20`. |
 | `file=Inbox/...-Quick-Note` | The path (relative to the vault root) and filename. The `.md` extension is added automatically. |
-| `content=...` | The body of the new note — your captured text, URL-encoded. |
-| `overwrite` | Tells Obsidian to overwrite if a file with that name already exists. With minute-level timestamps in the filename, collisions are essentially impossible — the flag is there as a safety net. |
+| `content=...` | The body of the new note -- your captured text, URL-encoded. |
+| `overwrite` | Tells Obsidian to overwrite if a file with that name already exists. With minute-level timestamps in the filename, collisions are essentially impossible -- the flag is there as a safety net. |
 
 ### 6. Open URLs
 
@@ -94,9 +94,9 @@ This is what actually launches Obsidian and triggers the note creation.
 Two pieces will need to change for your setup:
 
 1. **Vault name.** Replace `YourVaultName` with the URL-encoded name of your vault. If your vault is `MyNotes` (no spaces), use `vault=MyNotes`. If it's `Personal Vault`, use `vault=Personal%20Vault`. Easiest way: type your vault name into any URL-encoder and copy the result.
-2. **Inbox folder name.** Replace `file=Inbox/` with whatever capture folder you use — e.g., `file=00-Inbox/`, `file=Daily/`, or `file=Quick-Capture/`. The folder must already exist in your vault; Obsidian's `obsidian://new` action does not create missing folders.
+2. **Inbox folder name.** Replace `file=Inbox/` with whatever capture folder you use -- e.g., `file=00-Inbox/`, `file=Daily/`, or `file=Quick-Capture/`. The folder must already exist in your vault; Obsidian's `obsidian://new` action does not create missing folders.
 
-The filename suffix (`-Quick-Note`) is also stylistic — change it to whatever makes the captures easy to spot in the Inbox folder.
+The filename suffix (`-Quick-Note`) is also stylistic -- change it to whatever makes the captures easy to spot in the Inbox folder.
 
 ## How It Works
 
@@ -108,11 +108,11 @@ The filename suffix (`-Quick-Note`) is also stylistic — change it to whatever 
 
 ## Tips and Gotchas
 
-**Add the shortcut to your Home Screen, Lock Screen, or Action Button.** Otherwise you have to dig through the Shortcuts app every time — kills the friction-free capture promise. Share → Add to Home Screen for an icon; Lock Screen widget for zero-tap access from a locked phone; Settings → Accessibility → Touch → Back Tap for a gesture trigger.
+**Add the shortcut to your Home Screen, Lock Screen, or Action Button.** Otherwise you have to dig through the Shortcuts app every time -- kills the friction-free capture promise. Share → Add to Home Screen for an icon; Lock Screen widget for zero-tap access from a locked phone; Settings → Accessibility → Touch → Back Tap for a gesture trigger.
 
 **Minute-resolution timestamps are the sweet spot.** A minute prefix is short enough to read at a glance and precise enough to never collide unless you fire two captures in the same minute (rare). Going to the second adds noise; going to just the day means a second capture overwrites the first.
 
-**The `overwrite` flag is a safety net, not a feature.** If you find yourself relying on it, your filename pattern isn't unique enough — bump the resolution.
+**The `overwrite` flag is a safety net, not a feature.** If you find yourself relying on it, your filename pattern isn't unique enough -- bump the resolution.
 
 **Obsidian must have opened the vault at least once.** The `obsidian://` URL scheme registers itself on first vault open. Reinstalling the app or wiping the device requires opening the vault once before the shortcut works again.
 
