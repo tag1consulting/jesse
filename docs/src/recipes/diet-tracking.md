@@ -9,7 +9,7 @@ Daily nutrition and exercise tracking with a Markdown journal, append-only CSV l
 - **Daily journal** -- `Projects/Diet/YYYY-MM-DD.md` with structured meal tables, activity logs, and running totals
 - **CSV logs** -- `diet-logs/food-log.csv`, `diet-logs/exercise-log.csv`, `diet-logs/weight-log.csv` (weight is its own log, not a workbook sheet) at workspace root
 - **Chat dashboard** -- Colored emoji bars with macro flags and adaptive calorie display after every food or exercise log
-- **Live HTML dashboard** -- `Dashboard-Fancy.html` at vault root; static weight chart and pace bars rebuilt on weigh-in, dynamic macro bars updated on every log via `diet-today.js`
+- **Live HTML dashboard** -- `Dashboard-Fancy.html` at vault root; a static shell that renders external JS data files -- macro bars update on every log via `diet-today.js`, the weight chart and pace bars via data files regenerated on weigh-in. The HTML itself never changes for data
 - **Weight tracking** -- Two progress bars toward user goals, trend analysis, body composition metrics (optional), phases for different training cycles
 - **Coach's Notes Log** -- `Knowledge/Health/Coach-Notes-Log.md` tracks dashboard notes across days for consistency; prevents advice from contradicting itself or chasing noise
 - **Weekly accountability** -- Sunday routine with automated analysis report (four sections: Great, Good, Bad, Ugly) plus a floor-miss pattern check, saved to Knowledge/Health/Weekly-Diet-Analysis/
@@ -351,13 +351,15 @@ Each day's journal follows this structure:
 
 ## How It Works
 
-### Two-Layer Dashboard Architecture
+### Dashboard Architecture: Static Shell + Data Files
 
-The system maintains two live views of today's data:
+`Dashboard-Fancy.html` (vault root) is a **static shell** -- structure, CSS, and rendering JavaScript only, with no data inside. All data lives in small external JS files next to it, loaded with a cache-busting loader so the browser never serves a stale copy:
 
-**Layer 1 — `Dashboard-Fancy.html`** (vault root): The persistent HTML dashboard. Rebuilt on morning weigh-in or on request. Contains the weight trend chart (Chart.js), metric cards, 14-day pace bars, progress bars toward goal weights, body composition bars (when available), and coach's notes. Opening the file in a browser gives a visual overview without interacting with the assistant.
+- **`diet-today.js`** -- today's meals, exercise, targets, and weigh-in as `window.DIET_TODAY`. Rewritten on every food or exercise log; drives the macro bars, food journal, and exercise cards.
+- **`diet-weight-history.js`**, **`diet-progress.js`**, **`diet-coach-notes.js`** -- weight trend, progress/pace values, and coach's notes. Regenerated on morning roll and weigh-in; drive the chart, metric cards, pace and progress bars, and notes.
+- **`proposed-diet-today.js`** -- optional meal plan (see Meal Planning below).
 
-**Layer 2 — `diet-today.js`** (vault root): A small JavaScript file that holds today's food and exercise data as `window.DIET_TODAY`. Rewritten on every food or exercise log. The static HTML loads this file, so the macro bars and food log sections in the dashboard update on the next browser reload -- no HTML rebuild needed.
+Reloading the browser picks up whatever changed. The HTML itself is rebuilt only when its layout or rendering logic changes -- never for data. Contracts and build rules: `Fancy-Dashboard-Build.md`.
 
 ### Logging Meals
 
@@ -381,7 +383,7 @@ The system maintains two live views of today's data:
 
 1. User says: "weighed in: 175.5 lbs"
 2. Assistant appends a row to `weight-log.csv`
-3. Rebuilds `Dashboard-Fancy.html`: weight chart updates, pace bars recalculate from the 14-day trailing window (trough + raw regression shown as a range), progress bars refresh, coach's notes regenerate
+3. Regenerates the dashboard data files (`diet-weight-history.js`, `diet-progress.js`, `diet-coach-notes.js`): weight chart updates, pace bars recalculate from the 14-day trailing window (trough + raw regression shown as a range), progress bars refresh, coach's notes regenerate -- all on the next browser reload, with no HTML rebuild
 4. New notes appended to `Knowledge/Health/Coach-Notes-Log.md`
 
 ### Logging Alcohol
@@ -483,7 +485,7 @@ This is entirely optional. If the file doesn't exist, the dashboard simply hides
 
 ## Viewing in a Browser
 
-The HTML dashboard loads its data files via relative `<script src="...">` paths. Browsers block local file loading (`file://` protocol) for security, so you need a lightweight HTTP server.
+The HTML dashboard loads its data files via relative paths (through a cache-busting loader, so a plain reload always shows current data). Browsers block local file loading (`file://` protocol) for security, so you need a lightweight HTTP server.
 
 Any static file server works. One easy option is [miniserve](https://github.com/svenstaro/miniserve) (Rust, single binary, zero config):
 
@@ -511,10 +513,10 @@ After logging food or exercise, just reload the browser tab — the assistant re
 
 ## Debugging
 
-**Macro bars show wrong values after a log.** The fancy dashboard reads from `diet-today.js`. If the bars are stale, check that the log event rewrote `diet-today.js` and that the browser reloaded it (hard-reload with Ctrl/Cmd+Shift+R to bypass cache).
+**Macro bars show wrong values after a log.** The fancy dashboard reads from `diet-today.js`. The cache-busting loader means a normal reload always fetches fresh data -- so if the bars are stale after a reload, the file on disk is stale: check that the log event actually rewrote `diet-today.js` (and that your server is serving the current file), not the browser.
 
 **Field name mismatch: bars blank or undefined.** If a macro bar in the HTML shows nothing or `NaN`, the JavaScript is reading a field name that doesn't exist in `window.DIET_TODAY`. Compare the field names in `diet-today.js` against the contract table in `Fancy-Dashboard-Build.md`. The contract is exact -- casing and spelling must match.
 
-**Chart missing or broken.** The weight chart and the food log renderer run in separate error isolation blocks. A Chart.js failure will not break the food log, and vice versa. Open the browser console to see which block failed. Common cause: `weightChart` canvas element not found because the HTML was rebuilt incompletely.
+**Chart missing or broken.** The weight chart and the food log renderer run in separate error isolation blocks. A Chart.js failure will not break the food log, and vice versa. Open the browser console to see which block failed. Common causes: the CDN chart library blocked or offline, or `diet-weight-history.js` missing/empty.
 
 **`textContent` destroying child elements.** If a metric card goes blank after an update, the renderer likely called `element.textContent = value` on a container that has child nodes -- this wipes all children. The fix is to target the specific leaf node (e.g., `card-weight-value` not `card-weight`). See the error isolation section of `Fancy-Dashboard-Build.md`.
