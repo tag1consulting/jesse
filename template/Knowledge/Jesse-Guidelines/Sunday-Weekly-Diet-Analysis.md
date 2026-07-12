@@ -5,10 +5,12 @@ Weekly accountability report. Runs every Sunday as part of start-of-day routine.
 ## Inputs
 
 - Last 7 daily diet journals (`Projects/Diet/YYYY-MM-DD.md`)
-- `exercise-log.xlsx` (week's activity)
+- `diet-logs/exercise-log.csv` (week's activity); `food-log.csv` and `weight-log.csv` for totals -- parse with a real CSV parser, never `split(',')`
 - `Projects/Diet/Overview.md` (targets and goals)
 - Previous weekly report (for trend comparison)
 - Any health notes from the week
+
+**Optional: script the numbers.** The weekly arithmetic (per-day table, roll-ups, compliance counts, alcohol totals) can be produced by a single DuckDB run over the CSVs -- keep the queries in a `week.sql` file and paste the output tables into the report verbatim, so the numbers never depend on mental arithmetic. See "Optional: DuckDB for Dynamic Queries" in the diet-tracking recipe documentation. Hand-counting from the journals works fine too; the CSVs are the source of truth either way.
 
 ## Chat Analysis
 
@@ -39,6 +41,8 @@ Write to `Knowledge/Health/Weekly-Diet-Analysis/YYYY-MM-DD.md`:
 
 ```markdown
 # Weekly Diet Analysis — Week of [date range]
+
+**Week:** [N] (numbered sequentially from the first tracked week)
 
 ## Data Table
 
@@ -75,11 +79,14 @@ Write to `Knowledge/Health/Weekly-Diet-Analysis/YYYY-MM-DD.md`:
 
 ## Rules
 
-- Never fabricate data. Use actual numbers from journals and spreadsheets.
+- Never fabricate data. Use actual numbers from journals and the CSV logs.
 - Compare against the user's own targets (from Overview.md), not generic recommendations.
-- Track alcohol separately if the user logs it — total calories and days consumed.
-- Don't double-count exercise (exercise calories are separate from food calories).
+- Track alcohol separately if the user logs it — total calories, number of drinking days, and the counterfactual: what the week would have looked like without alcohol (average calories, compliance days).
+- Don't double-count exercise. The adaptive calorie target already includes the exercise add-back (see the formula in [[Knowledge/Jesse-Guidelines/Diet-Logging-Flow]]); judge compliance against that adaptive target, never layer additional "earned" food on top of it.
 - Be honest about what's working and what isn't.
+- **Week numbering is sequential.** Week 1 is the user's first tracked week; increment every Sunday regardless of tracking gaps, and put the number in the report header.
+- **Incomplete weeks still get analyzed.** If only 4 of 7 days were tracked, analyze the 4 and note the gap. Better than nothing.
+- **Fiber, when tracked,** is assessed the way protein is: average vs the floor and days at/above it. Count only days logged with fiber values, and skip carb-load days (the floor is suspended there).
 
 ## After Writing the Report
 

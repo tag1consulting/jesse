@@ -19,7 +19,7 @@ Read-only status display — used when the user asks about their tracking state 
 
 ## Rules
 
-- **Display only.** Never modify xlsx, daily journal, `diet-today.js`, or any config files.
+- **Display only.** Never modify the CSV logs, daily journal, `diet-today.js`, or any config files.
 - **No dashboard if no data.** If `diet-today.js` doesn't exist or has no meals, say so rather than rendering empty bars.
 - **Inline and HTML must agree.** The ASCII receipt and `Dashboard-Fancy.html` use the same targets, bar types, color logic, and the same `[LOW_FLAG_HOUR]` time-gate — they must show the same flags.
 - **Time-gate low flags.** Under-floor "low" flags render only after `[LOW_FLAG_HOUR]` (default 16:00); over-cap flags are never gated; bar colors are never gated. See [[Knowledge/Jesse-Guidelines/Diet-Dashboard-Guidelines]].

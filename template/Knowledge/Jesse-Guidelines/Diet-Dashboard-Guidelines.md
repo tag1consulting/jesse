@@ -195,10 +195,10 @@ Every nutrition log (meal, exercise, weigh-in) must update three places:
    - Add meal/exercise entry
    - Rerender the dashboard at the top
 
-2. **Spreadsheet(s)** (optional but recommended)
-   - Food log: `food-log.xlsx` at workspace root
-   - Exercise log: `exercise-log.xlsx` at workspace root
-   - Use these for long-term trend analysis outside the vault
+2. **CSV logs** (the source of truth, not an optional extra)
+   - Food log: `diet-logs/food-log.csv` at workspace root
+   - Exercise log: `diet-logs/exercise-log.csv` at workspace root
+   - Appended first on every log event; these feed long-term trend analysis and the weekly reports
 
 3. **Chat dashboard** (when you query state without logging)
    - Render the dashboard in the response using the same format

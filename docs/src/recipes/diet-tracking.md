@@ -1,13 +1,13 @@
 # Diet & Exercise Tracking
 
-Daily nutrition and exercise tracking with a Markdown journal, Excel spreadsheets, a chat dashboard, and a live HTML dashboard. Includes a first-run setup wizard that derives your targets from first principles, a floors/ceilings/windows macro model, an extensible day-style registry, adaptive calorie targets with a tracker-overestimation haircut, weight tracking with progress visualization, body composition metrics, alcohol enforcement, and weekly accountability reports.
+Daily nutrition and exercise tracking with a Markdown journal, append-only CSV logs, a chat dashboard, and a live HTML dashboard. Includes a first-run setup wizard that derives your targets from first principles, a floors/ceilings/windows macro model, an extensible day-style registry, adaptive calorie targets with a tracker-overestimation haircut, weight tracking with progress visualization, body composition metrics, alcohol enforcement, and weekly accountability reports.
 
 > **This recipe is optional.** When disabled, the assistant never mentions food, calories, exercise, or weight tracking. It does not include meal planning, recipe suggestions, diet advice, or nutrition coaching. The system records and displays -- it doesn't lecture.
 
 ## What You Get
 
 - **Daily journal** -- `Projects/Diet/YYYY-MM-DD.md` with structured meal tables, activity logs, and running totals
-- **Spreadsheets** -- `food-log.xlsx` (meals + weight tracking), `exercise-log.xlsx` (activities) at workspace root
+- **CSV logs** -- `diet-logs/food-log.csv`, `diet-logs/exercise-log.csv`, `diet-logs/weight-log.csv` (weight is its own log, not a workbook sheet) at workspace root
 - **Chat dashboard** -- Colored emoji bars with macro flags and adaptive calorie display after every food or exercise log
 - **Live HTML dashboard** -- `Dashboard-Fancy.html` at vault root; static weight chart and pace bars rebuilt on weigh-in, dynamic macro bars updated on every log via `diet-today.js`
 - **Weight tracking** -- Two progress bars toward user goals, trend analysis, body composition metrics (optional), phases for different training cycles
@@ -65,8 +65,10 @@ Most days are `normal`. For special days, set a **day style** and the dashboard 
 ```
 Dashboard-Fancy.html         # Live HTML dashboard (vault root)
 diet-today.js                # Today's food/macro data for the HTML dashboard (vault root)
-food-log.xlsx                # Food log (Date, Meal, Item...) + Weight sheet (Date, Weight, Phase...)
-exercise-log.xlsx            # One row per activity (workspace root)
+diet-logs/                   # Append-only CSV logs (workspace root) -- the permanent record
+  food-log.csv               # One row per food item (Date, Meal, Item, ..., Fiber_g)
+  exercise-log.csv           # One row per activity
+  weight-log.csv             # One row per weigh-in (Date, Weight_lbs, ..., Phase, ...)
 Projects/
   Diet/
     Overview.md              # Targets, goals, phases, body composition goals
@@ -165,7 +167,7 @@ Most days are `normal` (rest or training — the exercise add-back differentiate
 
 ## Weight Phases
 
-Define phases for different training cycles. The Weight sheet in food-log.xlsx includes a Phase column.
+Define phases for different training cycles. `diet-logs/weight-log.csv` includes a Phase column.
 
 Example phases:
 - **Phase 1: Aggressive cut** (target -1.5 lbs/week)
@@ -233,20 +235,64 @@ Add to your instruction file's `## Rules` section:
 ```markdown
 ### Diet Tracking
 
-Daily food journal at `[[Projects/Diet/Overview]]` (targets and goals defined there). Daily logs are `Projects/Diet/YYYY-MM-DD.md`. Excel trackers at workspace root: `food-log.xlsx` (meals + weight) and `exercise-log.xlsx` (activities). When the user logs a meal or exercise, follow `[[Knowledge/Jesse-Guidelines/Diet-Logging-Flow]]`. When the user asks about their state without new data, show the ASCII dashboard per `[[Knowledge/Jesse-Guidelines/Diet-Dashboard-Guidelines]]`. Weight tracking uses the Weight sheet in food-log.xlsx per `[[Knowledge/Jesse-Guidelines/Weight-Tracker-Guidelines]]`. HTML dashboard lives at `Dashboard-Fancy.html` (vault root) — see `[[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]` for build rules. Every Sunday, produce a weekly accountability report per `[[Knowledge/Jesse-Guidelines/Sunday-Weekly-Diet-Analysis]]` and save to `Knowledge/Health/Weekly-Diet-Analysis/`.
+Daily food journal at `[[Projects/Diet/Overview]]` (targets and goals defined there). Daily logs are `Projects/Diet/YYYY-MM-DD.md`. CSV logs in `diet-logs/` at workspace root: `food-log.csv`, `exercise-log.csv`, `weight-log.csv` -- the single source of truth; append the CSV row first on any log event. When the user logs a meal or exercise, follow `[[Knowledge/Jesse-Guidelines/Diet-Logging-Flow]]`. When the user asks about their state without new data, show the ASCII dashboard per `[[Knowledge/Jesse-Guidelines/Diet-Dashboard-Guidelines]]`. Weight tracking uses `diet-logs/weight-log.csv` per `[[Knowledge/Jesse-Guidelines/Weight-Tracker-Guidelines]]`. HTML dashboard lives at `Dashboard-Fancy.html` (vault root) — see `[[Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build]]` for build rules. Every Sunday, produce a weekly accountability report per `[[Knowledge/Jesse-Guidelines/Sunday-Weekly-Diet-Analysis]]` and save to `Knowledge/Health/Weekly-Diet-Analysis/`.
 ```
 
-### 5. Create spreadsheet templates
+### 5. Create the CSV logs
 
-On first use, create both spreadsheets with these columns:
+On first use, create `diet-logs/` at the workspace root with three CSV files. Each holds exactly its header row until the first log event; every log appends one complete row.
 
-**food-log.xlsx:**
-- Sheet 1 (Food Log): Date, Meal, Item, Amount, Unit, Grams, Calories, Protein, Fat, Carbs, Notes
-- Sheet 2 (Weight): Date, Weight, Weight (kg), Phase, Body Fat %, Muscle Mass, Notes
+**diet-logs/food-log.csv:**
+```
+Date,Meal,Item,Amount,Unit,Cal_per_100g,Grams,Calories,Protein_g,Fat_g,Carbs_g,Notes,Time,Meal_Type,Fiber_g
+```
 
-**exercise-log.xlsx:** Date, Type, Description, Distance (km), Duration, Pace (min/km), Elevation (m), Avg HR, Cadence, Calories, Plan Source, Notes
+**diet-logs/exercise-log.csv:**
+```
+Date,Type,Description,Distance_km,Duration,Pace_min_per_km,Elevation_m,Avg_HR,Cadence,Calories,Plan_Source,Notes,Start_Time
+```
 
-Or create them manually with those headers if you prefer to have them ready.
+**diet-logs/weight-log.csv:**
+```
+Date,Weight_lbs,Weight_kg,Phase,BodyFat_pct,MuscleMass_lbs,Notes
+```
+
+Optionally add `diet-logs/daily-targets.csv` (`Date,Mode,Cal_Target,Carb_Target_g,Protein_Target_g,Fat_Target_g,Exercise_Cal,Notes,Fiber_Target_g`) if you want a per-day record of what the targets were, not just what was eaten.
+
+Blank cells stay blank -- an empty BodyFat_pct or Fiber_g field is the honest "not measured" signal, never `0` or `None`. Every appended row is complete (its own Date, Meal or Type, and Time).
+
+## Why CSV Files
+
+The logs are plain CSV on purpose. An earlier iteration of this system used Excel
+workbooks (`food-log.xlsx` with a Weight sheet, `exercise-log.xlsx`); they were replaced
+with three append-only CSV files, and the difference shows up every day:
+
+- **Agent-native.** The assistant reads and appends CSV with ordinary file tools -- no
+  spreadsheet library, no binary round-trip, no risk of a half-written workbook. A log
+  event is one appended line.
+- **Git-diffable.** A day of eating is a handful of added rows in `git diff`. Binary
+  workbooks are opaque blobs; CSVs give you history, blame, and clean merges in a vault
+  that is already a git repository.
+- **Human-inspectable.** `head`, `grep`, and any text editor can audit any entry. Nothing
+  hides in cell formatting or formulas.
+- **Atomic appends.** Each log is one new row at the end of one file. There is no
+  workbook-wide rewrite, so an interrupted write can't corrupt months of history.
+- **No Excel dependency.** Nothing to install, license, or version-match -- any language,
+  any tool, indefinitely.
+- **Merge-conflict-resolvable.** If two machines both appended rows, the conflict is
+  visible text with an obvious resolution. With xlsx it's a coin flip.
+
+Two rules keep the CSVs trustworthy:
+
+- **RFC-4180 quoting.** Food items and notes routinely contain commas ("Egg (whole,
+  large)"). Any field containing a comma, double-quote, or newline must be wrapped in
+  double-quotes with embedded quotes doubled (`""`).
+- **Always parse with a real CSV reader** -- Python's `csv`, Node's `csv-parse`, or
+  equivalent. Never `line.split(',')`; it silently mangles quoted fields, and the Notes
+  column will eventually contain a comma.
+
+The daily journal and the dashboard JS files are *derived* views. If they ever disagree
+with the CSVs, the CSVs win -- regenerate the views, don't edit them by hand.
 
 ## Daily Journal Format
 
@@ -316,8 +362,8 @@ The system maintains two live views of today's data:
 ### Logging Meals
 
 1. User says: "log breakfast: two eggs, toast with butter, coffee with whole milk"
-2. Assistant estimates macros from knowledge base; checks food-log.xlsx for recent entries of the same items to reuse values (prevents drift)
-3. Updates the daily journal table, appends to food-log.xlsx, recalculates running totals
+2. Assistant estimates macros from knowledge base; checks `food-log.csv` for recent entries of the same items (real CSV parser) to reuse values (prevents drift)
+3. Appends the row(s) to `food-log.csv` first, then updates the daily journal table and recalculates running totals
 4. Rewrites `diet-today.js` with updated macro totals, meal items, and flags
 5. Shows the ASCII dashboard in chat with colored emoji bars
 6. Fancy dashboard auto-updates on next browser reload via `diet-today.js`
@@ -325,7 +371,7 @@ The system maintains two live views of today's data:
 ### Logging Exercise
 
 1. User says: "logged a 7km run, 38 minutes, avg HR 155"
-2. Assistant estimates calories burned, updates the daily journal Activity section, appends to exercise-log.xlsx
+2. Assistant estimates calories burned, appends the row to `exercise-log.csv`, updates the daily journal Activity section
 3. Rewrites `diet-today.js`; ASCII dashboard shows two-line calorie display:
    - Line 1: baseline intake vs. adaptive target
    - Line 2: net (intake − burn), gray bars, informational only
@@ -334,7 +380,7 @@ The system maintains two live views of today's data:
 ### Logging Weight (Weigh-In)
 
 1. User says: "weighed in: 175.5 lbs"
-2. Assistant adds row to Weight sheet in food-log.xlsx
+2. Assistant appends a row to `weight-log.csv`
 3. Rebuilds `Dashboard-Fancy.html`: weight chart updates, pace bars recalculate from the 14-day trailing window (trough + raw regression shown as a range), progress bars refresh, coach's notes regenerate
 4. New notes appended to `Knowledge/Health/Coach-Notes-Log.md`
 
@@ -364,11 +410,37 @@ Other styles: `refeed` (diet-break — pause the deficit, extra calories to carb
 ### Correcting Entries
 
 If the user corrects a value ("that was 350 not 300"):
+- Update the corresponding row in `food-log.csv`
 - Update the daily journal table
-- Update the corresponding row in food-log.xlsx
 - Recalculate running totals
 - Rewrite `diet-today.js` with corrected values
 - Refresh ASCII dashboard in chat
+
+## Optional: DuckDB for Dynamic Queries
+
+The baseline flow needs nothing beyond the CSV files and a text editor. If your logs grow
+to months of data and you want ad-hoc analysis -- weekly roll-ups, compliance counts,
+alcohol totals, rolling averages -- [DuckDB](https://duckdb.org/) can query the CSVs in
+place. No import step, no database file, read-only:
+
+```bash
+duckdb -c "SELECT Date, SUM(Calories) AS cal, SUM(Protein_g) AS protein_g
+           FROM read_csv_auto('diet-logs/food-log.csv')
+           GROUP BY Date ORDER BY Date DESC LIMIT 7"
+```
+
+`read_csv_auto` infers the schema from the header row and handles RFC-4180 quoting
+correctly. You get full SQL -- joins across the food, exercise, and weight logs, window
+functions for rolling averages -- and it stays instant well past the point where
+hand-parsing becomes slow or error-prone.
+
+A pattern that works well: keep your weekly-report queries in a `week.sql` file and run
+them every Sunday (`duckdb -c ".read week.sql"`), pasting the output tables into the
+accountability report verbatim. The queries do the counting so the analysis can do the
+thinking -- and the report's numbers stop depending on anyone's mental arithmetic.
+
+This is strictly optional. The CSVs remain the single source of truth; DuckDB is a
+read-only lens over them. If you never install it, everything in this recipe still works.
 
 ## Tips and Gotchas
 
@@ -382,17 +454,17 @@ If the user corrects a value ("that was 350 not 300"):
 
 **Targets self-correct.** The setup wizard's BMR estimate is a seed. After 2–3 weeks of logging, the calibration loop compares your actual weight trend to the prediction and adjusts your TDEE — so the initial body-composition and sex inputs are low-stakes. See `Diet-Setup-Wizard.md`.
 
-**Weight tracking is optional.** If you don't have a scale, skip the Weight sheet and the HTML dashboard. The system works fine with just food and exercise data.
+**Weight tracking is optional.** If you don't have a scale, skip `weight-log.csv` and the HTML dashboard. The system works fine with just food and exercise data.
 
-**Spreadsheets are the long-term record.** Daily journals are good for day-of review. Spreadsheets are what feeds weekly/monthly trend analysis and the Sunday accountability reports.
+**The CSVs are the long-term record.** Daily journals are good for day-of review, and the JS data files are a display cache. The CSVs are the archive -- they feed weekly/monthly trend analysis and the Sunday accountability reports.
 
-**Food identification prevents drift.** The system reuses nutritional values from your recent `food-log.xlsx` entries for the same item, preventing the slow creep of inconsistent estimates over time.
+**Food identification prevents drift.** The system reuses nutritional values from your recent `food-log.csv` entries for the same item, preventing the slow creep of inconsistent estimates over time.
 
 **Event-prep modes override targets temporarily.** Define a mode in Overview.md; the dashboard header reflects it and targets shift. Regular targets return when the mode period expires.
 
 **Works with the [Cookbook](./cookbook.md).** When both are active, logging a meal from a tracked recipe auto-populates nutrition data, and meal suggestions consider remaining macro budget. Either works standalone.
 
-**Removing this recipe** is clean: delete `Projects/Diet/`, `Dashboard-Fancy.html`, `diet-today.js`, the two spreadsheets, the guidelines files, the coach's notes log, the weekly analysis archive, and the instruction file hooks. Nothing else references it.
+**Removing this recipe** is clean: delete `Projects/Diet/`, `Dashboard-Fancy.html`, `diet-today.js`, the `diet-logs/` directory, the guidelines files, the coach's notes log, the weekly analysis archive, and the instruction file hooks. Nothing else references it.
 
 ---
 
