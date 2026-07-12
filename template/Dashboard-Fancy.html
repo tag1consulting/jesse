@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet & Fitness Dashboard</title>
+    <!-- Static shell: structure + CSS + rendering JS only. All data comes from the
+         external diet-*.js files, loaded via the cache-busting loader below.
+         Never rebuilt for data -- only for layout/rendering changes.
+         See Knowledge/Jesse-Guidelines/Fancy-Dashboard-Build.md -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js"></script>
+    <style>
+        :root {
+            --red: #E24B4A;
+            --yellow: #EF9F27;
+            --green: #639922;
+            --orange: #F97316;
+            --blue: #378ADD;
+            --empty: #ddd;
+            --text: #1a1a1a;
+            --text2: #666;
+            --bg: #fff;
+            --bg2: #f5f5f5;
+            --border: #e0e0e0;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --empty: #404040;
+                --text: #e0e0e0;
+                --text2: #999;
+                --bg: #1a1a1a;
+                --bg2: #252525;
+                --border: #3a3a3a;
+            }
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--text); background: var(--bg); padding: 20px; line-height: 1.5; }
+        .wrap { max-width: 900px; margin: 0 auto; }
+        h1 { font-size: 24px; font-weight: 700; margin-bottom: 24px; }
+        .section { margin-bottom: 32px; }
+        .sec-title { font-size: 13px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+        .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 14px; }
+        .card-label { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+        .card-val { font-size: 22px; font-weight: 700; }
+        .card-sub { font-size: 11px; color: var(--text2); margin-top: 3px; }
+        .panel { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-bottom: 12px; }
+        .bar-row { display: flex; align-items: center; margin: 10px 0; }
+        .bar-label { font-size: 12px; color: var(--text2); min-width: 70px; flex-shrink: 0; }
+        .bar-blocks { display: flex; gap: 2px; flex-shrink: 0; }
+        .blk { width: 14px; height: 16px; border-radius: 2px; }
+        .bar-info { font-size: 12px; color: var(--text2); margin-left: 10px; white-space: nowrap; }
+        .bar-sub { font-size: 11px; color: var(--text2); margin-left: 80px; margin-top: -4px; margin-bottom: 6px; }
+        .traj { font-size: 12px; color: var(--text2); margin: 6px 0; }
+        .comp-bar { display: flex; height: 28px; border-radius: 4px; overflow: hidden; margin: 8px 0; }
+        .comp-seg { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #fff; }
+        .flag { color: var(--red); font-weight: 600; }
+        .notes { background: var(--bg2); border: 1px solid var(--border); border-left: 3px solid var(--blue); border-radius: 6px; padding: 14px; font-size: 13px; line-height: 1.6; }
+        .notes-title { font-weight: 600; margin-bottom: 8px; }
+        .notes ul { margin: 0; padding-left: 20px; }
+        .notes li { margin: 6px 0; }
+        .meal-header td { font-size: 14px; padding-top: 12px !important; padding-bottom: 4px !important; }
+        table.food { width: 100%; font-size: 12px; border-collapse: collapse; margin-bottom: 4px; }
+        table.food th { text-align: left; color: var(--text2); font-weight: 500; padding: 2px 6px; border-bottom: 1px solid var(--border); }
+        table.food td { padding: 2px 6px; }
+        table.food .num { text-align: right; }
+        .subtotal td, .grandtotal td { font-weight: 600; border-top: 1px solid var(--border); }
+        .grandtotal td { font-size: 13px; }
+        .ex-card { background: var(--bg); border-left: 3px solid var(--orange); padding: 10px 12px; border-radius: 4px; margin: 8px 0; font-size: 13px; }
+        .remaining { font-size: 13px; font-weight: 600; margin-top: 10px; color: var(--text); }
+        .err { background: var(--red); color: #fff; padding: 10px; border-radius: 4px; margin: 8px 0; font-size: 12px; display: none; }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h1>Diet & Fitness Dashboard</h1>
+
+    <!-- 1. METRICS — rendered from diet-today.js weight data + diet-progress.js -->
+    <div class="section" id="metricsSection" style="display:none;">
+        <div class="sec-title">Metrics</div>
+        <div class="card-grid" id="metricsGrid"></div>
+    </div>
+
+    <!-- 2. MACRO REMAINING BARS — rendered from diet-today.js -->
+    <div class="section">
+        <div class="sec-title" id="dayHeader">Loading...</div>
+        <div class="panel" id="macroPanel" style="display:none;">
+            <div id="macroBars"></div>
+            <div id="remainingLine" class="remaining"></div>
+        </div>
+    </div>
+
+    <!-- 3. EXERCISE JOURNAL — rendered from diet-today.js -->
+    <div class="section" id="exerciseSection" style="display:none;">
+        <div class="sec-title">Exercise Journal</div>
+        <div class="panel" id="exercisePanel">
+            <div id="exerciseCards"></div>
+        </div>
+    </div>
+
+    <!-- 4. FOOD JOURNAL — rendered from diet-today.js -->
+    <div class="section" id="foodSection" style="display:none;">
+        <div class="sec-title">Food Journal</div>
+        <div class="panel" id="mealsPanel">
+            <div id="mealsContent"></div>
+        </div>
+    </div>
+
+    <!-- 4b. MEAL IDEAS — optional, rendered from proposed-diet-today.js -->
+    <div class="section" id="mealIdeasSection" style="display:none;">
+        <div class="sec-title">Meal Ideas</div>
+        <div class="panel" id="mealIdeasPanel">
+            <div id="mealIdeasContent"></div>
+            <div id="mealIdeasGap" style="margin-top:10px; font-size:12px; color:var(--orange); font-weight:600;"></div>
+        </div>
+    </div>
+
+    <!-- 5. COACH'S NOTES — rendered from diet-coach-notes.js -->
+    <div class="section" id="coachSection" style="display:none;">
+        <div class="sec-title">Coach's Notes</div>
+        <div class="notes" id="coachNotes"></div>
+    </div>
+
+    <!-- 6. WHAT'S AHEAD — rendered from diet-coach-notes.js -->
+    <div class="section" id="aheadSection" style="display:none;">
+        <div class="sec-title">What's Ahead</div>
+        <div class="notes" id="aheadNotes"></div>
+    </div>
+
+    <!-- 7. WEIGHT TREND CHART — rendered from diet-weight-history.js -->
+    <div class="section" id="weightChartSection" style="display:none;">
+        <div class="sec-title">Weight Trend</div>
+        <div class="panel">
+            <canvas id="weightChart" height="180"></canvas>
+            <div id="chartErr" class="err"></div>
+        </div>
+    </div>
+
+    <!-- 8. PROGRESS & PACE — rendered from diet-progress.js -->
+    <div class="section" id="progressSection" style="display:none;">
+        <div class="sec-title">Progress &amp; Pace</div>
+        <div class="panel" id="progressPanel"></div>
+    </div>
+
+    <!-- 9. BODY COMPOSITION — rendered from diet-today.js weight -->
+    <div class="section" id="compSection" style="display:none;">
+        <div class="sec-title">Body Composition</div>
+        <div class="panel" id="compPanel"></div>
+    </div>
+
+    <!-- 10. QUOTE — rendered from diet-coach-notes.js -->
+    <div id="quoteBlock" style="text-align:center; margin-top:20px; padding:16px; font-style:italic; color:var(--text2); font-size:14px; line-height:1.6; display:none;"></div>
+</div>
+
+<!-- Load external data files with a per-load cache-buster so the browser
+     always fetches current data instead of serving a stale cached copy
+     (HARD RULE -- see Fancy-Dashboard-Build.md; plain static script tags
+     reintroduce the phone-browser staleness bug). document.write of
+     parser-inserted script tags executes them synchronously in order,
+     before the render scripts below -- same guarantee as static tags.
+     Only diet-today.js is required; the others are optional and enable
+     weight charts, progress bars, coach's notes, and meal ideas. -->
+<script>
+(function () {
+  var v = Date.now();
+  var files = [
+    'diet-today.js',
+    'diet-weight-history.js',
+    'diet-progress.js',
+    'diet-coach-notes.js',
+    'proposed-diet-today.js'
+  ];
+  for (var i = 0; i < files.length; i++) {
+    document.write('<script src="' + files[i] + '?v=' + v + '"><\/script>');
+  }
+})();
+</script>
+
+<script>
+// === UTILITY ===
+var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+var EMPTY = isDark ? '#404040' : '#ddd';
+var RED = '#E24B4A', YEL = '#EF9F27', GRN = '#639922', ORG = '#F97316', BLU = '#378ADD';
+
+// =============================================================
+// 1. METRICS — shows weight card grid when weight data exists
+// =============================================================
+(function() {
+    var D = window.DIET_TODAY || {};
+    var P = window.DIET_PROGRESS || {};
+    var w = D.weight || {};
+    var hasWeighIn = !!(w && w.lbs);
+    var hasBf = !!(w && w.bf);
+
+    // No weigh-in today (travel, race day): fall back to the last recorded
+    // weight so the cards show current weight instead of hiding or zeroing.
+    // BF%/lean are NOT carried forward -- blank is the honest signal
+    // (no scale composition today).
+    var hist = window.DIET_WEIGHT_HISTORY || [];
+    var lastW = hist.length ? hist[hist.length - 1] : null;
+
+    var lbs = w.lbs || (lastW ? lastW.w : 0);
+    if (!lbs && !w.kg) return; // no weight data anywhere, skip metrics
+    var kg = w.kg || (lbs ? Math.round(lbs / 2.20462 * 10) / 10 : 0);
+    var bf = w.bf || 0;
+    var mm = w.mm || 0;
+
+    var grid = document.getElementById('metricsGrid');
+    var sec = document.getElementById('metricsSection');
+    if (!grid || !sec) return;
+    sec.style.display = '';
+
+    var cards = [
+        { label: 'Weight', val: lbs || kg,
+          sub: hasWeighIn ? (kg + ' kg') : (kg + ' kg &middot; last weigh-in') }
+    ];
+
+    // Body fat / lean mass: blank (not carried forward) when not measured today
+    if (hasBf) {
+        var fatLbs = Math.round(lbs * bf / 100 * 10) / 10;
+        cards.push({ label: 'Body Fat', val: bf + '%', sub: fatLbs + ' lbs fat' });
+        var leanLbs = Math.round((lbs - fatLbs) * 10) / 10;
+        cards.push({ label: 'Lean Mass', val: leanLbs, sub: mm ? ('MM ' + mm + ' (scale)') : '' });
+    } else if (!hasWeighIn && lastW) {
+        cards.push({ label: 'Body Fat', val: '--', sub: 'no weigh-in today' });
+        cards.push({ label: 'Lean Mass', val: '--', sub: 'no weigh-in today' });
+    }
+
+    // Progress from start (optional, from diet-progress.js)
+    if (P.startWeight && lbs) {
+        var fromStart = Math.round((P.startWeight - lbs) * 10) / 10;
+        var arrow = fromStart >= 0 ? '&darr; ' : '&uarr; ';
+        cards.push({ label: 'From Start', val: arrow + Math.abs(fromStart), sub: P.startWeight + ' &rarr; ' + lbs });
+    }
+
+    // Goal countdown (optional)
+    if (P.goalDate) {
+        var today = new Date(); today.setHours(0,0,0,0);
+        var goal = new Date(P.goalDate + 'T00:00:00');
+        var diff = Math.round((goal - today) / 86400000);
+        if (diff > 0) {
+            cards.push({ label: 'Goal Day', val: diff + ' days', sub: P.goalDate });
+        }
+    }
+
+    grid.innerHTML = '';
+    cards.forEach(function(c) {
+        var card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = '<div class="card-label">' + c.label + '</div>' +
+            '<div class="card-val">' + c.val + '</div>' +
+            '<div class="card-sub">' + (c.sub || '') + '</div>';
+        grid.appendChild(card);
+    });
+})();
+</script>
+
+<!-- Daily log + macro bars renderer (SEPARATE error scope) -->
+<script>
+try {
+    (function() {
+        if (!window.DIET_TODAY) return;
+        var D = window.DIET_TODAY;
+
+        // Day header
+        var hdr = document.getElementById('dayHeader');
+        if (hdr) hdr.textContent = (D.date || '') + ' — ' + (D.dayType || 'Rest day');
+
+        var hasEx = D.exercise && D.exercise.length > 0;
+        var hasMeals = D.meals && D.meals.length > 0;
+
+        // =====================
+        // 3. EXERCISE JOURNAL
+        // =====================
+        if (hasEx) {
+            var exSec = document.getElementById('exerciseSection');
+            var ec = document.getElementById('exerciseCards');
+            if (exSec) exSec.style.display = 'block';
+            if (ec) {
+                ec.innerHTML = '';
+                var sortedEx = D.exercise.slice().sort(function(a,b) {
+                    return (a.time || '').localeCompare(b.time || '');
+                });
+                sortedEx.forEach(function(ex) {
+                    var card = document.createElement('div');
+                    card.className = 'ex-card';
+                    var timeStr = ex.time ? '<span style="color:var(--text2); font-size:11px;">' + ex.time + '</span> ' : '';
+                    var parts = [timeStr + '<strong>' + (ex.type || 'Exercise') + '</strong>'];
+                    if (ex.desc) parts[0] += ' — ' + ex.desc;
+                    var details = [];
+                    if (ex.duration) details.push(ex.duration);
+                    if (ex.distance) details.push(ex.distance + (ex.unit || ' km'));
+                    if (ex.pace) details.push(ex.pace);
+                    if (ex.avgHR) details.push(ex.avgHR + ' bpm');
+                    if (ex.calories) details.push(ex.calories + ' cal');
+                    if (details.length) parts.push(details.join(' &middot; '));
+                    card.innerHTML = parts.join('<br>');
+                    ec.appendChild(card);
+                });
+            }
+        }
+
+        // =====================
+        // 4. FOOD JOURNAL
+        // =====================
+        var totCal=0, totP=0, totF=0, totC=0, totFib=0;
+        if (hasMeals) {
+            var foodSec = document.getElementById('foodSection');
+            var mc = document.getElementById('mealsContent');
+            if (foodSec) foodSec.style.display = 'block';
+            if (mc) {
+                mc.innerHTML = '';
+                var sortedMeals = D.meals.slice().sort(function(a,b) {
+                    return (a.time || '').localeCompare(b.time || '');
+                });
+                var tbl = document.createElement('table');
+                tbl.className = 'food';
+                var rows = '<tr><th>Item</th><th>Amount</th><th class="num">Cal</th><th class="num">P</th><th class="num">F</th><th class="num">C</th><th class="num">Fib</th></tr>';
+                sortedMeals.forEach(function(meal) {
+                    var timeLabel = meal.time ? '<span style="color:var(--text2); font-weight:400; font-size:12px;">' + meal.time + '</span> ' : '';
+                    rows += '<tr class="meal-header"><td colspan="7">' + timeLabel + '<strong>' + (meal.name || '') + '</strong></td></tr>';
+                    var mCal=0, mP=0, mF=0, mC=0, mFib=0;
+                    (meal.items || []).forEach(function(it) {
+                        rows += '<tr><td>'+(it.item||'')+'</td><td>'+(it.amount||'')+'</td>';
+                        rows += '<td class="num">'+(it.cal||0)+'</td><td class="num">'+(it.p||0)+'</td>';
+                        rows += '<td class="num">'+(it.f||0)+'</td><td class="num">'+(it.c||0)+'</td>';
+                        rows += '<td class="num">'+(it.fiber||0)+'</td></tr>';
+                        mCal += it.cal||0; mP += it.p||0; mF += it.f||0; mC += it.c||0; mFib += it.fiber||0;
+                    });
+                    rows += '<tr class="subtotal"><td colspan="2">Subtotal</td><td class="num">'+mCal+'</td><td class="num">'+mP.toFixed(1)+'</td><td class="num">'+mF.toFixed(1)+'</td><td class="num">'+mC.toFixed(1)+'</td><td class="num">'+mFib.toFixed(1)+'</td></tr>';
+                    totCal+=mCal; totP+=mP; totF+=mF; totC+=mC; totFib+=mFib;
+                });
+                rows += '<tr class="grandtotal"><td colspan="2">Total</td><td class="num">'+totCal+'</td><td class="num">'+totP.toFixed(1)+'</td><td class="num">'+totF.toFixed(1)+'</td><td class="num">'+totC.toFixed(1)+'</td><td class="num">'+totFib.toFixed(1)+'</td></tr>';
+                tbl.innerHTML = rows;
+                mc.appendChild(tbl);
+            }
+        }
+
+        // =====================
+        // 2. MACRO REMAINING BARS
+        // =====================
+        // Under-floor "low" flags are hidden before this local hour (an unfilled
+        // floor mid-day is expected, not a problem). Configurable. [LOW_FLAG_HOUR]
+        var LOW_FLAG_HOUR = 16;
+
+        // Day-Style Registry: dayStyle -> bar TYPES only (numbers live in D.targets).
+        // Keep in sync with the canonical registry in Diet-Logging-Flow.md.
+        var STYLE_PROFILES = {
+            'normal':             { calType: 'ceiling', fatType: 'window',           carbInRemaining: true  },
+            'long-run':           { calType: 'ceiling', fatType: 'window',           carbInRemaining: true  },
+            'endurance':          { calType: 'ceiling', fatType: 'window',           carbInRemaining: true  },
+            'refeed':             { calType: 'ceiling', fatType: 'window',           carbInRemaining: true  },
+            'sick':               { calType: 'ceiling', fatType: 'window',           carbInRemaining: true  },
+            'carb-load-training': { calType: 'window',  fatType: 'minimize-ceiling', carbInRemaining: false },
+            'carb-load-race':     { calType: 'window',  fatType: 'minimize-ceiling', carbInRemaining: false },
+            'fasting':            { calType: 'ceiling', fatType: 'floor',            carbInRemaining: true  }
+        };
+        function resolveStyle(d) {
+            if (d.dayStyle && STYLE_PROFILES[d.dayStyle]) return STYLE_PROFILES[d.dayStyle];
+            if ((d.dayType || '').toUpperCase().indexOf('CARB-LOAD') >= 0) return STYLE_PROFILES['carb-load-race'];
+            return STYLE_PROFILES['normal'];
+        }
+        var style = resolveStyle(D);
+        var t = D.targets || {};
+        var showLowFlags = new Date().getHours() >= LOW_FLAG_HOUR;
+
+        var macroP = document.getElementById('macroPanel');
+        var macroB = document.getElementById('macroBars');
+        var remLine = document.getElementById('remainingLine');
+        if (macroP) macroP.style.display = 'block';
+
+        var exCal = 0;
+        (D.exercise || []).forEach(function(ex) { exCal += ex.calories || 0; });
+
+        // --- color logic (bar colors are NEVER time-gated) ---
+        function floorColor(pct)   { return pct < 50 ? RED : pct < 80 ? YEL : GRN; }
+        function ceilingColor(pct) { return pct <= 79 ? GRN : pct <= 100 ? YEL : RED; }
+        function windowColor(val, floor, cap) {
+            if (floor != null && val < floor) return RED;          // too low
+            if (cap != null && cap > 0) {
+                var cp = val / cap * 100;
+                if (cp > 100) return RED;                          // over cap
+                if (cp >= 80) return YEL;                          // approaching cap
+            }
+            return GRN;                                            // in window
+        }
+
+        // --- goal chip: floor (>=, green), ceiling (<=, blue), window (up-down, amber) ---
+        function chip(kind) {
+            var map = { floor: { s: '≥', c: GRN }, ceiling: { s: '≤', c: BLU }, window: { s: '↕', c: YEL } };
+            var m = map[kind] || map.ceiling;
+            var sp = document.createElement('span');
+            sp.textContent = m.s;
+            sp.style.color = m.c;
+            sp.style.fontWeight = '700';
+            sp.style.marginRight = '6px';
+            sp.style.display = 'inline-block';
+            return sp;
+        }
+
+        // type: 'floor' | 'ceiling' | 'minimize-ceiling' | 'window'
+        function buildBar(label, type, val, floor, cap, infoStr, flags) {
+            var pct, color;
+            if (type === 'floor') {
+                pct = floor > 0 ? Math.round(val / floor * 100) : 0;
+                color = floorColor(pct);
+            } else if (type === 'window') {
+                pct = cap > 0 ? Math.round(val / cap * 100) : 0;
+                color = windowColor(val, floor, cap);
+            } else { // ceiling / minimize-ceiling
+                pct = cap > 0 ? Math.round(val / cap * 100) : 0;
+                color = ceilingColor(pct);
+            }
+            var filled = Math.min(20, Math.round(pct * 20 / 100));
+            if (pct >= 100) filled = 20;
+            if (filled < 0) filled = 0;
+            var chipKind = type === 'floor' ? 'floor' : type === 'window' ? 'window' : 'ceiling';
+
+            var row = document.createElement('div');
+            row.className = 'bar-row';
+            var lbl = document.createElement('div');
+            lbl.className = 'bar-label';
+            lbl.textContent = label;
+            row.appendChild(lbl);
+            var blocks = document.createElement('div');
+            blocks.className = 'bar-blocks';
+            for (var i = 0; i < 20; i++) {
+                var b = document.createElement('div');
+                b.className = 'blk';
+                b.style.background = (i < filled) ? color : EMPTY;
+                blocks.appendChild(b);
+            }
+            row.appendChild(blocks);
+            var info = document.createElement('div');
+            info.className = 'bar-info';
+            info.appendChild(chip(chipKind));
+            var txt = document.createElement('span');
+            txt.textContent = infoStr;
+            info.appendChild(txt);
+            (flags || []).forEach(function(f) {
+                var sp = document.createElement('span');
+                sp.className = 'flag';
+                sp.textContent = ' ' + f;
+                info.appendChild(sp);
+            });
+            row.appendChild(info);
+            return row;
+        }
+
+        if (macroB) {
+            macroB.innerHTML = '';
+
+            // --- Calories: ceiling (normal) or window (carb-load) ---
+            var calTarget = t.calories || 2000;
+            var calCap = (t.caloriesCap != null) ? t.caloriesCap : null;
+            var calFlags = [], calInfo, calFloorArg, calCapArg;
+            if (style.calType === 'window') {
+                calFloorArg = calTarget;
+                calCapArg = (calCap != null) ? calCap : calTarget;
+                var calPctW = calCapArg > 0 ? Math.round(totCal / calCapArg * 100) : 0;
+                calInfo = totCal.toLocaleString() + ' / ' + calTarget.toLocaleString() + '–' + calCapArg.toLocaleString() + '  (' + calPctW + '%)';
+                if (totCal > calCapArg) calFlags.push('← over calorie target');
+            } else {
+                calFloorArg = null;
+                calCapArg = calTarget;
+                var calPctC = calTarget > 0 ? Math.round(totCal / calTarget * 100) : 0;
+                calInfo = totCal.toLocaleString() + ' / ' + calTarget.toLocaleString() + '  (' + calPctC + '%)';
+                if (totCal > calTarget) calFlags.push('← over calorie target');
+            }
+            macroB.appendChild(buildBar('Cal', style.calType, totCal, calFloorArg, calCapArg, calInfo, calFlags));
+
+            // --- Net line (informational, always gray-blue; never time-gated) ---
+            if (exCal > 0) {
+                var netRow = document.createElement('div');
+                netRow.className = 'bar-row';
+                var netL = document.createElement('div');
+                netL.className = 'bar-label';
+                netL.textContent = '  Net';
+                netL.style.fontStyle = 'italic';
+                netRow.appendChild(netL);
+                var netBlocks = document.createElement('div');
+                netBlocks.className = 'bar-blocks';
+                var netVal = totCal - exCal;
+                var tgtCal = calTarget;
+                var grossPct = tgtCal > 0 ? Math.round(totCal / tgtCal * 100) : 0;
+                var grossFilled = Math.min(20, Math.round(grossPct * 20 / 100));
+                var netPct = tgtCal > 0 ? Math.round(netVal / tgtCal * 100) : 0;
+                var netFilled = Math.max(0, Math.min(20, Math.round(netPct * 20 / 100)));
+                for (var n = 0; n < 20; n++) {
+                    var nb = document.createElement('div');
+                    nb.className = 'blk';
+                    if (n < netFilled) {
+                        nb.style.background = BLU;
+                    } else if (n < grossFilled) {
+                        nb.style.background = 'repeating-linear-gradient(45deg,' + BLU + ',' + BLU + ' 2px, transparent 2px, transparent 4px)';
+                        nb.style.border = '1px solid ' + BLU;
+                        nb.style.boxSizing = 'border-box';
+                    } else {
+                        nb.style.background = EMPTY;
+                    }
+                    netBlocks.appendChild(nb);
+                }
+                netRow.appendChild(netBlocks);
+                var netInfo = document.createElement('div');
+                netInfo.className = 'bar-info';
+                netInfo.textContent = netVal + ' net (' + netPct + '%)  · ' + exCal + ' cal burned';
+                netRow.appendChild(netInfo);
+                macroB.appendChild(netRow);
+            }
+
+            // --- Protein: floor ---
+            var pTarget = t.protein || 150;
+            var pPct = pTarget > 0 ? Math.round(totP / pTarget * 100) : 0;
+            var pFlags = [];
+            if (showLowFlags && totP < pTarget * 0.9) pFlags.push('← low protein');
+            macroB.appendChild(buildBar('Protein', 'floor', totP, pTarget, null,
+                Math.round(totP * 10) / 10 + 'g / ' + pTarget + 'g  (' + pPct + '%)', pFlags));
+
+            // --- Carbs: floor ---
+            var cTarget = t.carbs || 180;
+            var cPct = cTarget > 0 ? Math.round(totC / cTarget * 100) : 0;
+            var cFlags = [];
+            if (showLowFlags && totC < cTarget) cFlags.push('← low carbs');
+            macroB.appendChild(buildBar('Carbs', 'floor', totC, cTarget, null,
+                Math.round(totC * 10) / 10 + 'g / ' + cTarget + 'g  (' + cPct + '%)', cFlags));
+
+            // --- Fat: window (normal) | minimize-ceiling (carb-load) | floor (fasting) ---
+            var fCap = t.fat || 70;
+            var fFloor = (t.fatFloor != null) ? t.fatFloor : null;
+            var fFlags = [], fInfo, fBarType, fFloorArg, fCapArg;
+            if (style.fatType === 'window' && fFloor != null) {
+                fBarType = 'window'; fFloorArg = fFloor; fCapArg = fCap;
+                var fPctW = fCap > 0 ? Math.round(totF / fCap * 100) : 0;
+                fInfo = Math.round(totF * 10) / 10 + 'g / ' + fFloor + '–' + fCap + 'g  (' + fPctW + '%)';
+                if (showLowFlags && totF < fFloor) fFlags.push('← fat under floor');
+                if (totF > fCap) fFlags.push('← fat over cap');
+            } else if (style.fatType === 'floor') {
+                fBarType = 'floor'; fFloorArg = (fFloor != null) ? fFloor : fCap; fCapArg = null;
+                var fPctF = fFloorArg > 0 ? Math.round(totF / fFloorArg * 100) : 0;
+                fInfo = Math.round(totF * 10) / 10 + 'g / ' + fFloorArg + 'g  (' + fPctF + '%)';
+                if (showLowFlags && totF < fFloorArg) fFlags.push('← fat under floor');
+            } else { // minimize-ceiling, or window with no floor defined (back-compat)
+                fBarType = 'ceiling'; fFloorArg = null; fCapArg = fCap;
+                var fPctC = fCap > 0 ? Math.round(totF / fCap * 100) : 0;
+                fInfo = Math.round(totF * 10) / 10 + 'g / ' + fCap + 'g  (' + fPctC + '%)';
+                if (totF > fCap) fFlags.push('← fat over cap');
+            }
+            macroB.appendChild(buildBar('Fat', fBarType, totF, fFloorArg, fCapArg, fInfo, fFlags));
+
+            // --- Fiber: floor, SUSPENDED on carb-load days (window calType) ---
+            // Low-residue eating before a long effort is deliberate, so on
+            // carb-load days show the total as a plain number, no bar, no color.
+            var fibTarget = (typeof t.fiber === 'number') ? t.fiber : 38;
+            if (style.calType === 'window') {
+                var fibRow = document.createElement('div');
+                fibRow.className = 'bar-row';
+                var fibL = document.createElement('div');
+                fibL.className = 'bar-label';
+                fibL.textContent = 'Fiber';
+                fibRow.appendChild(fibL);
+                var fibBlocks = document.createElement('div');
+                fibBlocks.className = 'bar-blocks';
+                fibRow.appendChild(fibBlocks);
+                var fibInfo = document.createElement('div');
+                fibInfo.className = 'bar-info';
+                fibInfo.textContent = (Math.round(totFib * 10) / 10) + 'g total · floor suspended (carb-load)';
+                fibRow.appendChild(fibInfo);
+                macroB.appendChild(fibRow);
+            } else {
+                var fibPct = fibTarget > 0 ? Math.round(totFib / fibTarget * 100) : 0;
+                var fibFlags = [];
+                if (showLowFlags && totFib < fibTarget * 0.5) fibFlags.push('← low fiber');
+                macroB.appendChild(buildBar('Fiber', 'floor', totFib, fibTarget, null,
+                    Math.round(totFib * 10) / 10 + 'g / ' + fibTarget + 'g  (' + fibPct + '%)', fibFlags));
+            }
+
+            // --- Legend (bottom of panel; each item fully colored) ---
+            var legend = document.createElement('div');
+            legend.style.fontSize = '10px';
+            legend.style.marginTop = '10px';
+            legend.style.lineHeight = '1.4';
+            legend.innerHTML =
+                '<span style="color:' + GRN + '">≥ floor (at or above)</span>' +
+                '<span style="color:var(--text2)">  ·  </span>' +
+                '<span style="color:' + BLU + '">≤ cap (at or under)</span>' +
+                '<span style="color:var(--text2)">  ·  </span>' +
+                '<span style="color:' + YEL + '">↕ window (in range)</span>';
+            macroB.appendChild(legend);
+        }
+
+        if (remLine) {
+            var remCal = (t.calories||2000) - totCal;
+            var remP = (t.protein||150) - totP;
+            var remTxt = 'Remaining: ~' + Math.max(0,remCal).toLocaleString() + ' cal, ' + Math.max(0,Math.round(remP)) + 'g protein';
+            if (style.carbInRemaining && t.carbs) {
+                remTxt += ', ' + Math.max(0, Math.round(t.carbs - totC)) + 'g carbs';
+            }
+            remLine.textContent = remTxt;
+        }
+    })();
+} catch(e) {
+    console.error('Daily log render error:', e);
+}
+</script>
+
+<!-- Meal Ideas renderer (from proposed-diet-today.js — optional) -->
+<script>
+try {
+    (function() {
+        var P = window.PROPOSED_DIET;
+        if (!P || !P.ideas || P.ideas.length === 0) return;
+        var sec = document.getElementById('mealIdeasSection');
+        var content = document.getElementById('mealIdeasContent');
+        if (!sec || !content) return;
+        sec.style.display = '';
+
+        var tbl = document.createElement('table');
+        tbl.className = 'food';
+        var hdr = tbl.insertRow();
+        ['Idea','Amount','Cal','P','F','C'].forEach(function(h) {
+            var th = document.createElement('th');
+            th.textContent = h;
+            th.style.textAlign = h === 'Idea' || h === 'Amount' ? 'left' : 'right';
+            th.style.padding = '4px 8px';
+            th.style.borderBottom = '1px solid var(--border)';
+            th.style.fontSize = '11px';
+            th.style.color = 'var(--text2)';
+            hdr.appendChild(th);
+        });
+
+        P.ideas.forEach(function(meal) {
+            var mhdr = tbl.insertRow();
+            var mhd = document.createElement('td');
+            mhd.colSpan = 6;
+            mhd.style.padding = '8px 8px 4px';
+            mhd.style.fontWeight = '600';
+            mhd.innerHTML = (meal.time ? '<span style="color:var(--text2);font-weight:400;">' + meal.time + '</span> ' : '') + meal.name;
+            mhdr.appendChild(mhd);
+
+            meal.items.forEach(function(it) {
+                var r = tbl.insertRow();
+                [{v:it.item,a:'left'},{v:it.amount,a:'left'},{v:Math.round(it.cal),a:'right'},{v:Math.round(it.p)+'g',a:'right'},{v:Math.round(it.f)+'g',a:'right'},{v:Math.round(it.c)+'g',a:'right'}].forEach(function(d) {
+                    var td = document.createElement('td');
+                    td.textContent = d.v;
+                    td.style.textAlign = d.a;
+                    td.style.padding = '2px 8px';
+                    r.appendChild(td);
+                });
+            });
+        });
+
+        content.appendChild(tbl);
+        if (P.source) {
+            var src = document.createElement('div');
+            src.style.fontSize = '11px';
+            src.style.color = 'var(--text2)';
+            src.style.marginTop = '8px';
+            src.textContent = 'Source: ' + P.source;
+            content.appendChild(src);
+        }
+        if (P.gapNote) {
+            var gapEl = document.getElementById('mealIdeasGap');
+            if (gapEl) gapEl.textContent = P.gapNote;
+        }
+    })();
+} catch(e) { console.error('Meal ideas render error:', e); }
+</script>
+
+<!-- Coach's Notes + What's Ahead (from diet-coach-notes.js — optional) -->
+<script>
+try {
+    (function() {
+        var C = window.DIET_COACH;
+        if (!C) return;
+
+        // Coach's Notes
+        if (C.notes && C.notes.length) {
+            var sec = document.getElementById('coachSection');
+            var el = document.getElementById('coachNotes');
+            if (sec && el) {
+                sec.style.display = '';
+                el.innerHTML = '<div class="notes-title">' + (C.title || "Coach's Notes") + '</div><ul>' +
+                    C.notes.map(function(n) { return '<li>' + n + '</li>'; }).join('') + '</ul>';
+            }
+        }
+
+        // What's Ahead
+        if (C.ahead && C.ahead.length) {
+            var aSec = document.getElementById('aheadSection');
+            var aEl = document.getElementById('aheadNotes');
+            if (aSec && aEl) {
+                aSec.style.display = '';
+                aEl.innerHTML = '<ul>' + C.ahead.map(function(n) { return '<li>' + n + '</li>'; }).join('') + '</ul>';
+            }
+        }
+
+        // Quote
+        if (C.quote && C.quote.text) {
+            var qb = document.getElementById('quoteBlock');
+            if (qb) {
+                qb.style.display = '';
+                qb.innerHTML = '&ldquo;' + C.quote.text + '&rdquo;<br><span style="font-size:12px; font-style:normal;">&mdash; ' + (C.quote.author || '') + '</span>';
+            }
+        }
+    })();
+} catch(e) { console.error('Coach notes render error:', e); }
+</script>
+
+<!-- Weight Trend Chart (from diet-weight-history.js — optional) -->
+<script>
+try {
+    (function() {
+        var H = window.DIET_WEIGHT_HISTORY;
+        if (!H || !H.length || H.length < 2) return;
+
+        var sec = document.getElementById('weightChartSection');
+        if (sec) sec.style.display = '';
+
+        var ctx = document.getElementById('weightChart');
+        if (!ctx) return;
+
+        var labels = H.map(function(e) { return e.d; });
+        var data = H.map(function(e) { return e.w; });
+
+        // 7-day moving average, computed from the history array
+        var ma = [];
+        for (var i = 0; i < data.length; i++) {
+            var s = Math.max(0, i - 6);
+            var win = data.slice(s, i + 1);
+            ma.push(Math.round(win.reduce(function(a,b){ return a + b; }, 0) / win.length * 10) / 10);
+        }
+
+        var datasets = [
+            { label: 'Daily Weight', data: data,
+              borderColor: '#378ADD', backgroundColor: 'transparent', borderWidth: 1.5,
+              pointRadius: 3, pointBackgroundColor: '#378ADD', tension: 0 },
+            { label: '7-Day Avg', data: ma,
+              borderColor: '#639922', backgroundColor: 'transparent', borderWidth: 2,
+              borderDash: [5,5], pointRadius: 0, tension: 0.3 }
+        ];
+
+        // Goal weight lines -- one horizontal dashed line per goal in diet-progress.js
+        var P = window.DIET_PROGRESS || {};
+        var goalColors = ['#E24B4A', '#999', '#EF9F27'];
+        var goalWeights = [];
+        (P.goals || []).forEach(function(g, gi) {
+            if (typeof g.weight !== 'number') return;
+            goalWeights.push(g.weight);
+            datasets.push({
+                label: (g.label || 'Goal') + ' (' + g.weight + ')',
+                data: Array(data.length).fill(g.weight),
+                borderColor: goalColors[gi % goalColors.length],
+                borderWidth: gi === 0 ? 2 : 1,
+                borderDash: gi === 0 ? [5,5] : [3,3],
+                pointRadius: 0, fill: false
+            });
+        });
+
+        // Y-axis bounds from the data + goals, with padding -- never hardcoded
+        var allVals = data.concat(goalWeights);
+        var yMin = Math.floor(Math.min.apply(null, allVals) / 5) * 5 - 5;
+        var yMax = Math.ceil(Math.max.apply(null, allVals) / 5) * 5 + 5;
+
+        new Chart(ctx, {
+            type: 'line',
+            data: { labels: labels, datasets: datasets },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: true, labels: { color: isDark ? '#999' : '#666', font: { size: 11 } } },
+                    tooltip: { mode: 'index', intersect: false }
+                },
+                scales: {
+                    y: {
+                        min: yMin, max: yMax,
+                        ticks: { color: isDark ? '#999' : '#666' },
+                        grid: { color: isDark ? '#3a3a3a' : '#e0e0e0' }
+                    },
+                    x: {
+                        ticks: { color: isDark ? '#999' : '#666', maxTicksLimit: 14, maxRotation: 45 },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    })();
+} catch(e) {
+    console.error('Weight chart error:', e);
+    var errEl = document.getElementById('chartErr');
+    if (errEl) { errEl.style.display = 'block'; errEl.textContent = 'Chart error: ' + e.message; }
+}
+</script>
+
+<!-- Progress & Pace bars (from diet-progress.js -- optional).
+     Algorithms are baked in here (HARD RULE, see Fancy-Dashboard-Build.md):
+     goals = fill-to-position; Pace = range-as-subset with converged-range
+     collapse and off-scale guard; FatLb/LeanD = single-block highlight.
+     The data file supplies only numbers, zone boundaries, and labels. -->
+<script>
+try {
+    (function() {
+        var P = window.DIET_PROGRESS;
+        if (!P) return;
+        var hasGoals = P.goals && P.goals.length;
+        var hasPace = (typeof P.troughPace === 'number') && (typeof P.rawPace === 'number') && (typeof P.paceScale === 'number');
+        if (!hasGoals && !hasPace) return;
+
+        var sec = document.getElementById('progressSection');
+        var panel = document.getElementById('progressPanel');
+        if (!sec || !panel) return;
+        sec.style.display = '';
+        panel.innerHTML = '';
+
+        function barRow(label, info) {
+            var row = document.createElement('div');
+            row.className = 'bar-row';
+            var lbl = document.createElement('div');
+            lbl.className = 'bar-label';
+            lbl.textContent = label;
+            row.appendChild(lbl);
+            var blocks = document.createElement('div');
+            blocks.className = 'bar-blocks';
+            row.appendChild(blocks);
+            var inf = document.createElement('div');
+            inf.className = 'bar-info';
+            inf.textContent = info || '';
+            row.appendChild(inf);
+            panel.appendChild(row);
+            return blocks;
+        }
+        function subLine(text) {
+            if (!text) return;
+            var d = document.createElement('div');
+            d.className = 'bar-sub';
+            d.textContent = text;
+            panel.appendChild(d);
+        }
+        function paintBlocks(container, colorFn) {
+            for (var i = 0; i < 20; i++) {
+                var b = document.createElement('div');
+                b.className = 'blk';
+                b.style.background = colorFn(i) || EMPTY;
+                container.appendChild(b);
+            }
+        }
+        // Zone boundaries come from the data file (phase config) -- never
+        // hardcoded here. Yellow is slow-side only; TOO FAST is orange;
+        // blue is reserved for GAINING.
+        var Z = P.paceZones || {};
+        function zoneColor(v) {
+            if (v < 0) return BLU;                                    // GAINING
+            if (typeof Z.slowMin === 'number' && v < Z.slowMin) return RED;   // TOO SLOW
+            if (typeof Z.idealMin === 'number' && v < Z.idealMin) return YEL; // SLOW
+            if (typeof Z.idealMax === 'number' && v > Z.idealMax) return ORG; // TOO FAST
+            return GRN;                                               // IDEAL
+        }
+        function nearestBlock(pace, blockSize) {
+            var best = 0, bestD = Infinity;
+            for (var i = 0; i < 20; i++) {
+                var d = Math.abs((i + 0.5) * blockSize - pace);
+                if (d < bestD) { bestD = d; best = i; }
+            }
+            return best;
+        }
+
+        // --- Goal progress bars: fill-to-position (the ONLY fill-to-position
+        //     bars). Color = trough zone color (barColor), never raw. ---
+        if (hasGoals) {
+            P.goals.forEach(function(g) {
+                var blocks = barRow(g.label || 'Goal', g.info);
+                var filled = Math.max(0, Math.min(20, g.filled || 0));
+                paintBlocks(blocks, function(i) { return i < filled ? (P.barColor || GRN) : EMPTY; });
+            });
+        }
+
+        // --- Pace bar: range-as-subset. Most blocks stay EMPTY; only blocks
+        //     whose center falls inside [low, high] get their zone color. ---
+        if (hasPace) {
+            var bs = P.paceScale / 20;
+            var low = Math.min(P.troughPace, P.rawPace);
+            var high = Math.max(P.troughPace, P.rawPace);
+            var blocks = barRow('Pace', P.paceInfo);
+            if (high < 0) {
+                // Pure gaining: leftmost block, blue warning anchor
+                paintBlocks(blocks, function(i) { return i === 0 ? BLU : EMPTY; });
+            } else if ((high - low) < 0.1) {
+                // Converged-range collapse: a single block at the value
+                var target = nearestBlock(high, bs);
+                paintBlocks(blocks, function(i) { return i === target ? zoneColor(high) : EMPTY; });
+            } else if (low > P.paceScale) {
+                // Entirely off scale: rightmost block so the bar never
+                // renders empty on a real signal (label carries "(off scale)")
+                paintBlocks(blocks, function(i) { return i === 19 ? zoneColor(low) : EMPTY; });
+            } else {
+                paintBlocks(blocks, function(i) {
+                    var v = (i + 0.5) * bs;
+                    return (v >= low && v <= high) ? zoneColor(v) : EMPTY;
+                });
+            }
+            (P.paceSubs || []).forEach(subLine);
+        }
+
+        // --- FatLb / LeanD: single-block highlight, colors from the data
+        //     file. Skipped entirely when composition data is absent. ---
+        if (typeof P.fatPace === 'number' && hasPace) {
+            var fbs = P.paceScale / 20;
+            var fBlocks = barRow('FatLb', P.fatInfo);
+            var fTarget = P.fatPace > P.paceScale ? 19 : nearestBlock(P.fatPace, fbs);
+            paintBlocks(fBlocks, function(i) { return i === fTarget ? (P.fatColor || GRN) : EMPTY; });
+            subLine(P.fatSub);
+        }
+        if (typeof P.leanPace === 'number' && typeof P.leanScale === 'number') {
+            var lbs2 = P.leanScale / 20;
+            var lBlocks = barRow('LeanΔ', P.leanInfo);
+            if (P.leanPace < 0) {
+                // GAINING lean mass: leftmost block, blue
+                paintBlocks(lBlocks, function(i) { return i === 0 ? BLU : EMPTY; });
+            } else {
+                var lTarget = P.leanPace > P.leanScale ? 19 : nearestBlock(P.leanPace, lbs2);
+                paintBlocks(lBlocks, function(i) { return i === lTarget ? (P.leanColor || GRN) : EMPTY; });
+            }
+            subLine(P.leanSub);
+        }
+
+        if (P.trajectory) {
+            var traj = document.createElement('div');
+            traj.className = 'traj';
+            traj.style.marginTop = '12px';
+            traj.textContent = 'Trajectory: ' + P.trajectory;
+            panel.appendChild(traj);
+        }
+    })();
+} catch(e) { console.error('Progress bars error:', e); }
+</script>
+
+<!-- Body Composition (from DIET_TODAY.weight -- self-hides when BF% absent;
+     never carried forward from a previous weigh-in) -->
+<script>
+try {
+    (function() {
+        var D = window.DIET_TODAY;
+        if (!D || !D.weight || !D.weight.lbs || !D.weight.bf) return;
+        var sec = document.getElementById('compSection');
+        var panel = document.getElementById('compPanel');
+        if (!sec || !panel) return;
+        sec.style.display = '';
+
+        var lbs = D.weight.lbs;
+        var bf = D.weight.bf;
+        var mm = D.weight.mm || 0;
+        var fatLbs = Math.round(lbs * bf / 100 * 10) / 10;
+        var leanLbs = Math.round((lbs - fatLbs) * 10) / 10;
+        var leanPct = Math.round((100 - bf) * 10) / 10;
+
+        panel.innerHTML =
+            '<div class="comp-bar">' +
+                '<div class="comp-seg" style="flex:' + leanLbs + '; background:' + GRN + ';">' + leanLbs + ' lbs lean (' + leanPct + '%)</div>' +
+                '<div class="comp-seg" style="flex:' + fatLbs + '; background:' + RED + ';">' + fatLbs + ' lbs fat (' + bf + '%)</div>' +
+            '</div>' +
+            (mm ? '<div class="traj">Scale muscle mass: ' + mm + ' lbs &middot; Fat mass: ' + fatLbs + ' lbs</div>' : '');
+    })();
+} catch(e) { console.error('Composition render error:', e); }
+</script>
+</body>
+</html>
