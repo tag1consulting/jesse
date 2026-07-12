@@ -14,6 +14,7 @@
 - [Overview](./recipes/index.md)
 - [Birthday and Date Reminders](./recipes/reminders.md)
 - [Email Integration](./recipes/email.md)
+- [Slack Integration](./recipes/slack.md)
 - [WhatsApp Integration](./recipes/whatsapp.md)
 - [Draft Lifecycle](./recipes/draft-lifecycle.md)
 - [Meeting Agendas](./recipes/meeting-agendas.md)
