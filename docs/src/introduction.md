@@ -1,128 +1,133 @@
-<div class="jesse-hero">
-  <img src="images/jesse-logo.svg" alt="Jesse logo">
-  <h1>Jesse</h1>
-  <p class="jesse-tagline">An AI assistant built from a folder of text files. No product, no account, no lock-in.</p>
-  <p class="jesse-subline">You own the files. The agent does the legwork. Nothing gets sent without your sign-off.</p>
+<div class="jl">
+<section class="jl-band jl-band-white jl-hero">
+<div class="jl-inner">
+<div>
+<p class="t1-eyebrow">Open source, from Tag1 Consulting</p>
+<h1 id="jesse">An AI assistant built from a folder of text files</h1>
+<p class="jl-lede">Jesse pairs an AI agent with your notes, tasks and contacts in markdown, and one instruction file that tells the agent how you work. Say "good morning" and it works through your notes and whatever tools you've connected, then hands you a briefing. I'm Jeremy Andrews, and I built it to run my own day at Tag1 and at&nbsp;home.</p>
+<div class="jl-actions">
+<a class="jl-btn" href="getting-started.html"><span>Quick start</span><span aria-hidden="true"></span></a>
+<a class="jl-link" href="how-jesse-works.html">How Jesse works</a>
 </div>
-
-<div class="jesse-cta">
-  <a class="primary" href="getting-started.html">Set it up in 10 minutes</a>
-  <a class="secondary" href="how-jesse-works.html">See how it works</a>
+<p class="jl-note">Jesse is free and MIT licensed, and <a class="jl-link" href="https://github.com/tag1consulting/jesse/tree/main/template">the template is on GitHub</a>. You'll need an AI agent that can work with files on your computer and call tools, such as Claude in Cowork or Claude Code, and you pay that agent's provider.</p>
 </div>
-
-Your day is probably spread across a handful of apps -- email, calendar, Slack, a task list, for example, though everyone's mix is different. Whatever tools your agent can reach, Jesse gathers what's new, sorts it by what actually needs you, and hands you one briefing.
-
-<p class="jesse-section-label">An example morning briefing</p>
-
-<div class="jesse-briefing">
-  <div class="titlebar"><span class="dots"><span></span><span></span><span></span></span> morning briefing</div>
-  <pre>
-📅 Calendar -- Today
-- 10:00 AM -- 1:1 with Sarah (prep: review her project update from Friday)
-- 2:00 PM  -- Team standup
-&nbsp;
-📧 Email -- 6 new
-🔴 Needs response today: Client asking about timeline for deliverable
-🟡 This week: Vendor sent contract for review
-🟢 FYI: 4 automated notifications
-&nbsp;
-💬 Slack
-- @mention in #projects -- someone asking about deploy schedule
-- DM from manager with a question about budget
-&nbsp;
-🔔 Reminders
-- Follow up with Alex on proposal (set 3 days ago)</pre>
+<div class="jl-hero-art t1-frame"><img src="images/jesse-logo.svg" alt="Jesse logo, a lowercase j followed by a &gt; prompt"></div>
 </div>
-
-You scan it, correct anything it got wrong, and start your day already caught up. Behind that briefing, Jesse has also updated your task list, prepared agendas for today's meetings, and acted on any notes you dropped in from your phone.
-
-<p class="jesse-section-label">How it works</p>
-
-<div class="jesse-diagram">
-<svg viewBox="0 0 640 265" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram: your tools feed an AI agent, guided by an instruction file, which reads and writes your vault and delivers a briefing to you">
-  <defs>
-    <linearGradient id="jgrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#6366F1"/>
-      <stop offset="1" stop-color="#7C3AED"/>
-    </linearGradient>
-    <marker id="jarrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-      <path d="M0,0 L8,4 L0,8 z" fill="currentColor" opacity="0.7"/>
-    </marker>
-  </defs>
-  <g font-family="sans-serif" font-size="13" fill="currentColor">
-    <rect x="245" y="10" width="150" height="46" rx="8" fill="none" stroke="url(#jgrad)" stroke-width="2"/>
-    <text x="320" y="29" text-anchor="middle" font-weight="bold">Instruction file</text>
-    <text x="320" y="46" text-anchor="middle" font-size="11" opacity="0.75">your rules and routines</text>
-    <line x1="320" y1="56" x2="320" y2="92" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)" opacity="0.7"/>
-    <rect x="15" y="97" width="150" height="72" rx="8" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.8"/>
-    <text x="90" y="122" text-anchor="middle" font-weight="bold">Your tools</text>
-    <text x="90" y="140" text-anchor="middle" font-size="11" opacity="0.75">email, calendar, chat,</text>
-    <text x="90" y="155" text-anchor="middle" font-size="11" opacity="0.75">whatever you use</text>
-    <rect x="245" y="97" width="150" height="72" rx="8" fill="url(#jgrad)"/>
-    <text x="320" y="128" text-anchor="middle" font-weight="bold" fill="#fff">AI agent</text>
-    <text x="320" y="146" text-anchor="middle" font-size="11" fill="#fff" opacity="0.9">any one you choose</text>
-    <rect x="475" y="97" width="150" height="72" rx="8" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.8"/>
-    <text x="550" y="122" text-anchor="middle" font-weight="bold">Your vault</text>
-    <text x="550" y="140" text-anchor="middle" font-size="11" opacity="0.75">markdown files,</text>
-    <text x="550" y="155" text-anchor="middle" font-size="11" opacity="0.75">Jesse's memory</text>
-    <line x1="165" y1="133" x2="240" y2="133" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)" opacity="0.7"/>
-    <text x="202" y="125" text-anchor="middle" font-size="10" opacity="0.7">reads</text>
-    <line x1="400" y1="125" x2="470" y2="125" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)" opacity="0.7"/>
-    <line x1="470" y1="145" x2="400" y2="145" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)" opacity="0.7"/>
-    <text x="435" y="117" text-anchor="middle" font-size="10" opacity="0.7">writes</text>
-    <text x="435" y="160" text-anchor="middle" font-size="10" opacity="0.7">remembers</text>
-    <line x1="320" y1="169" x2="320" y2="205" stroke="currentColor" stroke-width="1.5" marker-end="url(#jarrow)" opacity="0.7"/>
-    <text x="320" y="228" text-anchor="middle" font-weight="bold">You</text>
-    <text x="320" y="246" text-anchor="middle" font-size="11" opacity="0.75">one briefing, drafts to review, nothing sent without approval</text>
-  </g>
-</svg>
+</section>
+<section class="jl-band jl-band-navy">
+<div class="jl-inner jl-works t1-frame">
+<div class="jl-head jl-head-center">
+<p class="t1-eyebrow">The parts</p>
+<h2 id="the-parts">What Jesse is made of</h2>
 </div>
-
-Three parts, each one you can open and read:
-
-<div class="jesse-grid">
-  <div class="card">
-    <span class="kicker">Memory</span>
-    <h3>The vault</h3>
-    <p>A folder of markdown files: your tasks, projects, people, notes. The agent starts every session fresh; the vault is what persists. You can read every bit of it in any editor.</p>
-  </div>
-  <div class="card">
-    <span class="kicker">Process</span>
-    <h3>The instruction file</h3>
-    <p>One file (<code>JESSE.md</code>) that tells the agent who you are, what your rules are, and what to do each morning. Every time it gets something wrong, you tighten a rule.</p>
-  </div>
-  <div class="card">
-    <span class="kicker">Engine</span>
-    <h3>The agent</h3>
-    <p>Any AI agent that can read files and call tools -- Claude Cowork and Claude Code work out of the box. Switch providers tomorrow and the vault comes with you.</p>
-  </div>
+<div class="jl-cols">
+<div class="jl-col">
+<h3 id="the-vault">The vault</h3>
+<p>The vault is a folder of markdown files holding your task list (<code>Dashboard.md</code>), today's plan (<code>Today.md</code>), projects, people and reminders. At the start of every session the agent reads the task list and today's plan to see where things stand; it doesn't need to remember anything from the last one.</p>
 </div>
-
-<p class="jesse-section-label">Why people trust it</p>
-
-<div class="jesse-grid">
-  <div class="card">
-    <h3>Drafts, never sends</h3>
-    <p>Jesse writes replies and messages into a drafts folder and waits. Nothing leaves your outbox without your explicit approval.</p>
-  </div>
-  <div class="card">
-    <h3>Plain files you own</h3>
-    <p>No database, no export button, no subscription. Markdown in folders, versionable with git, readable in twenty years.</p>
-  </div>
-  <div class="card">
-    <h3>You make the calls</h3>
-    <p>Jesse surfaces, flags, and drafts. It shows its judgment calls so you can correct them. It doesn't decide strategy or commit you to anything.</p>
-  </div>
+<div class="jl-col">
+<h3 id="the-instruction-file">The instruction file</h3>
+<p>The instruction file, <code>JESSE.md</code>, is where the magic happens. It tells the agent who you are, what your priorities look like, what tools are connected, and exactly what to do when you start a session. When you correct the agent, it fixes the rule in <code>JESSE.md</code> (or in a guideline file <code>JESSE.md</code> points to), and the next session reads the fixed version.</p>
 </div>
-
-## Not a Product
-
-There's nothing to install, no account to create, nothing to pay for. Jesse is a method: a vault structure, an instruction file, and a set of patterns for working with an AI agent, refined through months of daily use. Copy the template, point your agent at it, and make it yours.
-
-It was built to solve a real problem -- managing the daily overhead of a demanding workload without adding yet another app to the stack. Read the full story in the [blog post on Tag1's website](https://www.tag1.com/blog/building-my-ai-assistant/).
-
-## Where to Go Next
-
-- **[How Jesse Works](./how-jesse-works.md)** -- the mental model, a morning traced end to end, and the safety design.
-- **[Quick Start](./getting-started.md)** -- copy the template and run your first session in about 10 minutes.
-- **[Recipes](./recipes/index.md)** -- add capabilities piecemeal: email, Slack, meeting agendas, research, reminders, and more.
+<div class="jl-col">
+<h3 id="the-agent">The agent</h3>
+<p>I use Claude in Cowork and in Claude Code. If you use Claude too, rename <code>JESSE.md</code> to <code>CLAUDE.md</code>. Other agents should work after some changes to the instruction file, and if you switch, the vault comes with you.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="jl-band jl-band-blue">
+<div class="jl-inner jl-brief-wrap">
+<div class="jl-head">
+<p class="t1-eyebrow">Start of day</p>
+<h2 id="start-of-day">What a morning looks like</h2>
+<p>Jesse reads the notes you've dropped from your phone or desktop into the vault's <code>Inbox/</code> folder, plus whatever you've connected (email, calendar, Slack, WhatsApp). It does the research or drafting your notes asked for, rebuilds <code>Today.md</code> and writes agendas for today's meetings.</p>
+<p>The briefing includes Jesse's judgment calls (what it decided, and what it chose not to do), so you can catch a bad decision early.</p>
+</div>
+<div>
+<div class="jl-window">
+<div class="jl-window-bar"><span>Morning briefing</span><span>Tuesday</span></div>
+<div class="jl-brief">
+<p class="jl-brief-label">Calendar</p>
+<dl>
+<dt>10:00</dt><dd>1:1 with Sarah. Prep notes from her Friday update are in the agenda.</dd>
+<dt>14:00</dt><dd>Team standup. Agenda ready.</dd>
+</dl>
+<p class="jl-brief-label">Email, 6 new</p>
+<dl>
+<dt><span class="jl-flag jl-flag-now"></span>Urgent</dt><dd>Client asking for a delivery date</dd>
+<dt><span class="jl-flag jl-flag-week"></span>This Week</dt><dd>Vendor contract to review</dd>
+<dt><span class="jl-flag jl-flag-fyi"></span>FYI</dt><dd>4 automated notifications</dd>
+</dl>
+<p class="jl-brief-label">From your notes</p>
+<dl>
+<dt>Done</dt><dd>"Research office insurance renewals": the report is in <code>Projects/Research/</code></dd>
+</dl>
+<div class="jl-judgment"><p><strong>Judgment calls:</strong> Put the vendor contract under This Week, not Urgent; they want it back by Friday. Left the 4 notifications off <code>Dashboard.md</code>. Tell me if either is wrong.</p></div>
+</div>
+</div>
+<p class="jl-caption">This is a made-up example; yours will look like what your instruction file asks for.</p>
+</div>
+</div>
+</section>
+<section class="jl-band jl-band-white">
+<div class="jl-inner">
+<div class="jl-head">
+<p class="t1-eyebrow">Ground rules</p>
+<h2 id="ground-rules">The decisions stay yours</h2>
+</div>
+<div class="jl-cards">
+<div class="jl-card t1-frame">
+<h3 id="your-notes-give-the-orders">Your notes give the orders</h3>
+<p>Notes you put in <code>Inbox/</code> are instructions to the agent. Email and chat are only information, so if a message wants something done, the agent checks with you first. Replies and agendas it writes go in <code>Projects/drafts/</code> for you to review and edit. Whether it can send anything itself depends on the tools you connect and your agent's approval settings.</p>
+</div>
+<div class="jl-card t1-frame">
+<h3 id="plain-files">Plain files</h3>
+<p>Your notes, tasks and rules are plain markdown that any editor can open (I&nbsp;use Obsidian). If you keep the vault in git, every change the agent makes to it shows up as a diff you can review or roll back.</p>
+</div>
+<div class="jl-card t1-frame">
+<h3 id="tracked">Tracked until you sign off on it</h3>
+<p>Anything from your <code>Inbox/</code> notes, email or chat that needs action goes on <code>Dashboard.md</code> with the date it was added, and stays there until you say it's done.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="jl-band jl-band-cream">
+<div class="jl-inner jl-story">
+<div>
+<h2 class="t1-eyebrow" id="why-i-built-it">Why I built it</h2>
+<blockquote>
+<p>I run Tag1, help where I can at my wife's vineyard, and have two young kids, chickens, dogs, cats and a house in Tuscany that always needs something fixed. My TODO list is relentless.</p>
+<p>I wanted one place to look each morning instead of dozens, so I could get through the administrative overhead and then close the laptop. I still wanted to make the decisions myself. Jesse is what came out of that, and it keeps changing as I find better ways to do things.</p>
+<p class="jl-sig">Jeremy Andrews<span>Founding Partner and CEO, Tag1 Consulting</span></p>
+</blockquote>
+</div>
+<div class="jl-reads">
+<h3 class="t1-eyebrow" id="more-on-the-tag1-blog">More on the Tag1 blog</h3>
+<a class="jl-read t1-frame" href="https://www.tag1.com/blog/building-my-ai-assistant/"><strong>Building My AI Assistant</strong><span>My March 2026 post: how Jesse started and what goes in the instruction file.</span></a>
+<a class="jl-read t1-frame" href="https://www.tag1.com/blog/jesse-missing-user-manual/"><strong>Jesse: The Missing User Manual</strong><span>Tag1's Hank VanZile on what it took to make Jesse work for him.</span></a>
+</div>
+</div>
+</section>
+<section class="jl-band jl-band-purple">
+<div class="jl-inner jl-cta t1-frame">
+<div>
+<h2 id="set-up-your-own">Set up your own</h2>
+<p>Copy the template folder and point your agent at it, then keep adjusting the instruction file until Jesse works the way you do. The quick start takes about ten minutes. Connecting your calendar and other tools takes longer, and how you do it depends on your agent.</p>
+</div>
+<div class="jl-cta-side">
+<div class="jl-actions">
+<a class="jl-btn" href="getting-started.html"><span>Quick start</span><span aria-hidden="true"></span></a>
+<a class="jl-link" href="https://github.com/tag1consulting/jesse/tree/main/template">Template on GitHub</a>
+</div>
+<p class="jl-more">Then add the <a class="jl-link" href="recipes/index.html">recipes</a> you need: step&#8209;by&#8209;step add&#8209;ons for things like email, Slack, WhatsApp, quick notes from an iPhone, birthday reminders and vault search.</p>
+</div>
+</div>
+</section>
+<footer class="jl-foot">
+<div class="jl-inner">
+<p>Jesse is an open source project from <a href="https://www.tag1.com/">Tag1&nbsp;Consulting</a>.</p>
+<p><a href="https://github.com/tag1consulting/jesse/blob/main/LICENSE">MIT license</a> · <a href="https://github.com/tag1consulting/jesse">Source on GitHub</a></p>
+</div>
+</footer>
+</div>

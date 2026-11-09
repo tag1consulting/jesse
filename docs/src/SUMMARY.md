@@ -1,6 +1,6 @@
 # Summary
 
-[Introduction](./introduction.md)
+[Home](./introduction.md)
 
 # Start Here
 
