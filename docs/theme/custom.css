@@ -501,20 +501,25 @@ html:not(.navy):not(.coal):not(.ayu) .jl-band-white .jl-card h3 { color: var(--t
 .jl-card p { color: var(--b-fg); margin: 0; font-size: 1.55rem; }
 
 /* ---------- Why I built it ---------- */
-.jl-story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6.4rem; }
+.jl-story { max-width: 760px; }
 .jl-story .t1-eyebrow { margin-bottom: 1.6rem; }
 .jl-story blockquote { margin: 0; padding: 0; border: 0; background: none; color: var(--b-fg); font-size: 1.85rem; line-height: 1.65; }
 .jl-story blockquote p { margin: 0 0 1.6rem; }
 .jl .jl-sig { font-size: 1.45rem; font-weight: 600; }
 .jl-sig span { display: block; font-weight: 400; color: var(--b-muted); }
+.jl-reads-head { margin: 6.4rem 0 2.4rem !important; }
+.jl-reads { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3.2rem; }
 .jl a.jl-read:is(:link, :visited) {
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: var(--b-accent);
   background: var(--b-card-bg);
-  padding: 2rem 2.4rem;
-  margin: 0 0 1.6rem;
+  padding: 0 0 2.4rem;
 }
+.jl-read img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; margin: 0 0 2rem; }
+.jl-read > :not(img) { margin-inline: 2.4rem; }
+.jl .jl-read .jl-read-meta { color: var(--b-muted); font-size: 1.2rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.8rem; }
 .jl-read strong { display: block; color: var(--b-head); font-weight: 600; font-size: 1.7rem; margin-bottom: 0.4rem; }
 html:not(.navy):not(.coal):not(.ayu) .jl-band-cream .jl-read strong { color: var(--t1-navy); }
 .jl-read span { display: block; color: var(--b-muted); font-size: 1.45rem; }
@@ -544,7 +549,8 @@ html:is(.navy, .coal, .ayu) .jl-foot { background: var(--t1-navy-deep); }
 }
 @media (max-width: 960px) {
   .jl-hero-art { display: none; }
-  .jl-hero .jl-inner, .jl-brief-wrap, .jl-story { grid-template-columns: minmax(0, 1fr); gap: 4rem; }
+  .jl-hero .jl-inner, .jl-brief-wrap { grid-template-columns: minmax(0, 1fr); gap: 4rem; }
+  .jl-reads { grid-template-columns: minmax(0, 1fr); gap: 2.4rem; }
   .jl-cols, .jl-cards { grid-template-columns: minmax(0, 1fr); gap: 3.2rem; }
   .jl-card { grid-template-rows: none; grid-row: auto; }
 }
@@ -588,7 +594,9 @@ html:is(.navy, .coal, .ayu) .jl-foot { background: var(--t1-navy-deep); }
   .jl-brief-wrap, .jl-story { display: block; }
   .jl-brief-wrap > * + *, .jl-story > * + * { margin-top: 3.2rem; }
   .jl-brief-wrap > div:last-child { break-inside: avoid; }
-  .jl-reads { break-inside: avoid; }
+  .jl-reads { display: block; }
+  .jl-read img { display: none; }
+  .jl-read { margin-bottom: 1.6rem; padding-top: 1.6rem !important; }
   .jl-read { background: none !important; }
   .t1-eyebrow, .jl-head h2 { break-after: avoid; }
   .jl-works { border: 0 !important; padding: 0 !important; }

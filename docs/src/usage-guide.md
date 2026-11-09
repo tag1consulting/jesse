@@ -24,7 +24,7 @@ The briefing groups things by urgency. A typical output looks something like:
 
 ```
 📅 Calendar — Today
-- 10:00 AM — 1:1 with Sarah (prep: review her project update from Friday)
+- 10:00 AM — 1:1 with Sally (prep: review her project update from Friday)
 - 2:00 PM — Team standup
 
 📧 Email — 6 new
@@ -65,7 +65,7 @@ Between routines, Jesse is useful for one-off tasks. Some examples:
 
 **Quick research.** "Summarize the Slack thread in #engineering about the outage" pulls the full conversation and gives you a condensed version.
 
-**Meeting prep.** "Help me prepare for my 2pm with Sarah" pulls up her people file, any open tasks related to her projects, and recent communication history.
+**Meeting prep.** "Help me prepare for my 2pm with Sally" pulls up her people file, any open tasks related to her projects, and recent communication history.
 
 **Capturing notes.** Drop a note in Inbox/ from your phone (via Obsidian mobile, a quick-capture shortcut, or however you sync files). The next time you run a routine, the agent picks it up and acts on it. If your note says "research options for X," it does the research. If it says "remind me to call Y on Thursday," it creates a reminder.
 
