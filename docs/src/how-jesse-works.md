@@ -24,7 +24,7 @@ You open a session and say "good morning." Here's what happens:
 
 ```
 📅 Calendar -- Today
-- 10:00 AM -- 1:1 with Sarah (prep: review her project update from Friday)
+- 10:00 AM -- 1:1 with Sally (prep: review her project update from Friday)
 - 2:00 PM  -- Team standup
 
 📧 Email -- 6 new
@@ -40,7 +40,7 @@ You open a session and say "good morning." Here's what happens:
 - Follow up with Alex on proposal (set 3 days ago)
 ```
 
-Every line traces back to a file or a scan: the calendar block from your calendar tool, the meeting prep note from the people file the agent keeps on Sarah, the email triage from rules in your instruction file about what's urgent, the reminder from a date-prefixed file in `Knowledge/Reminders/`.
+Every line traces back to a file or a scan: the calendar block from your calendar tool, the meeting prep note from the people file the agent keeps on Sally, the email triage from rules in your instruction file about what's urgent, the reminder from a date-prefixed file in `Knowledge/Reminders/`.
 
 You scan the briefing, correct what's wrong ("that vendor email is actually urgent"), and the agent updates the files. The whole loop takes a few minutes.
 

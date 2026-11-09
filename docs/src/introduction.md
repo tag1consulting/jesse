@@ -4,7 +4,7 @@
 <div>
 <p class="t1-eyebrow">Open source, from Tag1 Consulting</p>
 <h1 id="jesse">An AI assistant built from a folder of text files</h1>
-<p class="jl-lede">Jesse pairs an AI agent with your notes, tasks and contacts in markdown, and one instruction file that tells the agent how you work. Say "good morning" and it works through your notes and whatever tools you've connected, then hands you a briefing. I'm Jeremy Andrews, and I built it to run my own day at Tag1 and at&nbsp;home.</p>
+<p class="jl-lede">Jesse pairs an AI agent with your notes, tasks and contacts in markdown, and one instruction file that tells the agent how you work. Say "good morning" and it works through your notes and whatever tools you've connected, then hands you a briefing.</p>
 <div class="jl-actions">
 <a class="jl-btn" href="getting-started.html"><span>Quick start</span><span aria-hidden="true"></span></a>
 <a class="jl-link" href="how-jesse-works.html">How Jesse works</a>
@@ -31,7 +31,7 @@
 </div>
 <div class="jl-col">
 <h3 id="the-agent">The agent</h3>
-<p>I use Claude in Cowork and in Claude Code. If you use Claude too, rename <code>JESSE.md</code> to <code>CLAUDE.md</code>. Other agents should work after some changes to the instruction file, and if you switch, the vault comes with you.</p>
+<p>At Tag1 we run it on Claude, in Cowork and in Claude Code. If you use Claude too, rename <code>JESSE.md</code> to <code>CLAUDE.md</code>. Other agents should work after some changes to the instruction file, and if you switch, the vault comes with you.</p>
 </div>
 </div>
 </div>
@@ -50,7 +50,7 @@
 <div class="jl-brief">
 <p class="jl-brief-label">Calendar</p>
 <dl>
-<dt>10:00</dt><dd>1:1 with Sarah. Prep notes from her Friday update are in the agenda.</dd>
+<dt>10:00</dt><dd>1:1 with Sally. Prep notes from her Friday update are in the agenda.</dd>
 <dt>14:00</dt><dd>Team standup. Agenda ready.</dd>
 </dl>
 <p class="jl-brief-label">Email, 6 new</p>
@@ -83,7 +83,7 @@
 </div>
 <div class="jl-card t1-frame">
 <h3 id="plain-files">Plain files</h3>
-<p>Your notes, tasks and rules are plain markdown that any editor can open (I&nbsp;use Obsidian). If you keep the vault in git, every change the agent makes to it shows up as a diff you can review or roll back.</p>
+<p>Your notes, tasks and rules are plain markdown that any editor can open (we use Obsidian). If you keep the vault in git, every change the agent makes to it shows up as a diff you can review or roll back.</p>
 </div>
 <div class="jl-card t1-frame">
 <h3 id="tracked">Tracked until you sign off on it</h3>
@@ -93,8 +93,8 @@
 </div>
 </section>
 <section class="jl-band jl-band-cream">
-<div class="jl-inner jl-story">
-<div>
+<div class="jl-inner">
+<div class="jl-story">
 <h2 class="t1-eyebrow" id="why-i-built-it">Why I built it</h2>
 <blockquote>
 <p>I run Tag1, help where I can at my wife's vineyard, and have two young kids, chickens, dogs, cats and a house in Tuscany that always needs something fixed. My TODO list is relentless.</p>
@@ -102,10 +102,11 @@
 <p class="jl-sig">Jeremy Andrews<span>Founding Partner and CEO, Tag1 Consulting</span></p>
 </blockquote>
 </div>
+<h3 class="t1-eyebrow jl-reads-head" id="more-on-the-tag1-blog">More on the Tag1 blog</h3>
 <div class="jl-reads">
-<h3 class="t1-eyebrow" id="more-on-the-tag1-blog">More on the Tag1 blog</h3>
-<a class="jl-read t1-frame" href="https://www.tag1.com/blog/building-my-ai-assistant/"><strong>Building My AI Assistant</strong><span>My March 2026 post: how Jesse started and what goes in the instruction file.</span></a>
-<a class="jl-read t1-frame" href="https://www.tag1.com/blog/jesse-missing-user-manual/"><strong>Jesse: The Missing User Manual</strong><span>Tag1's Hank VanZile on what it took to make Jesse work for him.</span></a>
+<a class="jl-read t1-frame" href="https://www.tag1.com/blog/building-my-ai-assistant/"><img src="images/blog/building-my-ai-assistant.jpg" alt="" loading="lazy" width="800" height="450"><span class="jl-read-meta">March 2026 · Jeremy Andrews</span><strong>Building My AI Assistant</strong><span>How Jesse started and what goes in the instruction file.</span></a>
+<a class="jl-read t1-frame" href="https://www.tag1.com/blog/jesse-missing-user-manual/"><img src="images/blog/jesse-missing-user-manual.jpg" alt="" loading="lazy" width="800" height="450"><span class="jl-read-meta">May 2026 · Hank VanZile</span><strong>Jesse: The Missing User Manual</strong><span>How Hank got Jesse working by telling it what to change.</span></a>
+<a class="jl-read t1-frame" href="https://www.tag1.com/blog/syncing-two-ai-assistants/"><img src="images/blog/syncing-two-ai-assistants.jpg" alt="" loading="lazy" width="800" height="450"><span class="jl-read-meta">September 2026 · Hank VanZile</span><strong>Syncing Two AI Assistants Without Letting Them See Each Other</strong><span>One Jesse for work and one at home, sharing guidelines but never each other's private data.</span></a>
 </div>
 </div>
 </section>
@@ -126,7 +127,7 @@
 </section>
 <footer class="jl-foot">
 <div class="jl-inner">
-<p>Jesse is an open source project from <a href="https://www.tag1.com/">Tag1&nbsp;Consulting</a>.</p>
+<p>Jesse is an open source innovation from <a href="https://www.tag1.com/">Tag1&nbsp;Consulting</a>.</p>
 <p><a href="https://github.com/tag1consulting/jesse/blob/main/LICENSE">MIT license</a> · <a href="https://github.com/tag1consulting/jesse">Source on GitHub</a></p>
 </div>
 </footer>
