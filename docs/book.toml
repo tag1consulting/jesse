@@ -15,3 +15,7 @@ preferred-dark-theme = "navy"
 git-repository-url = "https://github.com/tag1consulting/jesse"
 edit-url-template = "https://github.com/tag1consulting/jesse/edit/main/docs/{path}"
 site-url = "https://jesse.help/"
+canonical-site-url = "https://jesse.help/"
+
+[output.html.redirect]
+"/introduction.html" = "/"
