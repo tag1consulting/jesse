@@ -6,6 +6,10 @@ on:
     paths:
       - 'docs/**'
       - '.github/workflows/pages.yml'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - '.github/workflows/pages.yml'
   workflow_dispatch:
 
 permissions:
@@ -14,8 +18,17 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: ${{ github.event_name == 'pull_request' && format('pages-pr-{0}', github.event.pull_request.number) || 'pages' }}
   cancel-in-progress: false
+
+env:
+  # mdBook pin: built from source at rust-lang/mdBook commit e18773a9 (the merge
+  # of PR 2706), which adds the `canonical-site-url` setting that docs/book.toml
+  # uses to write <link rel="canonical"> on every page. No mdBook release
+  # contains it yet (v0.5.4 is the newest and predates it). When the first
+  # release that contains this commit ships, install that release's prebuilt
+  # binary at its exact version instead and drop this source build and cache.
+  MDBOOK_REV: e18773a967eb7f3f1392c831cb2caf9af9bdf5a5
 
 jobs:
   build:
@@ -23,20 +36,35 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install mdbook
-        uses: peaceiris/actions-mdbook@v2
+      - name: Cache mdbook binary
+        id: mdbook-cache
+        uses: actions/cache@v4
         with:
-          mdbook-version: 'latest'
+          path: ~/.cargo/bin/mdbook
+          key: mdbook-${{ runner.os }}-${{ env.MDBOOK_REV }}
+
+      - name: Install mdbook (source build at pinned commit)
+        if: steps.mdbook-cache.outputs.cache-hit != 'true'
+        run: cargo install --git https://github.com/rust-lang/mdBook --rev "$MDBOOK_REV" --locked mdbook
 
       - name: Build book
-        run: mdbook build docs/
+        run: |
+          set -o pipefail
+          mdbook --version
+          mdbook build docs/ 2>&1 | tee mdbook.log
+          if grep -E '^\s*(WARN|ERROR)' mdbook.log; then
+            echo "::error::mdbook logged a WARN or ERROR line"
+            exit 1
+          fi
 
       - name: Upload artifact
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/book
 
   deploy:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

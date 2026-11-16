@@ -283,7 +283,7 @@ body { background: var(--bg); color: var(--fg); font-size: 1.6rem; line-height: 
 }
 
 /* ===================================================================
-   Landing page (introduction.md)
+   Landing page (index.md)
 
    Everything is scoped under .jl. The page-level rules use
    html:has(#git-edit-button):has(main > .jl:first-child): only the real
